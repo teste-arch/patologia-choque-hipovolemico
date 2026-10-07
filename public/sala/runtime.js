@@ -45,240 +45,231 @@ const CLINICAL_DATA = {
     }
   },
 
-  // -------------------------------------------------------------
-  // TRILHA DE APRENDIZADO: 6 PARADAS TEÓRICAS
+    // -------------------------------------------------------------
+  // TRILHA DE APRENDIZADO: 6 PARADAS TEÓRICAS (MINIMALISTA)
   // -------------------------------------------------------------
   trilha: [
     {
       id: 1,
       numero: 1,
       titulo: "O que é Choque Hipovolêmico?",
-      subtitulo: "Definição e conceito hemodinâmico central",
+      subtitulo: "Conceito hemodinâmico direto",
       icone: "heart-pulse",
       conteudo: [
-        "O choque hipovolêmico é uma emergência crítica decorrente da perda expressiva de volume de líquido circulante no organismo (sangue ou outros fluidos corporais).",
-        "Com menos volume dentro dos vasos, o retorno de sangue para o coração (pré-carga) diminui acentuadamente, fazendo com que o coração bombeie menos a cada batimento.",
-        "Como consequência direta, os órgãos e tecidos deixam de receber oxigênio e nutrientes suficientes, instalando-se a hipoperfusão celular generalizada."
+        "Emergência crítica provocada pela <strong>perda rápida de volume circulante</strong> (sangue ou fluidos corporais).",
+        "Menos sangue nos vasos reduz a <strong>pré-carga</strong> e o coração bombeia menos a cada batimento.",
+        "O resultado é a <strong>hipoperfusão tecidual</strong>: as células deixam de receber oxigênio suficiente."
       ],
       interacao: {
         tipo: "vaso-volume",
-        instrucao: "Mova o slider para alterar o volume circulante e observe o que acontece com o ritmo do coração e com a Gota:",
-        nivelInicial: 100, // %
+        instrucao: "Mova o slider para alterar o volume e veja o ritmo cardíaco responder:",
+        nivelInicial: 100,
         mensagensNivel: {
-          alto: "Volume normal (100% a 85%): O coração bate ritmado e tranquilo. Os tecidos recebem oxigênio pleno!",
-          medio: "Perda moderada (84% a 65%): O volume cai. O coração acelera (taquicardia compensatória) para tentar manter o fluxo!",
-          critico: "Perda grave (< 65%): Volume muito baixo! O coração bate rápido, porém 'vazio'. As células entram em sofrimento!"
+          alto: "Volume normal (100%–85%): Bomba cardíaca ritmada e tecidos bem oxigenados.",
+          medio: "Perda moderada (84%–65%): Taquicardia compensatória para tentar manter o débito.",
+          critico: "Perda crítica (< 65%): Coração bate rápido e 'vazio'. Sofrimento celular instalado!"
         }
       },
-      paraFixar: "Menos volume → menos sangue voltando → menos sangue bombeado → células sem oxigênio."
+      paraFixar: "Menos volume → menos sangue voltando → menos bombeamento → células sem oxigênio."
     },
 
     {
       id: 2,
       numero: 2,
       titulo: "De onde vem a perda?",
-      subtitulo: "Etiologia: causas hemorrágicas e não hemorrágicas",
+      subtitulo: "Causas hemorrágicas vs. não hemorrágicas",
       icone: "droplet",
       conteudo: [
-        "A perda de volume pode ocorrer por sangramento visível ou oculto, mas também por desidratação e perda maciça de plasma.",
-        "Identificar rapidamente a origem da perda orienta imediatamente as prioridades de reanimação da equipe de enfermagem."
+        "A perda pode ser <strong>visível ou oculta</strong> (sangramento) ou por <strong>desidratação grave</strong> (fluidos/plasma).",
+        "Identificar a causa orienta a reposição imediata da enfermagem."
       ],
       gruposFlip: [
         {
           grupo: "Hemorrágico",
           subtitulo: "Perda de sangue total (glóbulos + plasma)",
           exemplos: [
-            "Trauma físico (fraturas de pelve e de ossos longos, lesões viscerais)",
+            "Trauma físico (fraturas de pelve e ossos longos)",
             "Hemorragia digestiva alta ou baixa",
-            "Causas obstétricas (descolamento prematuro de placenta, rotura uterina)",
-            "Ruptura de aneurismas ou grandes vasos"
+            "Causas obstétricas e ruptura de aneurismas"
           ],
-          destaque: "Risco imediato de coagulopatia e perda da capacidade de carregar oxigênio."
+          destaque: "Risco rápido de perda carreadora de O₂ e coagulopatia."
         },
         {
           grupo: "Não Hemorrágico",
           subtitulo: "Perda de água, eletrólitos e plasma",
           exemplos: [
             "Vômitos e diarreias graves e prolongadas",
-            "Grandes queimaduras (extravasamento maciço de plasma)",
-            "Perda para o 3º espaço (pancreatite aguda, obstrução intestinal)",
-            "Diurese excessiva (cetoacidose diabética, uso abusivo de diuréticos)"
+            "Grandes queimaduras (perda maciça de plasma)",
+            "Perda para o 3º espaço (pancreatite, obstrução)"
           ],
-          destaque: "Provoca hemoconcentração e desidratação celular grave."
+          destaque: "Provoca hemoconcentração e desidratação grave."
         }
       ],
       minijogo: {
         tipo: "classificacao",
         titulo: "Classifique a causa",
-        instrucao: "Toque em cada situação clínica para classificá-la como Hemorrágica ou Não Hemorrágica:",
+        instrucao: "Toque em cada situação clínica para classificar o tipo de perda:",
         cartas: [
-          { id: "c1", texto: "Fratura fechada de pelve instável", tipo: "hemorragica", feedback: "Correto! A bacia pode reter mais de 2 litros de sangue no retroperitônio sem corte na pele." },
-          { id: "c2", texto: "Diarreia e vômitos intensos por 3 dias", tipo: "nao_hemorragica", feedback: "Exato! Perda intensa de fluidos e eletrólitos pelo trato gastrointestinal." },
-          { id: "c3", texto: "Grande queimadura de 2º e 3º grau", tipo: "nao_hemorragica", feedback: "Muito bem! Há perda maciça de plasma por lesão vascular dérmica para o terceiro espaço." },
-          { id: "c4", texto: "Hemorragia digestiva alta por varizes esofágicas", tipo: "hemorragica", feedback: "Correto! Sangramento vascular maciço ativo com perda de sangue vivo." },
-          { id: "c5", texto: "Pancreatite aguda grave com sequestro peritoneal", tipo: "nao_hemorragica", feedback: "Certo! Ocorre sequestro inflamatório de líquido no terceiro espaço retroperitoneal." },
-          { id: "c6", texto: "Fratura exposta de fêmur com sangramento ativo", tipo: "hemorragica", feedback: "Exato! Perda considerável de sangue arterial/venoso e muscular." }
+          { id: "c1", texto: "Fratura fechada de pelve instável", tipo: "hemorragica", feedback: "Correto! A bacia pode ocultar mais de 2 litros de sangue no retroperitônio." },
+          { id: "c2", texto: "Diarreia e vômitos intensos por 3 dias", tipo: "nao_hemorragica", feedback: "Exato! Perda gastrointestinal de água e eletrólitos." },
+          { id: "c3", texto: "Grande queimadura de 2º e 3º grau", tipo: "nao_hemorragica", feedback: "Certo! Extravasamento de plasma por lesão endotelial." },
+          { id: "c4", texto: "Hemorragia digestiva por varizes", tipo: "hemorragica", feedback: "Correto! Perda ativa de sangue intravascular." },
+          { id: "c5", texto: "Pancreatite aguda grave", tipo: "nao_hemorragica", feedback: "Muito bem! Sequestro inflamatório no 3º espaço retroperitoneal." },
+          { id: "c6", texto: "Fratura exposta de fêmur", tipo: "hemorragica", feedback: "Exato! Perda considerável de sangue e hemostasia urgente." }
         ]
       },
-      paraFixar: "Perda de sangue ou de líquidos: o resultado hemodinâmico é o mesmo, falta volume circulante."
+      paraFixar: "Perda de sangue ou de fluidos: no fim, falta volume circulante no leito vascular."
     },
 
     {
       id: 3,
       numero: 3,
       titulo: "A Reação em Cadeia",
-      subtitulo: "Fisiopatologia: da compensação à falência celular",
+      subtitulo: "Fisiopatologia: da defesa ao colapso",
       icone: "activity",
       conteudo: [
-        "Diante da perda de volume, o organismo aciona mecanismos neuroendócrinos para defender os órgãos vitais (cérebro e coração).",
-        "Essa resposta é dividida em fase compensada e fase descompensada. Quando a compensação falha, a deterioração é exponencial."
+        "O corpo tenta se defender acionando o sistema simpático e hormonal para poupar cérebro e coração.",
+        "Quando a compensação falha, instala-se acidose e a perigosa Tríade Letal."
       ],
       fases: [
         {
           etapa: 1,
-          nome: "Queda Inicial do Volume e Débito",
-          detalhe: "↓ Volume circulante → ↓ Retorno venoso (pré-carga) → ↓ Volume sistólico e Débito Cardíaco.",
+          nome: "Queda de Pré-carga e Débito",
+          detalhe: "↓ Volume circulante → ↓ Retorno venoso → ↓ Débito cardíaco e pressão arterial.",
           orgaos: ["vasos", "coracao"],
           compensacaoBarra: 100
         },
         {
           etapa: 2,
-          nome: "Fase Compensada: Disparo Simpático e Hormonal",
-          detalhe: "Barorreceptores detectam a queda de pressão → ativação do Sistema Nervoso Simpático (taquicardia + vasoconstrição periférica para poupar cérebro e coração). SRAA e ADH ativados: rins retêm água e sódio.",
+          nome: "Fase Compensada (Defesa)",
+          detalhe: "Taquicardia compensatória + vasoconstrição periférica (pele fria/pálida). Rins retêm sódio e água.",
           orgaos: ["cerebro", "coracao", "pele", "rins"],
           compensacaoBarra: 75
         },
         {
           etapa: 3,
-          nome: "Hipoperfusão e Metabolismo Anaeróbio",
-          detalhe: "Vasoconstrição prolongada reduz a oxigenação dos tecidos periféricos. As células passam a gerar energia sem oxigênio, produzindo Lactato em excesso e Acidose Metabólica.",
+          nome: "Metabolismo Anaeróbio",
+          detalhe: "Hipoperfusão celular prolongada. Células geram energia sem oxigênio, produzindo Lactato e Acidose.",
           orgaos: ["musculos", "figado", "sangue"],
           compensacaoBarra: 40
         },
         {
           etapa: 4,
-          nome: "Fase Descompensada e Tríade Letal",
-          detalhe: "Queda da contratilidade cardíaca, vasodilatação terminal e hipotensão refratária. Instala-se a Tríade Letal do Trauma: Hipotermia + Acidose + Coagulopatia, levando à disfunção de múltiplos órgãos.",
+          nome: "Fase Descompensada (Tríade Letal)",
+          detalhe: "Hipotermia + Acidose + Coagulopatia quebram a hemostasia e levam à falência de múltiplos órgãos.",
           orgaos: ["todos"],
           compensacaoBarra: 10
         }
       ],
       triadeLetal: {
-        titulo: "Tríade Letal no Choque Hemorrágico do Trauma",
+        titulo: "Tríade Letal do Trauma",
         componentes: [
-          { nome: "Hipotermia", desc: "Reduz a função enzimática dos fatores de coagulação e a contratilidade cardíaca." },
-          { nome: "Acidose", desc: "Acúmulo de lactato diminui ainda mais a resposta vascular e a coagulação." },
-          { nome: "Coagulopatia", desc: "Incapacidade de formar coágulos firmes, agravando o sangramento." }
+          { nome: "Hipotermia", desc: "Inibe enzimas da coagulação e enfraquece o coração." },
+          { nome: "Acidose", desc: "Excesso de lactato piora o tônus dos vasos e a coagulação." },
+          { nome: "Coagulopatia", desc: "Sangue não coagula, intensificando o sangramento." }
         ]
       },
-      paraFixar: "No começo o corpo compensa (e disfarça). Quando a compensação acaba, a queda é rápida."
+      paraFixar: "No começo o corpo compensa (e disfarça). Quando a defesa acaba, a queda é rápida."
     },
 
     {
       id: 4,
       numero: 4,
       titulo: "O Corpo Fala",
-      subtitulo: "Sinais, sintomas e a escala de perda volêmica",
+      subtitulo: "Sinais clínicos e classes de perda",
       icone: "user-check",
       conteudo: [
-        "A avaliação clínica atenta da enfermagem identifica o choque muito antes da pressão arterial cair.",
-        "A pressão arterial sistólica é um sinal tardio de choque. O corpo manifesta sofrimento precoce na frequência cardíaca, na pele e no nível de consciência."
+        "A pressão arterial sistólica cai tarde no choque. A enfermagem identifica o choque antes pela frequência cardíaca, pele e sensório."
       ],
       hotspotsCorpo: [
         {
           id: "cerebro",
-          nome: "Cérebro (Neurológico)",
-          x: 50, y: 15,
-          acontece: "Hipoperfusão do sistema nervoso central e ação da adrenalina.",
-          observaEnfermeiro: "Ansiedade precoce, agitação motora, confusão mental, sonolência e letargia tardia."
+          nome: "Cérebro (Sensório)",
+          acontece: "Hipoperfusão cerebral e descarga de adrenalina.",
+          observaEnfermeiro: "Ansiedade precoce, agitação, confusão ou sonolência tardia."
         },
         {
           id: "coracao",
-          nome: "Coração (Cardiovascular)",
-          x: 52, y: 32,
-          acontece: "Estímulo adrenérgico para compensar a diminuição do volume sistólico.",
-          observaEnfermeiro: "Taquicardia (pulso fino e rápido). Nota: ausência de taquicardia não descarta choque em idosos, atletas ou em uso de betabloqueadores."
+          nome: "Coração (Hemodinâmica)",
+          acontece: "Estímulo adrenérgico compensatório.",
+          observaEnfermeiro: "Taquicardia (pulso fino e rápido). Nota: ausência de taquicardia não descarta choque em idosos ou atletas."
         },
         {
           id: "pulmoes",
-          nome: "Pulmões (Respiratório)",
-          x: 44, y: 36,
-          acontece: "Tentativa de compensar a acidose metabólica eliminando CO₂ (hiperventilação compensatória).",
-          observaEnfermeiro: "Taquipneia (frequência respiratória aumentada) e respiração profunda ou superficial."
+          nome: "Pulmões (Ventilação)",
+          acontece: "Tentativa de compensar acidose eliminando CO₂.",
+          observaEnfermeiro: "Taquipneia (frequência respiratória aumentada)."
         },
         {
           id: "rins",
-          nome: "Rins (Renal)",
-          x: 50, y: 48,
-          acontece: "Vasoconstrição das artérias renais para desviar fluxo a órgãos nobres + ação da aldosterona e ADH.",
-          observaEnfermeiro: "Oligúria (diurese < 0,5 mL/kg/h) até anúria. Urina concentrada de cor escura."
+          nome: "Rins (Excreção)",
+          acontece: "Vasoconstrição renal e ação do ADH/aldosterona.",
+          observaEnfermeiro: "Oligúria (< 0,5 mL/kg/h) e urina concentrada."
         },
         {
           id: "pele",
-          nome: "Pele e Extremidades",
-          x: 28, y: 55,
-          acontece: "Vasoconstrição periférica intensa mediada por receptores alfa-adrenérgicos.",
-          observaEnfermeiro: "Pele pálida, fria, pegajosa (sudorese fria), livedo e tempo de enchimento capilar lento (> 2 segundos)."
+          nome: "Pele e Perfusão",
+          acontece: "Vasoconstrição periférica para poupar órgãos nobres.",
+          observaEnfermeiro: "Pele pálida, fria, suor pegajoso e enchimento capilar lento (> 2s)."
         },
         {
           id: "vasos",
-          nome: "Vasos Sanguíneos e Pressão",
-          x: 50, y: 65,
-          acontece: "Esvaziamento do leito venoso e eventual perda da capacidade de manter o tônus vascular.",
-          observaEnfermeiro: "Veias periféricas colapsadas ('veia difícil'), pressão de pulso convergente e hipotensão tardia."
+          nome: "Vasos e Pressão",
+          acontece: "Esvaziamento do leito venoso.",
+          observaEnfermeiro: "Veias colapsadas, pulso filiforme e hipotensão arterial tardia."
         }
       ],
       sliderHemorragia: {
-        titulo: "Medidor Didático de Perda Sanguínea (Adulto ~70 kg)",
-        instrucao: "Deslize para ver as 4 Classes de Hemorragia (ATLS/PHTLS):",
+        titulo: "As 4 Classes de Hemorragia (ATLS/PHTLS)",
+        instrucao: "Deslize para ver a evolução clínica conforme o volume perdido:",
         classes: [
           {
             classe: "Classe I",
             perdaPercent: "Até 15%",
             volumeAprox: "Até 750 mL",
-            fc: "Normal (< 100 bpm)",
+            fc: "< 100 bpm",
             pa: "Normal",
-            fr: "14 a 20 irpm",
-            mental: "Pouco ansioso ou normal",
-            resumo: "Totalmente compensado. Sintomas mínimos, similar a uma doação de sangue.",
+            fr: "14–20 irpm",
+            mental: "Normal / alerta",
+            resumo: "Compensado. Sintomas mínimos, similar a doar sangue.",
             faixaSlider: [0, 15]
           },
           {
             classe: "Classe II",
-            perdaPercent: "15% a 30%",
-            volumeAprox: "750 a 1500 mL",
-            fc: "100 a 120 bpm (taquicardia)",
-            pa: "Normal (pressão de pulso estreita)",
-            fr: "20 a 30 irpm",
-            mental: "Ansioso / agitado",
-            resumo: "Compensação simpática visível: taquicardia, palidez, pele fria.",
+            perdaPercent: "15%–30%",
+            volumeAprox: "750–1500 mL",
+            fc: "100–120 bpm",
+            pa: "Normal",
+            fr: "20–30 irpm",
+            mental: "Ansioso",
+            resumo: "Taquicardia visível, pele fria e palidez.",
             faixaSlider: [16, 30]
           },
           {
             classe: "Classe III",
-            perdaPercent: "30% a 40%",
-            volumeAprox: "1500 a 2000 mL",
-            fc: "120 a 140 bpm",
-            pa: "Diminuída (hipotensão estabelecida)",
-            fr: "30 a 40 irpm",
+            perdaPercent: "30%–40%",
+            volumeAprox: "1500–2000 mL",
+            fc: "120–140 bpm",
+            pa: "Diminuída",
+            fr: "30–40 irpm",
             mental: "Ansioso / confuso",
-            resumo: "Fase descompensada! A pressão cai, hipoperfusão grave. Necessita de reposição criteriosa e sangue.",
+            resumo: "Descompensado! Hipotensão e hipoperfusão. Precisa de sangue e controle da fonte.",
             faixaSlider: [31, 40]
           },
           {
             classe: "Classe IV",
-            perdaPercent: "Acima de 40%",
+            perdaPercent: "> 40%",
             volumeAprox: "> 2000 mL",
-            fc: "> 140 bpm (ou bradicardia pré-parada)",
-            pa: "Muito diminuída / inaudível",
-            fr: "> 35 irpm (respiração agônica)",
-            mental: "Confuso / letárgico / comatoso",
-            resumo: "Risco iminente de morte! Choque profundo e colapso circulatório irreversível se não revertido imediatamente.",
+            fc: "> 140 bpm",
+            pa: "Muito baixa",
+            fr: "> 35 irpm",
+            mental: "Letárgico",
+            resumo: "Choque profundo com risco iminente de colapso.",
             faixaSlider: [41, 50]
           }
         ]
       },
-      avisoClinico: "Atenção da Enfermagem: A ausência de taquicardia não exclui choque (ex.: uso de betabloqueadores, marca-passo, atletas ou neuropatia).",
+      avisoClinico: "Atenção: A ausência de taquicardia não exclui choque (uso de betabloqueadores ou atletas).",
       paraFixar: "A pressão só cai tarde. Taquicardia, pele fria e confusão avisam antes."
     },
 
@@ -286,431 +277,365 @@ const CLINICAL_DATA = {
       id: 5,
       numero: 5,
       titulo: "Montando o Quebra-Cabeça",
-      subtitulo: "Diagnóstico clínico, exames laboratoriais e imagem",
+      subtitulo: "Diagnóstico e exames essenciais",
       icone: "clipboard-list",
       conteudo: [
-        "O diagnóstico do choque hipovolêmico é fundamentalmente CLÍNICO e dinâmico, baseado na anamnese, mecanismo de lesão e avaliação dos sinais vitais.",
-        "Exames laboratoriais e de imagem servem para quantificar a gravidade, guiar a reposição e localizar a fonte de sangramento oculto."
+        "O diagnóstico do choque é primordialmente <strong>clínico</strong>.",
+        "Exames guiam a reposição e ajudam a localizar perdas ocultas."
       ],
-      alertaImportante: "Ponto-chave no Trauma de Bacia: FAST negativo para líquido livre abdominal NÃO exclui sangramento pélvico grave, pois o sangramento pélvico é predominantemente retroperitoneal!",
+      alertaImportante: "FAST negativo NÃO descarta hemorragia de pelve (sangramento retroperitoneal!).",
       bandejaExames: [
         {
           id: "ex_hemo",
           nome: "Hemograma Completo",
           tipo: "Laboratório",
-          icone: "vial",
-          paraQueServe: "Avalia hemoglobina, hematócrito e plaquetas. No início do sangramento agudo, a hemoglobina pode estar falsamente normal até haver hemodiluição!",
-          papelEnfermagem: "Coleta em tubo EDTA com identificação precisa à beira do leito e envio com prioridade máxima."
+          paraQueServe: "Avalia hemoglobina/hematócrito. Atenção: pode estar normal no início antes da hemodiluição!",
+          papelEnfermagem: "Coleta com identificação positiva rigorosa e envio prioritário."
         },
         {
           id: "ex_tipagem",
-          nome: "Tipagem Sanguínea e Prova Cruzada",
+          nome: "Tipagem ABO/Rh e Prova Cruzada",
           tipo: "Banco de Sangue",
-          icone: "droplets",
-          paraQueServe: "Define o grupo ABO/Rh e compatibilidade para transfusão de concentrado de hemácias e plasma.",
-          papelEnfermagem: "Etapa mais crítica de segurança: dupla checagem rigorosa na coleta e identificação da pulseira do paciente."
+          paraQueServe: "Garante compatibilidade imunológica para concentrado de hemácias e plasma.",
+          papelEnfermagem: "Dupla checagem rigorosa na pulseira do paciente antes de enviar."
         },
         {
           id: "ex_lactato",
-          nome: "Lactato Sérico e Gasometria",
+          nome: "Lactato e Gasometria",
           tipo: "Marcador de Perfusão",
-          icone: "activity",
-          paraQueServe: "Avalia a hipoperfusão celular e a acidose metabólica. O clareamento do lactato guia o sucesso da ressuscitação.",
-          papelEnfermagem: "Coleta com técnica asséptica em seringa heparinizada, transporte refrigerado imediato ao laboratório."
+          paraQueServe: "Mede sofrimento celular anaeróbio e acidose metabólica.",
+          papelEnfermagem: "Coleta asséptica em seringa heparinizada com transporte ágil."
         },
         {
           id: "ex_coagulo",
-          nome: "Coagulograma (TP, TTPa, Fibrinogênio)",
+          nome: "Coagulograma (TP, TTPa)",
           tipo: "Hemostasia",
-          icone: "shield-alert",
-          paraQueServe: "Monitora coagulopatia precoce induzida pelo trauma (parte crucial da tríade letal).",
-          papelEnfermagem: "Preenchimento correto do tubo de citrato até a linha de marcação para não alterar a proporção sangue/anticoagulante."
+          paraQueServe: "Monitora o desenvolvimento de coagulopatia precoce no trauma.",
+          papelEnfermagem: "Tubo de citrato preenchido exatamente até o traço de marcação."
         },
         {
           id: "ex_fast",
-          nome: "FAST / eFAST (Ultrassom à beira do leito)",
-          tipo: "Imagem",
-          icone: "radio",
-          paraQueServe: "Detecta líquido livre no pericárdio, pleura e cavidade peritoneal. Atenção: não avalia o retroperitônio!",
-          papelEnfermagem: "Posicionar o paciente, preparar o aparelho, acoplar gel e auxiliar a equipe médica sem desestabilizar a pelve."
+          nome: "Ultrassom FAST / eFAST",
+          tipo: "Imagem Beira de Leito",
+          paraQueServe: "Detecta líquido livre no abdome/pericárdio. Não avalia o retroperitônio!",
+          papelEnfermagem: "Posicionar aparelho e auxiliar a equipe sem mexer na pelve instável."
         },
         {
           id: "ex_tc",
-          nome: "Tomografia Computadorizada (TC)",
+          nome: "Tomografia Computadorizada",
           tipo: "Imagem Definitiva",
-          icone: "scan",
-          paraQueServe: "Mapeamento anatômico detalhado das fraturas e sangramentos vasculares em pelve e abdome.",
-          papelEnfermagem: "Atenção: JAMAIS transportar paciente hemodinamicamente instável para a sala de TC! Primeiro estabilizar na Sala Vermelha."
+          paraQueServe: "Mapeamento anatômico de fraturas e vasos lesados.",
+          papelEnfermagem: "JAMAIS transportar paciente hemodinamicamente instável para a TC!"
         }
       ],
-      paraFixar: "Exame normal no início não descarta hemorragia. Clínica e tendência dos sinais vitais mandam."
+      paraFixar: "Exame normal no início não descarta hemorragia. Tendência dos sinais vitais manda."
     },
 
     {
       id: 6,
       numero: 6,
       titulo: "Ordem de Prioridades",
-      subtitulo: "Tratamento baseado no mnemônico XABCDE",
+      subtitulo: "Abordagem sistemática XABCDE",
       icone: "check-circle-2",
       conteudo: [
-        "No choque hemorrágico traumático, o tempo é o maior inimigo do paciente. As ações devem seguir a lógica das maiores ameaças à vida primeiro.",
-        "A abordagem sistemática XABCDE garante que o controle do sangramento exanguinante venha antes de qualquer outra medida secundária."
+        "No trauma grave, tratamos primeiro o que mata mais rápido: a perda maciça de sangue."
       ],
       minijogoXabcde: {
-        titulo: "Ordene os passos do atendimento XABCDE",
-        instrucao: "Toque nos passos na ordem correta da abordagem do trauma (do primeiro ao último):",
+        titulo: "Ordene os passos do XABCDE",
+        instrucao: "Toque nos passos na sequência prioritária correta do atendimento:",
         passosCorretos: [
-          {
-            letra: "X",
-            titulo: "Controle da Hemorragia Exsanguinante",
-            descricao: "Comprimir sangramentos externos graves e estabilizar pelve instável com cinta pélvica.",
-            ordem: 1
-          },
-          {
-            letra: "A",
-            titulo: "Via Aérea com Proteção Cervical",
-            descricao: "Garantir permeabilidade da via aérea mantendo alinhamento da coluna cervical.",
-            ordem: 2
-          },
-          {
-            letra: "B",
-            titulo: "Boa Ventilação e Oxigenação",
-            descricao: "Avaliar padrão respiratório, expansibilidade torácica e ofertar O₂ suplementar conforme necessidade.",
-            ordem: 3
-          },
-          {
-            letra: "C",
-            titulo: "Circulação e Reposição Criteriosa",
-            descricao: "Acessos venosos calibrosos, reposição de fluidos aquecidos/sangue e monitorização contínua.",
-            ordem: 4
-          },
-          {
-            letra: "D",
-            titulo: "Disfunção Neurológica",
-            descricao: "Avaliar nível de consciência, escala de coma e reatividade pupilar.",
-            ordem: 5
-          },
-          {
-            letra: "E",
-            titulo: "Exposição com Prevenção da Hipotermia",
-            descricao: "Despir para inspecionar lesões e cobrir imediatamente com manta térmica.",
-            ordem: 6
-          }
+          { letra: "X", titulo: "Hemorragia Exsanguinante", descricao: "Conter sangramento externo e fechar pelve instável com cinta.", ordem: 1 },
+          { letra: "A", titulo: "Via Aérea com Proteção Cervical", descricao: "Garantir via aérea mantendo a coluna alinhada.", ordem: 2 },
+          { letra: "B", titulo: "Boa Ventilação / Oxigenação", descricao: "Checar padrão respiratório e ofertar O₂ se indicado.", ordem: 3 },
+          { letra: "C", titulo: "Circulação e Reposição Criteriosa", descricao: "Acessos calibrosos, fluidos aquecidos e sangue conforme protocolo.", ordem: 4 },
+          { letra: "D", titulo: "Disfunção Neurológica", descricao: "Avaliar nível de consciência e pupilas.", ordem: 5 },
+          { letra: "E", titulo: "Exposição e Prevenção de Hipotermia", descricao: "Despir para inspecionar e cobrir imediatamente com manta térmica.", ordem: 6 }
         ]
       },
-      paraFixar: "Primeiro o que mata mais rápido: o sangramento. Depois via aérea, circulação e aquecimento."
+      paraFixar: "Primeiro o que mata mais rápido: o sangramento. Depois via aérea, circulação e calor."
     }
   ],
 
   // -------------------------------------------------------------
-  // CASO CLÍNICO INTERATIVO: LUCAS, 28 ANOS (5 ETAPAS)
+  // CASO CLÍNICO: LUCAS (28a) — EDIÇÃO ENXUTA E MINIMALISTA
   // -------------------------------------------------------------
   casoClinico: {
     pacienteInfo: {
       nome: "Lucas",
       idade: "28 anos",
-      historia: "Lucas trafegava de motocicleta quando sofreu colisão em alta velocidade contra um automóvel. O impacto lateral projetou seu corpo contra o meio-fio.",
-      exameFisicoInicial: "Consciente porém muito ansioso, face pálida, sudorese fria, queixando-se de dor intensa na pelve. Membro inferior direito visivelmente encurtado e em rotação externa ('livro aberto'). Hematoma extenso em flanco e períneo. Não há sangramento externo ativo evidente em vias aéreas ou membros."
+      historia: "Colisão moto × automóvel em alta velocidade.",
+      exameFisicoInicial: "Consciente, ansioso, pálido e com dor pélvica intensa. Perna direita encurtada e rodada para fora ('livro aberto'). Hematoma em flanco e períneo."
     },
 
     etapas: [
       {
         id: 1,
         numero: 1,
-        fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR (APH)",
+        fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR",
         titulo: "Na Cena do Acidente",
         cenario: "rua",
-        situacao: "Você é o(a) enfermeiro(a) da unidade de suporte. Ao chegar, encontra Lucas caído na via, ansioso, pálido, com sudorese fria e enchimento capilar lento (4 segundos). FC 128 bpm, PA 88/53 mmHg, FR 26 irpm, SpO2 94%. Membro inferior direito encurtado e rotação externa, com dor pélvica excruciante.",
-        contexto: "Com a perda de sangue na pelve fraturada, o volume circulante diminui drasticamente, reduzindo o retorno venoso (pré-carga) e o débito cardíaco. O organismo compensa com taquicardia e vasoconstrição periférica intensa (pele fria e pálida). O anel pélvico é profusamente vascularizado por plexos venosos e ramos das artérias ilíacas, podendo acumular litros de sangue de forma oculta.",
+        situacao: "Lucas está caído no asfalto, pálido e com dor intensa na pelve deformada. FC 128 bpm, PA 88/53 mmHg, FR 26 irpm, SpO₂ 94%.",
+        contexto: "A pelve fraturada pode reter litros de sangue de forma oculta no retroperitônio. O corpo tenta compensar com taquicardia e palidez. A prioridade imediata é conter o sangramento e aquecer.",
         sinais: [
-          "Taquicardia compensatória (128 bpm)",
-          "Hipotensão arterial precoce (88/53 mmHg)",
-          "Pele fria, pálida e sudorética com tempo de enchimento capilar de 4s",
-          "Taquipneia (26 irpm) e ansiedade intensa",
-          "Deformidade pélvica em rotação externa e hematomas em flanco"
+          "FC 128 bpm | PA 88/53 mmHg",
+          "Pele fria, pálida e sudorese (enchimento 4s)",
+          "Deformidade pélvica em rotação externa e hematomas"
         ],
         miniAnimacao: "cinta-pelvica",
         miniAnimacaoTitulo: "Estabilização Pélvica Precoce",
-        miniAnimacaoDesc: "A cinta pélvica reduz o volume da pelve óssea e promove tamponamento hemostático dos vasos rompidos.",
-        
+        miniAnimacaoDesc: "A cinta reduz o volume ósseo da pelve e promove tamponamento mecânico dos vasos.",
         opcoes: [
           {
             id: "1A",
-            texto: "Seguir a abordagem XABCDE: verificar hemorragias externas, proteger coluna cervical, assegurar via aérea e oxigenação conforme avaliação, monitorizar, aplicar cinta pélvica ao nível dos trocânteres maiores, aquecer com manta e preparar saída rápida da cena.",
+            texto: "Seguir o XABCDE: estabilizar a pelve com cinta nos trocânteres maiores, aquecer com manta térmica, monitorizar e preparar saída rápida da cena.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Excelente conduta de enfermagem! A prioridade imediata é conter o foco oculto de sangramento fechando a pelve e protegendo contra a tríade letal com aquecimento precoce, sem demorar na via pública.",
+            feedback: "Conduta perfeita! Conter o foco de sangramento na bacia e aquecer com manta previne o colapso precoce.",
             efeitos: { fc: -6, pas: 6, fr: -2, spo2: 3, perfusao: 5, consciencia: 0, volume: 0, temperatura: 5, sangramento: -25 },
-            dicaGota: "Lembre-se da abordagem XABCDE: estancar e conter a fonte da perda de sangue vem antes de tudo!"
+            dicaGota: "Prioridade do XABCDE: contenha o sangramento pélvico e aqueça logo o paciente!"
           },
           {
             id: "1B",
-            texto: "Realizar imobilização completa e demorada com prancha rígida longa, colar, tirantes e coxins cefálicos antes de inspecionar ou intervir na deformidade pélvica.",
+            texto: "Fazer imobilização completa e demorada com prancha longa e colar cervical antes de cuidar da pelve.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Cuidado com o tempo de cena! Embora a restrição de movimento da coluna seja importante, gastar minutos preciosos na via sem conter o sangramento pélvico ativo acelera o choque hemorrágico.",
+            feedback: "Atenção ao tempo de cena: imobilizar é importante, mas demorar sem tratar a hemorragia pélvica agrava o choque.",
             efeitos: { fc: 4, pas: -2, fr: 1, spo2: 0, perfusao: -3, consciencia: -3, volume: -5, temperatura: -5, sangramento: 0 },
-            dicaGota: "A imobilização não pode retardar o tratamento do choque. O tempo de cena precisa ser mínimo!"
+            dicaGota: "Não gaste tempo precioso na via pública para procedimentos secundários."
           },
           {
             id: "1C",
-            texto: "Examinar repetidamente a estabilidade do anel pélvico comprimindo as cristas ilíacas para dentro e para baixo para testar a mobilidade óssea.",
+            texto: "Examinar repetidamente a estabilidade comprimindo e balançando a pelve para testar mobilidade.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Conduta perigosa! Testar a estabilidade comprimindo e balançando a pelve desaloja coágulos já formados e pode lacerar vasos ilíacos e plexos venosos, transformando uma fratura em sangramento incontrolável.",
+            feedback: "Perigoso! Balançar pelve suspeita desfaz coágulos e pode romper vasos ilíacos. Pelve suspeita não se balança: se estabiliza!",
             efeitos: { fc: 10, pas: -8, fr: 2, spo2: -2, perfusao: -8, consciencia: -5, volume: -10, temperatura: -5, sangramento: 15 },
-            dicaGota: "Nunca balance ou aperte uma bacia suspeita de fratura! Pelve suspeita deve ser imobilizada, nunca testada repetidamente."
+            dicaGota: "Nunca comprima ou balance uma bacia com suspeita de fratura!"
           }
         ],
         cuidadosEnfermagem: [
-          "Realizar avaliação rápida e sistemática seguindo o mnemônico XABCDE // TODO: validar com PHTLS",
-          "Manter alinhamento e proteção da coluna cervical",
-          "Monitorizar continuamente sinais vitais (FC, PA, SpO2 e ritmo)",
-          "Aplicar a cinta pélvica posicionada estritamente sobre a altura dos grandes trocânteres femorais",
-          "Cobrir o paciente com manta térmica para prevenção precoce da hipotermia",
-          "Manter diálogo acolhedor, esclarecendo os passos para reduzir o estresse adrenérgico"
+          "Avaliação rápida sistemática XABCDE e alinhamento cervical.",
+          "Instalação da cinta pélvica posicionada sobre os trocânteres maiores.",
+          "Manta térmica para prevenir hipotermia e monitorização contínua."
         ],
-        paraFixar: "Choque no trauma = procurar e controlar o sangramento primeiro. Pelve suspeita não se balança: se estabiliza.",
-        vocesabia: "O retroperitônio e o espaço pélvico podem acumular mais de 2 a 3 litros de sangue sem exteriorização visível por feridas!"
+        paraFixar: "Choque no trauma = procurar e conter o sangramento. Pelve suspeita se estabiliza, nunca se balança.",
+        vocesabia: "A bacia fraturada pode reter mais de 2 litros de sangue sem nenhuma ferida externa aberta!"
       },
 
       {
         id: 2,
         numero: 2,
-        fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR (APH)",
+        fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR",
         titulo: "No Transporte da Ambulância",
         cenario: "ambulancia",
-        situacao: "Lucas já está embarcado na ambulância com a cinta pélvica posicionada. Ele permanece pálido, com pulso filiforme (122 bpm) e PA 92/55 mmHg. Há um hospital geral básico a 4 minutos sem cirurgia de trauma e um Centro de Trauma Terciário com Banco de Sangue a 14 minutos.",
-        contexto: "O paciente em choque hemorrágico grave necessita de intervenção definitiva para hemostasia (hemodinâmica com embolização ou cirurgia de controle de danos) e hemocomponentes. A infusão indiscriminada de grandes volumes de soro fisiológico gelado dilui os fatores de coagulação, causa acidose hiperclorêmica e resfria o paciente.",
+        situacao: "Lucas está na ambulância com cinta aplicada, pulso fino (122 bpm) e PA 92/55 mmHg. O hospital básico local não tem cirurgião; o Centro de Trauma está a 14 minutos.",
+        contexto: "Choque hemorrágico requer centro de trauma com cirurgia e banco de sangue. Atrasar o trajeto ou infundir litros de soro frio dilui fatores de coagulação e resfria o paciente.",
         sinais: [
-          "PA limítrofe com resposta volêmica instável",
-          "Frequência cardíaca persistentemente elevada",
-          "Pele fria e pulso radial débil",
-          "Nível de consciência oscilando entre agitação e prostração"
+          "PA 92/55 mmHg | FC 122 bpm",
+          "Pele fria e pulsos radiais débeis",
+          "Consciência oscilando entre ansiedade e torpor"
         ],
         miniAnimacao: "triade-letal",
         miniAnimacaoTitulo: "Prevenção da Tríade Letal",
-        miniAnimacaoDesc: "Hipotermia + Acidose + Coagulopatia criam um círculo vicioso que paralisa a coagulação natural.",
-        
+        miniAnimacaoDesc: "Hipotermia + Acidose + Coagulopatia criam um ciclo vicioso fatal no trauma.",
         opcoes: [
           {
             id: "2A",
-            texto: "Transportar rapidamente ao Centro de Trauma Terciário, puncionar acesso venoso periférico calibroso em trajeto sem atrasar a saída, iniciar reposição criteriosa com fluidos aquecidos conforme prescrição médica e protocolo, mantendo monitorização contínua e pré-notificando a Sala Vermelha via regulação médica.",
+            texto: "Transporte rápido ao Centro de Trauma, acesso venoso calibroso durante o trajeto com fluidos aquecidos criteriosos e pré-notificar a Sala Vermelha via regulação.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta perfeita! No trauma grave, o paciente certo deve ir para o destino certo. A pré-notificação permite que a Sala Vermelha e o Banco de Sangue estejam prontos antes mesmo da chegada da ambulância.",
+            feedback: "Excelente decisão! O paciente certo deve ir para o hospital certo, rápido e com a equipe avisada.",
             efeitos: { fc: -4, pas: 6, fr: -1, spo2: 1, perfusao: 5, consciencia: 3, volume: 5, temperatura: 5, sangramento: -10 },
-            dicaGota: "O destino hospitalar e a comunicação prévia fazem toda a diferença para o paciente de trauma grave!"
+            dicaGota: "Leve direto ao hospital com cirurgia e pré-notifique a equipe!"
           },
           {
             id: "2B",
-            texto: "Manter a ambulância parada na cena tentando punções venosas repetidas em ambos os membros e realizando procedimentos secundários antes de iniciar o deslocamento.",
+            texto: "Parar a ambulância na cena tentando punções repetidas e procedimentos secundários antes de deslocar.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Acesso venoso é fundamental, porém permanecer parado na cena atrasa o tratamento cirúrgico definitivo. Punções e monitorizações em pacientes de trauma devem ser feitas a caminho do hospital sempre que possível.",
+            feedback: "Acesso venoso no trauma grave deve ser feito em deslocamento. Permanecer parado consome tempo vital.",
             efeitos: { fc: 4, pas: -3, fr: 0, spo2: 0, perfusao: -4, consciencia: -3, volume: -6, temperatura: -6, sangramento: 5 },
-            dicaGota: "A 'hora de ouro' não permite ficar parado na cena para tarefas que podem ser executadas no deslocamento."
+            dicaGota: "A hora de ouro não permite ficar parado na via pública."
           },
           {
             id: "2C",
-            texto: "Desviar o trajeto e levar imediatamente ao hospital básico mais próximo, que não conta com suporte de cirurgia nem banco de sangue, sem avisar a regulação prévia.",
+            texto: "Desviar o trajeto para o hospital básico local, que não tem suporte cirúrgico nem hemoterapia.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Decisão inadequada! Parar em um hospital sem suporte cirúrgico ou hemoterápico retarda a intervenção que realmente salva a vida de Lucas, necessitando de uma transferência secundária de altíssimo risco.",
+            feedback: "Decisão inadequada: parar onde não há cirurgia nem sangue atrasa o tratamento definitivo e exige transferência de alto risco.",
             efeitos: { fc: 8, pas: -8, fr: 1, spo2: -1, perfusao: -8, consciencia: -6, volume: -10, temperatura: -8, sangramento: 10 },
-            dicaGota: "O hospital mais próximo nem sempre é o hospital capacitado para trauma com choque hemorrágico."
+            dicaGota: "O hospital mais próximo nem sempre é o hospital capacitado para trauma pélvico."
           }
         ],
         cuidadosEnfermagem: [
-          "Puncionar acesso venoso periférico de grosso calibre (14G ou 16G) sem retardar o deslocamento",
-          "Administrar fluidos aquecidos de forma criteriosa conforme prescrição médica e protocolo institucional // TODO: validar com PHTLS",
-          "Manter monitorização eletrocardiográfica, oximetria e pressão arterial contínuas",
-          "Pré-notificar a equipe da Sala Vermelha através da Central de Regulação Médica",
-          "Registrar detalhadamente horários, volumes infundidos, evolução dos sinais vitais e intercorrências",
-          "Proporcionar conforto térmico e apoio psicológico contínuo ao paciente"
+          "Punção de acesso calibroso em deslocamento sem atrasar a saída.",
+          "Fluidos aquecidos e criteriosos conforme prescrição/protocolo.",
+          "Pré-notificação imediata do Centro de Trauma pela regulação."
         ],
-        paraFixar: "No trauma grave, o paciente certo vai para o lugar certo, rápido e com o hospital avisado.",
-        vocesabia: "Infusão excessiva de cristaloides dilui os fatores de coagulação e as plaquetas, além de aumentar a pressão intravascular rompendo coágulos recentes!"
+        paraFixar: "No trauma grave, o paciente vai para o hospital certo, rápido e com a equipe avisada.",
+        vocesabia: "Cristaloide em excesso dilui os fatores de coagulação e aumenta o sangramento."
       },
 
       {
         id: 3,
         numero: 3,
-        fase: "FASE 2 — PRONTO-SOCORRO (SALA VERMELHA)",
+        fase: "FASE 2 — SALA VERMELHA (PS)",
         titulo: "Chegada à Sala Vermelha",
         cenario: "sala-vermelha",
-        situacao: "Lucas dá entrada na Sala Vermelha. A PA sobe brevemente para 96/60 mmHg com a infusão do APH, mas logo recua para 84/50 mmHg (resposta transitória). FC 124 bpm. O exame de ultrassom FAST à beira do leito é NEGATIVO para líquido livre intraperitoneal. A dosagem rápida de lactato resulta em 4,8 mmol/L (alto) e pH 7,24 (acidose).",
-        contexto: "A resposta transitória a fluidos é a marca registrada do sangramento contínuo ativo. O FAST negativo NÃO afasta hemorragia pélvica grave, pois a maior parte do sangue das fraturas de pelve se aloja no espaço retroperitoneal. O lactato elevado e a acidose confirmam hipoperfusão tecidual e metabolismo anaeróbio grave.",
+        situacao: "Lucas dá entrada na Sala Vermelha. A PA sobe brevemente e cai para 84/50 mmHg (resposta transitória). Ultrassom FAST é negativo no abdome, mas o lactato é 4,8 mmol/L.",
+        contexto: "FAST negativo NÃO descarta sangramento pélvico (o sangue se esconde no retroperitônio). O lactato alto confirma hipoperfusão tecidual severa.",
         sinais: [
-          "Resposta transitória à reposição volêmica prévia",
-          "Lactato elevado (4,8 mmol/L) e acidose metabólica",
-          "Ultrassom FAST negativo com bacia clinicamente instável",
-          "Palidez cutânea acentuada e sudorese fria mantida"
+          "Resposta transitória à reposição",
+          "Lactato 4,8 mmol/L e acidose metabólica",
+          "FAST negativo com pelve instável"
         ],
         miniAnimacao: "fast-negativo",
         miniAnimacaoTitulo: "Atenção ao Retroperitônio",
-        miniAnimacaoDesc: "O FAST analisa a cavidade peritoneal; o sangue da bacia se esconde no retroperitônio e na pelve profunda.",
-        
+        miniAnimacaoDesc: "O FAST avalia a cavidade peritoneal; o sangramento pélvico fica atrás (retroperitônio).",
         opcoes: [
           {
             id: "3A",
-            texto: "Realizar passagem de caso estruturada (SBAR), manter e checar a cinta pélvica, monitorização multiparamétrica, garantir 2 acessos venosos periféricos calibrosos, coletar amostras com rigorosa identificação (hemograma, tipagem, coagulograma, gasometria/lactato) conforme prescrição médica, manter aquecimento ativo com manta térmica, acionar protocolo de transfusão maciça do serviço e comunicar imediatamente cirurgia geral, ortopedia e radiologia intervencionista.",
+            texto: "Passagem de caso (SBAR), manter cinta pélvica, 2 acessos calibrosos, coletar exames com identificação rigorosa, aquecer ativamente, acionar transfusão maciça e acionar cirurgia/ortopedia.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta de enfermagem brilhante e sincronizada! Choque hemorrágico exige sangue e hemostasia definitiva. A enfermagem garante os acessos, a segurança na coleta, o controle térmico e aciona a cadeia de resposta multidisciplinar.",
+            feedback: "Conduta exemplar! Choque grave exige hemostasia e sangue. A enfermagem garante os acessos, a segurança nas amostras e o calor.",
             efeitos: { fc: -8, pas: 8, fr: -1, spo2: 2, perfusao: 10, consciencia: 5, volume: 15, temperatura: 5, sangramento: -25 },
-            dicaGota: "Um FAST negativo não descarta sangramento na bacia! Foque em amostras corretas, sangue e acionamento da equipe de trauma."
+            dicaGota: "FAST negativo na pelve não descarta choque! Foque em amostras corretas e sangue."
           },
           {
             id: "3B",
-            texto: "Acreditar que não há sangramento ativo devido ao FAST negativo, continuar apenas infundindo bolsas de soro fisiológico e aguardar o agendamento de uma tomografia de corpo inteiro.",
+            texto: "Interpretar o FAST negativo como ausência de sangramento, infundir apenas soro e aguardar tomografia.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Equívoco perigoso! O FAST negativo exclui hemoperitônio maciço, mas não hematoma retroperitoneal de bacia. Continuar apenas com soro aumenta a hemodiluição e o resfriamento.",
+            feedback: "Equívoco perigoso: FAST negativo exclui hemoperitônio, não hematoma retroperitoneal. Continuar apenas com soro esfria o paciente.",
             efeitos: { fc: 2, pas: -4, fr: 0, spo2: 0, perfusao: -5, consciencia: -3, volume: -3, temperatura: -8, sangramento: 5 },
-            dicaGota: "Cuidado: cristaloide puro não transporta oxigênio e piora a hipotermia. Lucas precisa de hemostasia e sangue!"
+            dicaGota: "Cristaloide puro não transporta oxigênio e piora a hipotermia."
           },
           {
             id: "3C",
-            texto: "Afrouxar e retirar a cinta pélvica para palpar a bacia e encaminhar o paciente imediatamente, ainda instável, para a sala de tomografia computadorizada.",
+            texto: "Afrouxar a cinta para palpar a pelve e levar o paciente instável imediatamente para a tomografia.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Conduta com alto risco de desfecho fatal! Remover a cinta desfaz o tamponamento da fratura e reabre o sangramento volumoso. Pacientes hemodinamicamente instáveis nunca devem ser levados para a tomografia.",
+            feedback: "Conduta fatal: soltar a cinta desfaz o tamponamento e reabre o sangramento. Paciente instável nunca vai para a TC!",
             efeitos: { fc: 10, pas: -12, fr: 1, spo2: -3, perfusao: -10, consciencia: -8, volume: -12, temperatura: -4, sangramento: 20 },
-            dicaGota: "Jamais remova a cinta pélvica e nunca transporte paciente instável para a tomografia!"
+            dicaGota: "Nunca remova a cinta e jamais leve paciente instável para a tomografia!"
           }
         ],
         cuidadosEnfermagem: [
-          "Realizar passagem de plantão estruturada com a equipe multidisciplinar (ferramenta SBAR) // TODO: validar protocolo FAC",
-          "Manter monitorização contínua de ECG, PNI, SpO2 e capnografia se entubado",
-          "Garantir dois acessos venosos periféricos de grosso calibre (14G ou 16G) e checar permeabilidade",
-          "Proceder à coleta rigorosa de exames laboratoriais com identificação positiva do paciente à beira do leito",
-          "Manter a cinta pélvica ajustada sem afrouxamento indevido",
-          "Instalar medidas ativas de aquecimento (manta térmica com ar aquecido forçado e infusores aquecidos)",
-          "Controlar débito urinário e balanço hídrico rigoroso",
-          "Comunicar à equipe médica alterações hemodinâmicas imediatas"
+          "Passagem estruturada de caso com SBAR e monitorização contínua.",
+          "Manutenção e checagem da cinta pélvica sem afrouxamento indevido.",
+          "Aquecimento ativo precoce e coleta de amostras com checagem rigorosa."
         ],
-        paraFixar: "FAST negativo não descarta sangramento pélvico. Instável: sangue, calor e controle da fonte, não tomografia.",
-        vocesabia: "Em relato de caso publicado (Saleh et al., Cureus, 2024), um paciente com fratura em livro aberto apresentou-se com FC de 76 bpm: a ausência de taquicardia clássica pode ocorrer e não descarta choque grave!"
+        paraFixar: "FAST negativo não descarta sangramento pélvico. Instável precisa de sangue e hemostasia, não tomografia.",
+        vocesabia: "Em estudo publicado (Saleh et al., Cureus, 2024), paciente com fratura em livro aberto apresentou FC de 76 bpm: ausência de taquicardia não exclui choque!"
       },
 
       {
         id: 4,
         numero: 4,
-        fase: "FASE 2 — PRONTO-SOCORRO (SALA VERMELHA)",
+        fase: "FASE 2 — SALA VERMELHA (PS)",
         titulo: "Transfusão com Segurança",
         cenario: "sala-vermelha",
-        situacao: "O Banco de Sangue libera a primeira bolsa de concentrado de hemácias para Lucas. O ambiente da Sala Vermelha está agitado, com múltiplos profissionais atuando simultaneamente. A prescrição médica de hemocomponente está lançada e cabe à equipe de enfermagem instalar e vigiar o procedimento.",
-        contexto: "Em situações de extrema urgência, a transfusão de hemocomponentes é uma intervenção hemostática e de transporte de oxigênio que salva vidas. No entanto, erros de identificação de paciente ou de bolsa são as causas primárias de reações transfusionais hemolíticas agudas graves.",
+        situacao: "Chegou o primeiro concentrado de hemácias do Banco de Sangue. A equipe está com pressa. Cabe à enfermagem instalar e vigiar a infusão.",
+        contexto: "Na urgência, a transfusão salva vidas, mas falhas de identificação provocam reações hemolíticas agudas fatais. Vigilância nos primeiros 15 minutos é obrigatória.",
         sinais: [
-          "Necessidade de reposição volêmica com carreador de oxigênio",
-          "Risco iminente de reação transfusional se houver quebra de barreira de segurança",
-          "Sinais de alerta durante infusão: taquicardia súbita, hipotensão, febre, calafrios, broncoespasmo ou lombalgia"
+          "Instalação de hemocomponente sob pressão de tempo",
+          "Risco de reação por erro de identificação",
+          "Sinais de alerta: calafrios, febre, dor lombar ou queda de PA"
         ],
         miniAnimacao: "transfusao-segura",
         miniAnimacaoTitulo: "Cultura de Segurança Transfusional",
-        miniAnimacaoDesc: "Dupla checagem à beira do leito: conferência simultânea da pulseira do paciente e da etiqueta da bolsa.",
-        
+        miniAnimacaoDesc: "Dupla checagem obrigatória: conferência independente da pulseira e da bolsa à beira do leito.",
         opcoes: [
           {
             id: "4A",
-            texto: "Conferir rigorosamente a prescrição médica, realizar a dupla checagem à beira do leito com outro profissional (conferindo nome completo, prontuário, tipo sanguíneo e número da bolsa), aferir e registrar sinais vitais antes de iniciar, instalar com equipo específico e filtro, manter observação direta nos primeiros 10 a 15 minutos e reavaliar continuamente.",
+            texto: "Conferir prescrição, realizar dupla checagem à beira do leito (paciente e bolsa), aferir sinais vitais antes de abrir, usar equipo com filtro e observar diretamente nos primeiros 15 minutos.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta de enfermagem exemplar! A pressa da emergência nunca pode suprimir a dupla checagem. A vigilância nos primeiros minutos é decisiva para identificar precocemente qualquer incompatibilidade imunológica ou reação adversa.",
+            feedback: "Brilhante! A pressa da emergência nunca pode suprimir a dupla checagem. A vigilância precoce detecta incompatibilidades a tempo.",
             efeitos: { fc: -4, pas: 6, fr: -1, spo2: 2, perfusao: 5, consciencia: 3, volume: 8, temperatura: 3, sangramento: 0 },
-            dicaGota: "Segurança do paciente em primeiro lugar! Dupla checagem e vigilância no leito salvam vidas."
+            dicaGota: "Segurança em primeiro lugar: dupla checagem e vigilância no leito salvam vidas."
           },
           {
             id: "4B",
-            texto: "Realizar a checagem correta antes de conectar a bolsa, porém retirar-se do leito logo em seguida para cumprir outras tarefas administrativas, sem monitorar os sinais vitais durante a infusão.",
+            texto: "Fazer a checagem correta antes de conectar a bolsa, mas sair do leito logo em seguida sem reavaliar os primeiros minutos.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "A checagem inicial foi correta, mas o abandono da vigilância durante os primeiros minutos de infusão impede a identificação precoce de reações agudas potencialmente fatais.",
+            feedback: "A checagem inicial foi certa, mas abandonar a vigilância impede de reconhecer uma reação hemolítica no início.",
             efeitos: { fc: 2, pas: 0, fr: 0, spo2: 0, perfusao: -2, consciencia: -1, volume: 2, temperatura: 0, sangramento: 0 },
-            dicaGota: "A maior parte das reações transfusionais graves manifesta-se nos primeiros 15 minutos de infusão!"
+            dicaGota: "A maioria das reações transfusionais graves ocorre nos primeiros 15 minutos!"
           },
           {
             id: "4C",
-            texto: "Diante do clima tenso de urgência, conectar a bolsa rapidamente conferindo apenas a etiqueta do hemocomponente de forma solitária, pulando a conferência da pulseira para 'ganhar tempo'.",
+            texto: "Conectar a bolsa rapidamente conferindo apenas a etiqueta sozinho(a), pulando a pulseira para 'ganhar tempo'.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Erro gravíssimo de segurança do paciente! A incompatibilidade ABO por falha de checagem provoca hemólise intravascular maciça, choque refratário e coagulação intravascular disseminada (CIVD).",
+            feedback: "Erro gravíssimo! Incompatibilidade ABO por falha de identificação causa choque hemolítico e coagulação intravascular disseminada.",
             efeitos: { fc: 8, pas: -10, fr: 3, spo2: -3, perfusao: -10, consciencia: -6, volume: -5, temperatura: 0, sangramento: 0 },
-            dicaGota: "Jamais pule a dupla checagem! Velocidade sem segurança transforma o tratamento em risco de óbito."
+            dicaGota: "Nunca pule a dupla checagem à beira do leito!"
           }
         ],
         cuidadosEnfermagem: [
-          "Conferir a prescrição médica e indicação formal do hemocomponente // TODO: validar protocolo do serviço",
-          "Executar a dupla checagem obrigatória à beira do leito com dois profissionais de saúde",
-          "Conferir dados: nome completo, data de nascimento, número do prontuário, tipagem ABO/Rh da bolsa e do paciente, validade e integridade física da bolsa",
-          "Aferir sinais vitais completos antes de abrir o equipo, aos 10–15 minutos de infusão e ao término",
-          "Utilizar equipo específico com filtro para hemocomponentes e aquecedor de infusão rápida conforme protocolo",
-          "Suspender IMEDIATAMENTE a transfusão e acionar a equipe médica caso surjam febre, calafrios, dispneia, hipotensão ou queixas de dor",
-          "Manter a via venosa permeável com solução salina em via exclusiva e guardar a bolsa para análise laboratorial se houver reação",
-          "Registrar horários de início e término, número de lote da bolsa e ocorrências em prontuário"
+          "Dupla checagem obrigatória à beira do leito com conferência da pulseira.",
+          "Aferição de sinais vitais antes, aos 10–15 minutos e ao término da infusão.",
+          "Suspensão IMEDIATA da infusão caso surjam calafrios, febre ou dor."
         ],
         paraFixar: "Pressa não dispensa a dupla checagem. Na transfusão, quem vigia detecta a reação a tempo.",
-        vocesabia: "Reações transfusionais hemolíticas agudas por incompatibilidade ABO decorrem em mais de 90% dos casos de falhas humanas na checagem de etiquetas e identificação do paciente à beira do leito!"
+        vocesabia: "Mais de 90% dos erros transfusionais graves decorrem de falhas humanas na checagem da identificação do paciente!"
       },
 
       {
         id: 5,
         numero: 5,
-        fase: "FASE 2 — PRONTO-SOCORRO (SALA VERMELHA)",
-        titulo: "Suspeita de Lesão Associada",
+        fase: "FASE 2 — SALA VERMELHA (PS)",
+        titulo: "Suspeita de Lesão Uretral",
         cenario: "sala-vermelha",
-        situacao: "Com a transfusão em curso e a cinta mantida, Lucas apresenta melhora dos parâmetros hemodinâmicos. Ao preparar o cateterismo vesical para o rigoroso controle de diurese, você observa sangramento ativo no meato uretral (uretrorragia) e acentuado hematoma em bolsa escrotal e região perineal ('hematoma em borboleta').",
-        contexto: "Em traumas pélvicos de alta energia (especialmente fraturas do tipo livro aberto e cisalhamento vertical), a ruptura da uretra membranosa e lesões de bexiga são frequentes. A tentativa de passagem de sonda vesical de demora às cegas pode transformar uma laceração uretral parcial em secção completa, criando falso trajeto, abscesso pélvico e complicações urológicas permanentes.",
+        situacao: "Lucas melhora a PA. Ao preparar o cateterismo vesical para medir a diurese, você nota sangue vivo no meato uretral e hematoma em bolsa escrotal.",
+        contexto: "Fraturas de bacia podem romper a uretra. Passar sonda às cegas pode transformar uma laceração parcial em ruptura completa e infectar a pelve.",
         sinais: [
-          "Sangue vivo visível no meato uretral externo (uretrorragia)",
+          "Sangue no meato uretral (uretrorragia)",
           "Hematoma perineal e escrotal proeminente",
-          "Bexigoma palpável ou dor suprapúbica associada",
-          "Incapacidade de micção espontânea"
+          "Dor suprapúbica ou bexigoma palpável"
         ],
         miniAnimacao: "uretra",
-        miniAnimacaoTitulo: "Alerta Vermelho: Suspeita de Lesão Uretral",
-        miniAnimacaoDesc: "Não passe sonda às cegas! A tentativa pode converter lesão parcial em ruptura completa da uretra.",
-        
+        miniAnimacaoTitulo: "Alerta: Não Sonde às Cegas!",
+        miniAnimacaoDesc: "Uretrorragia contraindica sondagem às cegas. Comunique imediatamente a urologia.",
         opcoes: [
           {
             id: "5A",
-            texto: "Suspender imediatamente qualquer tentativa de cateterismo vesical de demora ou alívio, comunicar prontamente à equipe médica e à urologia sobre a tríade de achados (uretrorragia, hematoma perineal e dor), registrar a conduta e monitorar abaulamento suprapúbico e sinais de retenção urinária enquanto se aguarda avaliação urológica e/ou cistostomia suprapúbica.",
+            texto: "Suspender qualquer tentativa de sondagem, comunicar imediatamente à equipe médica e urologia, registrar os achados e vigiar distensão vesical.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta perfeita e de alta destreza clínica de enfermagem! Reconhecer os sinais de contraindicação do cateterismo vesical às cegas protege o paciente contra sequelas anatômicas definitivas. A comunicação ágil orienta a conduta correta (uretrocistografia retrógrada ou cistostomia suprapúbica).",
+            feedback: "Perfeito! Reconhecer os sinais de lesão uretral protege o paciente contra sequelas definitivas. A investigação vem antes da sonda.",
             efeitos: { fc: 0, pas: 0, fr: 0, spo2: 0, perfusao: 2, consciencia: 2, volume: 0, temperatura: 0, sangramento: 0 },
-            dicaGota: "Sangue no meato da uretra é sinal de pare! Jamais introduza sonda vesical às cegas nesta situação."
+            dicaGota: "Sangue no meato é sinal de pare! Jamais introduza sonda vesical às cegas."
           },
           {
             id: "5B",
-            texto: "Tentar passar a sonda vesical de silicone 'com muita delicadeza', prometendo parar caso sinta qualquer resistência mecânica na uretra.",
+            texto: "Tentar passar a sonda vesical 'com delicadeza', prometendo parar se houver resistência mecânica.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Conduta de alto risco! Mesmo com aparente delicadeza, a ponta do cateter pode romper a mucosa lesada e invadir o hematoma pélvico circundante, levando a infecção grave do sítio de fratura.",
+            feedback: "Conduta arriscada: mesmo com delicadeza, o cateter pode romper a mucosa lesada e invadir o hematoma pélvico.",
             efeitos: { fc: 2, pas: -1, fr: 0, spo2: 0, perfusao: -2, consciencia: 0, volume: -3, temperatura: 0, sangramento: 3 },
-            dicaGota: "A presença de uretrorragia contraindica qualquer tentativa de sondagem sem imagem prévia!"
+            dicaGota: "A presença de sangue no meato contraindica qualquer tentativa às cegas."
           },
           {
             id: "5C",
-            texto: "Insistir na introdução rápida de uma sonda de alívio fina para drenar a bexiga antes de chamar a equipe médica, alegando urgência em medir a diurese.",
+            texto: "Passar sonda de alívio rápido para drenar a bexiga antes de avisar a equipe médica.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Conduta incorreta e prejudicial! A passagem inadvertida pode dilacerar a uretra, extravasar urina para o retroperitônio e infectar o hematoma pélvico, agravando exponencialmente o prognóstico de Lucas.",
+            feedback: "Conduta incorreta: passar sonda às cegas pode dilacerar a uretra e provocar extravasamento de urina para a pelve fraturada.",
             efeitos: { fc: 4, pas: -3, fr: 1, spo2: 0, perfusao: -4, consciencia: -2, volume: -5, temperatura: 0, sangramento: 5 },
-            dicaGota: "Nunca passe sonda às cegas com sangue no meato. Comunique à equipe médica imediatamente!"
+            dicaGota: "Nunca passe sonda com sangue no meato. Comunique à equipe imediatamente!"
           }
         ],
         cuidadosEnfermagem: [
-          "Inspecionar rigorosamente o meato uretral e a região perineal antes de qualquer procedimento de sondagem",
-          "Interromper o procedimento na vigência de uretrorragia, hematoma escrotal/perineal ou próstata elevada // TODO: validar protocolo de trauma",
-          "Comunicar imediatamente a equipe médica e o plantonista da urologia utilizando técnica estruturada de comunicação",
-          "Aferir e registrar volume urinário espontâneo se houver, presença de hematúria macroscópica e palpação do globo vesical",
-          "Separar bandeja e materiais estéreis caso a equipe médica opte por punção ou cistostomia suprapúbica",
-          "Orientar o paciente a não realizar esforço miccional até a definição diagnóstica"
+          "Inspeção visual do meato uretral e períneo antes de qualquer sondagem.",
+          "Interrupção imediata do procedimento se houver uretrorragia ou hematoma perineal.",
+          "Comunicação urgente com a urologia para avaliação e conduta adequada."
         ],
-        paraFixar: "Sangue no meato + hematoma perineal = pense em lesão uretral. Não sonde às cegas: comunique.",
-        vocesabia: "Segundo estudos em trauma pélvico (Saleh et al., Cureus, 2024), lesões associadas de uretra e bexiga acometem até 15% das fraturas em livro aberto, exigindo abordagem multidisciplinar coordenada!"
+        paraFixar: "Sangue no meato + hematoma perineal = suspeita de lesão uretral. Não sonde às cegas: comunique.",
+        vocesabia: "Lesões uretrais acometem até 15% das fraturas pélvicas graves em livro aberto (Saleh et al., Cureus, 2024)."
       }
     ]
   },
@@ -1225,179 +1150,212 @@ class PatientRenderer {
     this.container = document.getElementById(containerId);
   }
 
-  // Define cor da pele conforme nível de perfusão
-  getSkinColor(perfusao) {
-    if (perfusao >= 70) return "#FFDFC4"; // Corado / saudável
-    if (perfusao >= 50) return "#F5E2CE"; // Leve palidez
-    if (perfusao >= 30) return "#EFE8DA"; // Pálido evidente
-    return "#D8DEE8"; // Acinzentado / cianose suave
+  getSkinColors(perfusao) {
+    if (perfusao >= 70) {
+      return { start: "#FED0BB", end: "#F7A382", blush: 0.75, lip: "#E63946" };
+    }
+    if (perfusao >= 50) {
+      return { start: "#F5DFCE", end: "#E2BAA3", blush: 0.4, lip: "#C96D6D" };
+    }
+    if (perfusao >= 30) {
+      return { start: "#EFE8DC", end: "#D8C7B5", blush: 0.15, lip: "#A68080" };
+    }
+    return { start: "#E2E7EF", end: "#BAC8D8", blush: 0.05, lip: "#7E8C9D" }; // cianose suave
   }
 
-  // Gera o SVG do cenário de fundo conforme a etapa
   renderScenarioBackground(cenarioTipo) {
     if (cenarioTipo === "rua") {
       return `
-        <!-- Cenário 1: Rua / Acidente -->
-        <rect x="0" y="0" width="520" height="240" fill="#E8EDF5" />
-        <!-- Pista e asfalto -->
-        <rect x="0" y="160" width="520" height="80" fill="#4A5568" />
-        <line x1="0" y1="200" x2="520" y2="200" stroke="#FFD166" stroke-width="3" stroke-dasharray="20 15" />
-        <!-- Moto caída estilizada cartoon -->
-        <g transform="translate(40, 155) scale(0.65)">
-          <circle cx="20" cy="30" r="14" fill="#2D3748" stroke="#1A202C" stroke-width="3"/>
-          <circle cx="70" cy="30" r="14" fill="#2D3748" stroke="#1A202C" stroke-width="3"/>
-          <path d="M 20 30 L 45 10 L 60 25 L 70 30" stroke="#E63946" stroke-width="6" stroke-linecap="round"/>
-          <line x1="45" y1="10" x2="40" y2="0" stroke="#718096" stroke-width="4"/>
-          <!-- Risco no asfalto -->
-          <path d="M -10 38 Q 20 35 45 37" stroke="#2D3748" stroke-width="3" opacity="0.6"/>
+        <defs>
+          <linearGradient id="skyRua" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E2E8F0"/>
+            <stop offset="100%" stop-color="#CBD5E1"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="520" height="240" fill="url(#skyRua)"/>
+        <!-- Pista e asfalto com guia -->
+        <rect x="0" y="165" width="520" height="75" fill="#334155"/>
+        <line x1="0" y1="202" x2="520" y2="202" stroke="#FBBF24" stroke-width="3" stroke-dasharray="24 16"/>
+        <!-- Moto caída estilizada cartoon Duolingo -->
+        <g transform="translate(42, 160) scale(0.68)">
+          <circle cx="20" cy="28" r="14" fill="#1E293B" stroke="#0F172A" stroke-width="3"/>
+          <circle cx="20" cy="28" r="6" fill="#94A3B8"/>
+          <circle cx="72" cy="28" r="14" fill="#1E293B" stroke="#0F172A" stroke-width="3"/>
+          <circle cx="72" cy="28" r="6" fill="#94A3B8"/>
+          <path d="M 20 28 L 44 8 L 62 22 L 72 28" stroke="#E63946" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="8" r="5" fill="#FFD166"/>
+          <line x1="44" y1="8" x2="38" y2="-2" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
         </g>
-        <!-- Ambulância de fundo com giroflex -->
-        <g transform="translate(380, 100) scale(0.8)">
-          <rect x="10" y="30" width="110" height="55" rx="8" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="2"/>
-          <rect x="80" y="40" width="35" height="25" rx="4" fill="#90CDF4"/>
-          <rect x="10" y="55" width="110" height="12" fill="#E63946"/>
-          <!-- Cruz vermelha -->
-          <rect x="42" y="35" width="6" height="16" fill="#E63946"/>
-          <rect x="37" y="40" width="16" height="6" fill="#E63946"/>
-          <circle cx="35" cy="85" r="10" fill="#2D3748"/>
-          <circle cx="95" cy="85" r="10" fill="#2D3748"/>
-          <!-- Giroflex pulsante -->
-          <ellipse cx="65" cy="26" rx="7" ry="5" fill="#E63946" class="siren-active"/>
+        <!-- Ambulância fofa ao fundo com giroflex pulsante -->
+        <g transform="translate(390, 105) scale(0.8)">
+          <rect x="10" y="24" width="105" height="56" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+          <path d="M 78 32 L 105 32 L 115 54 L 78 54 Z" fill="#93C5FD" rx="2"/>
+          <rect x="10" y="52" width="105" height="10" fill="#E63946"/>
+          <rect x="42" y="32" width="6" height="16" rx="2" fill="#E63946"/>
+          <rect x="37" y="37" width="16" height="6" rx="2" fill="#E63946"/>
+          <circle cx="34" cy="80" r="10" fill="#1E293B"/>
+          <circle cx="94" cy="80" r="10" fill="#1E293B"/>
+          <!-- Sirene pulsando -->
+          <ellipse cx="62" cy="20" rx="8" ry="6" fill="#EF4444" class="siren-active"/>
         </g>
       `;
     }
 
     if (cenarioTipo === "ambulancia") {
       return `
-        <!-- Cenário 2: Interior da Ambulância -->
-        <rect x="0" y="0" width="520" height="240" fill="#2D3748" />
-        <rect x="15" y="15" width="490" height="210" rx="12" fill="#F7FAFC" stroke="#E2E8F0" stroke-width="3"/>
-        <!-- Janela com asfalto correndo -->
-        <rect x="40" y="30" width="160" height="70" rx="8" fill="#BEE3F8" stroke="#CBD5E0" stroke-width="2"/>
-        <line x1="50" y1="80" x2="190" y2="80" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="16 12"/>
-        <!-- Equipamentos e suportes internos -->
-        <rect x="380" y="30" width="90" height="100" rx="6" fill="#EDF2F7" stroke="#CBD5E0" stroke-width="2"/>
-        <rect x="390" y="40" width="70" height="40" rx="4" fill="#1A202C"/>
-        <line x1="395" y1="60" x2="455" y2="60" stroke="#00FF88" stroke-width="2"/>
-        <circle cx="400" cy="95" r="4" fill="#38A169"/>
-        <circle cx="415" cy="95" r="4" fill="#E53E3E"/>
+        <rect x="0" y="0" width="520" height="240" fill="#1E293B"/>
+        <rect x="12" y="12" width="496" height="216" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+        <!-- Janela da ambulância -->
+        <rect x="36" y="28" width="150" height="64" rx="8" fill="#BAE6FD" stroke="#93C5FD" stroke-width="2"/>
+        <line x1="45" y1="70" x2="175" y2="70" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="14 10"/>
+        <!-- Painel de oxigênio / suporte -->
+        <rect x="390" y="28" width="85" height="95" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+        <rect x="400" y="38" width="65" height="38" rx="4" fill="#0F172A"/>
+        <line x1="405" y1="58" x2="460" y2="58" stroke="#10B981" stroke-width="2"/>
+        <circle cx="412" cy="94" r="5" fill="#10B981"/>
+        <circle cx="430" cy="94" r="5" fill="#EF4444"/>
       `;
     }
 
-    // Cenário Padrão: Sala Vermelha do Pronto-Socorro
+    // Cenário Sala Vermelha
     return `
-      <!-- Cenário 3: Sala Vermelha PS -->
-      <rect x="0" y="0" width="520" height="240" fill="#F0F4F8" />
-      <!-- Faixa vermelha institucional na parede -->
-      <rect x="0" y="70" width="520" height="20" fill="#E63946" opacity="0.85" />
-      <text x="20" y="84" font-family="'Fredoka', sans-serif" font-weight="700" font-size="11" fill="#FFFFFF" letter-spacing="2">EMERGÊNCIA • SALA VERMELHA • TRAUMA</text>
-      <!-- Sirene de teto pulsando -->
-      <g transform="translate(250, 12)" class="siren-active">
-        <rect x="0" y="0" width="20" height="6" fill="#718096" rx="2"/>
-        <path d="M 3 6 C 3 18, 17 18, 17 6 Z" fill="#E63946"/>
+      <rect x="0" y="0" width="520" height="240" fill="#F8FAFC"/>
+      <!-- Faixa institucional Sala Vermelha com luz suave -->
+      <rect x="0" y="65" width="520" height="18" fill="#E63946" opacity="0.9"/>
+      <text x="24" y="78" font-family="'Fredoka', sans-serif" font-weight="700" font-size="10.5" fill="#FFFFFF" letter-spacing="2">EMERGÊNCIA • SALA VERMELHA • PLANTÃO DE TRAUMA</text>
+      <!-- Sirene no teto -->
+      <g transform="translate(250, 10)" class="siren-active">
+        <rect x="0" y="0" width="20" height="5" fill="#64748B" rx="2"/>
+        <path d="M 3 5 C 3 17, 17 17, 17 5 Z" fill="#EF4444"/>
       </g>
-      <!-- Suporte de soro à esquerda -->
-      <line x1="70" y1="30" x2="70" y2="220" stroke="#A0AEC0" stroke-width="4" stroke-linecap="round"/>
-      <path d="M 55 40 Q 70 30 85 40" stroke="#A0AEC0" stroke-width="3" fill="none"/>
+      <!-- Suporte de soro elegante -->
+      <line x1="72" y1="26" x2="72" y2="225" stroke="#94A3B8" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M 58 36 Q 72 26 86 36" stroke="#94A3B8" stroke-width="2.5" fill="none"/>
     `;
   }
 
-  // Renderiza todo o componente SVG do paciente e maca
   render(state) {
     if (!this.container) return;
 
     const p = state.paciente;
-    const skin = this.getSkinColor(p.perfusao);
+    const skin = this.getSkinColors(p.perfusao);
     const cenarioTipo = state.etapaAtualIndex === 0 ? "rua" : state.etapaAtualIndex === 1 ? "ambulancia" : "sala-vermelha";
 
-    // Expressão dos olhos conforme consciência
+    // Expressão dos olhos estilo Duolingo
     let eyesSvg = "";
     if (p.consciencia >= 75) {
-      // Alerta / ansioso
+      // Olhos grandes, pupilas brilhantes, sobrancelhas de dor arqueadas
       eyesSvg = `
-        <circle cx="178" cy="115" r="3.5" fill="#1D2B53" />
-        <circle cx="194" cy="115" r="3.5" fill="#1D2B53" />
-        <circle cx="179" cy="113.5" r="1.2" fill="#FFFFFF" />
-        <circle cx="195" cy="113.5" r="1.2" fill="#FFFFFF" />
-        <!-- Sobrancelhas franzidas de dor/ansiedade -->
-        <line x1="174" y1="108" x2="182" y2="111" stroke="#4A5568" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="198" y1="108" x2="190" y2="111" stroke="#4A5568" stroke-width="1.8" stroke-linecap="round"/>
+        <g transform="translate(178, 114)">
+          <ellipse cx="0" cy="0" rx="5.5" ry="6.5" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.8"/>
+          <ellipse cx="0.5" cy="0" rx="3.6" ry="4.5" fill="#1D2B53"/>
+          <circle cx="1.8" cy="-1.5" r="1.5" fill="#FFFFFF"/>
+          <circle cx="-0.8" cy="1.8" r="0.8" fill="#FFFFFF"/>
+        </g>
+        <g transform="translate(196, 114)">
+          <ellipse cx="0" cy="0" rx="5.5" ry="6.5" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.8"/>
+          <ellipse cx="0.5" cy="0" rx="3.6" ry="4.5" fill="#1D2B53"/>
+          <circle cx="1.8" cy="-1.5" r="1.5" fill="#FFFFFF"/>
+          <circle cx="-0.8" cy="1.8" r="0.8" fill="#FFFFFF"/>
+        </g>
+        <!-- Sobrancelhas de dor inclinadas -->
+        <path d="M 172 105 Q 178 102 184 107" stroke="#3D261A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M 202 105 Q 196 102 190 107" stroke="#3D261A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
       `;
     } else if (p.consciencia >= 45) {
-      // Sonolento / cansado
+      // Sonolento / pálpebras caídas
       eyesSvg = `
-        <path d="M 174 116 Q 178 119 182 116" stroke="#1D2B53" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M 190 116 Q 194 119 198 116" stroke="#1D2B53" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <line x1="174" y1="110" x2="182" y2="112" stroke="#718096" stroke-width="1.5"/>
-        <line x1="198" y1="110" x2="190" y2="112" stroke="#718096" stroke-width="1.5"/>
+        <g transform="translate(178, 115)">
+          <ellipse cx="0" cy="0" rx="5.5" ry="6" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.5"/>
+          <ellipse cx="0" cy="1" rx="3.2" ry="3.5" fill="#1D2B53"/>
+          <circle cx="1.2" cy="0" r="1.1" fill="#FFFFFF"/>
+          <path d="M -5.5 -1 Q 0 4 5.5 -1" fill="${skin.end}" stroke="#1D2B53" stroke-width="1.6"/>
+        </g>
+        <g transform="translate(196, 115)">
+          <ellipse cx="0" cy="0" rx="5.5" ry="6" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.5"/>
+          <ellipse cx="0" cy="1" rx="3.2" ry="3.5" fill="#1D2B53"/>
+          <circle cx="1.2" cy="0" r="1.1" fill="#FFFFFF"/>
+          <path d="M -5.5 -1 Q 0 4 5.5 -1" fill="${skin.end}" stroke="#1D2B53" stroke-width="1.6"/>
+        </g>
+        <path d="M 173 107 Q 178 108 183 109" stroke="#5D3A24" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M 201 107 Q 196 108 191 109" stroke="#5D3A24" stroke-width="2.2" stroke-linecap="round" fill="none"/>
       `;
     } else {
-      // Quase fechados / torpor
+      // Olhos fechados / torpor
       eyesSvg = `
-        <line x1="174" y1="117" x2="182" y2="117" stroke="#1D2B53" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="190" y1="117" x2="198" y2="117" stroke="#1D2B53" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 173 116 Q 178 119 183 116" stroke="#1D2B53" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M 191 116 Q 196 119 201 116" stroke="#1D2B53" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <line x1="174" y1="110" x2="182" y2="111" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+        <line x1="200" y1="110" x2="192" y2="111" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
       `;
     }
 
-    // Suor dinâmico se hipoperfusão
+    // Suor dinâmico estilo cartoon
     const showSweat = p.perfusao < 55;
     const sweatSvg = showSweat ? `
-      <g fill="#63B3ED" class="sweat-drop">
-        <path d="M 170 108 C 170 106 172 104 172 104 C 172 104 174 106 174 108 A 2 2 0 0 1 170 108 Z"/>
-        <path d="M 200 110 C 200 108 202 106 202 106 C 202 106 204 108 204 110 A 2 2 0 0 1 200 110 Z"/>
+      <g class="sweat-drop" fill="#60A5FA" stroke="#3B82F6" stroke-width="0.8">
+        <path d="M 169 107 C 169 104 172 102 172 102 C 172 102 175 104 175 107 A 3 3 0 0 1 169 107 Z"/>
+        <path d="M 202 109 C 202 106 205 104 205 104 C 205 104 208 106 208 109 A 3 3 0 0 1 202 109 Z"/>
       </g>
     ` : "";
 
-    // Tremor de frio se temperatura baixa
     const isShivering = p.temperatura < 65 ? "patient-shivering" : "";
 
-    // Tamanho do hematoma pélvico (escala de acordo com sangramento)
-    const hematomaRadiusX = Math.max(8, (p.sangramento / 100) * 36);
-    const hematomaRadiusY = Math.max(5, (p.sangramento / 100) * 22);
-    const hematomaOpacity = Math.min(0.85, Math.max(0.25, p.sangramento / 100));
+    // Hematoma pélvico difuso moderno
+    const hematomaRadiusX = Math.max(10, (p.sangramento / 100) * 34);
+    const hematomaRadiusY = Math.max(6, (p.sangramento / 100) * 20);
+    const hematomaOpacity = Math.min(0.85, Math.max(0.2, p.sangramento / 100));
 
-    // Cinta Pélvica instalada
+    // Cinta Pélvica moderna (estilo SAM Pelvic Sling profissional)
     const cintaSvg = state.cintaPelvicaAplicada ? `
-      <!-- Cinta Pélvica nos Trocânteres Maiores -->
-      <g transform="translate(262, 142)">
-        <rect x="0" y="0" width="60" height="24" rx="6" fill="#1D2B53" stroke="#2EC4B6" stroke-width="2.5"/>
-        <rect x="18" y="4" width="24" height="16" rx="4" fill="#FFD166"/>
-        <!-- Fivela / indicador de tração correta -->
-        <circle cx="30" cy="12" r="3" fill="#E63946"/>
-        <text x="30" y="32" font-family="'Nunito', sans-serif" font-weight="800" font-size="8" fill="#1D2B53" text-anchor="middle">CINTA FIXADA</text>
+      <g transform="translate(260, 140)">
+        <!-- Faixa azul de neoprene -->
+        <rect x="0" y="0" width="64" height="26" rx="6" fill="#1D2B53" stroke="#0F172A" stroke-width="2"/>
+        <!-- Faixa central laranja de alta visibilidade -->
+        <rect x="12" y="5" width="40" height="16" rx="3" fill="#FF6B35"/>
+        <!-- Fivela / engate mecânico de tração -->
+        <rect x="25" y="3" width="14" height="20" rx="3" fill="#FFD166" stroke="#D97706" stroke-width="1.5"/>
+        <circle cx="32" cy="13" r="3" fill="#EF4444"/>
+        <!-- Costura tracejada profissional -->
+        <line x1="4" y1="3" x2="60" y2="3" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <line x1="4" y1="23" x2="60" y2="23" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text x="32" y="34" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#1D2B53" text-anchor="middle">SAM SLING FIXADA</text>
       </g>
     ` : "";
 
-    // Manta térmica de aquecimento
+    // Manta térmica aluminizada reflexiva
     const mantaSvg = state.mantaTermicaAplicada ? `
-      <!-- Manta Térmica Aluminizada/Amarela -->
-      <path d="M 195 130 Q 300 118 410 135 L 405 185 Q 295 190 195 175 Z" 
-            fill="#FFD166" opacity="0.88" stroke="#E09F3E" stroke-width="2"/>
-      <text x="300" y="155" font-family="'Fredoka', sans-serif" font-weight="700" font-size="11" fill="#1D2B53" text-anchor="middle" letter-spacing="1">MANTA TÉRMICA ATIVA</text>
+      <g>
+        <path d="M 194 130 Q 300 116 415 134 L 410 188 Q 295 194 194 176 Z" 
+              fill="url(#mantaGrad)" opacity="0.94" stroke="#D97706" stroke-width="1.8"/>
+        <!-- Vincos poligonais reflexivos de manta de trauma -->
+        <line x1="220" y1="130" x2="310" y2="190" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+        <line x1="280" y1="125" x2="370" y2="185" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+        <line x1="330" y1="124" x2="405" y2="175" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+        <text x="305" y="156" font-family="'Fredoka', sans-serif" font-weight="700" font-size="10.5" fill="#78350F" text-anchor="middle" letter-spacing="1">MANTA TÉRMICA ATIVA</text>
+      </g>
     ` : "";
 
-    // Bolsa de Soro / Sangue no suporte
+    // Bolsas de infusão
     let infusionBagSvg = "";
     if (state.transfusaoIniciada) {
       infusionBagSvg = `
-        <!-- Bolsa de Sangue Concentrado de Hemácias -->
-        <g transform="translate(60, 48)">
-          <rect x="0" y="0" width="22" height="34" rx="5" fill="#8B0000" stroke="#FFFFFF" stroke-width="1.5"/>
-          <rect x="4" y="6" width="14" height="12" rx="2" fill="#FFFFFF" opacity="0.9"/>
-          <text x="11" y="15" font-family="'Nunito', sans-serif" font-weight="800" font-size="7" fill="#8B0000" text-anchor="middle">CH</text>
-          <!-- Tubo e gotejamento rápido -->
-          <line x1="11" y1="34" x2="11" y2="80" stroke="#8B0000" stroke-width="2"/>
-          <circle cx="11" cy="46" r="2.5" fill="#8B0000" class="iv-drip fast"/>
+        <g transform="translate(62, 46)">
+          <rect x="0" y="0" width="24" height="36" rx="6" fill="#881337" stroke="#FFFFFF" stroke-width="1.8"/>
+          <rect x="4" y="6" width="16" height="13" rx="2" fill="#FFFFFF" opacity="0.95"/>
+          <text x="12" y="16" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#881337" text-anchor="middle">CH O+</text>
+          <!-- Linha do equipo em curva suave -->
+          <path d="M 12 36 Q 14 70 45 105" stroke="#881337" stroke-width="2" fill="none"/>
+          <circle cx="12" cy="48" r="2.5" fill="#881337" class="iv-drip fast"/>
         </g>
       `;
     } else {
       infusionBagSvg = `
-        <!-- Frasco / Bolsa de Cristaloides -->
-        <g transform="translate(60, 48)">
-          <rect x="0" y="0" width="22" height="34" rx="5" fill="#EBF8FF" stroke="#63B3ED" stroke-width="1.5"/>
-          <text x="11" y="18" font-family="'Nunito', sans-serif" font-weight="700" font-size="7" fill="#2B6CB0" text-anchor="middle">SF</text>
-          <line x1="11" y1="34" x2="11" y2="80" stroke="#63B3ED" stroke-width="1.5"/>
-          <circle cx="11" cy="46" r="2" fill="#63B3ED" class="iv-drip"/>
+        <g transform="translate(62, 46)">
+          <rect x="0" y="0" width="24" height="36" rx="6" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.8"/>
+          <text x="12" y="20" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#0369A1" text-anchor="middle">SF 0.9%</text>
+          <path d="M 12 36 Q 14 70 45 105" stroke="#38BDF8" stroke-width="1.8" fill="none"/>
+          <circle cx="12" cy="48" r="2.2" fill="#38BDF8" class="iv-drip"/>
         </g>
       `;
     }
@@ -1405,76 +1363,121 @@ class PatientRenderer {
     const html = `
       <svg viewBox="0 0 520 240" class="patient-svg-root" style="width: 100%; height: auto; display: block;">
         <defs>
-          <filter id="shadowFilter" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#1D2B53" flood-opacity="0.15"/>
+          <linearGradient id="skinDuoGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${skin.start}"/>
+            <stop offset="100%" stop-color="${skin.end}"/>
+          </linearGradient>
+
+          <linearGradient id="hairDuoGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4A3022"/>
+            <stop offset="100%" stop-color="#2D1C13"/>
+          </linearGradient>
+
+          <linearGradient id="gownDuoGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#CCFBF1"/>
+            <stop offset="100%" stop-color="#99F6E4"/>
+          </linearGradient>
+
+          <linearGradient id="mantaGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FDE047"/>
+            <stop offset="50%" stop-color="#F59E0B"/>
+            <stop offset="100%" stop-color="#FBBF24"/>
+          </linearGradient>
+
+          <radialGradient id="hematomaGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#6B21A8" stop-opacity="0.9"/>
+            <stop offset="70%" stop-color="#7E22CE" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+          </radialGradient>
+
+          <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0F172A" flood-opacity="0.12"/>
           </filter>
         </defs>
 
         <!-- 1. Cenário de Fundo -->
         ${this.renderScenarioBackground(cenarioTipo)}
 
-        <!-- 2. Maca Hospitalar com Rodinhas -->
-        <g transform="translate(130, 150)" filter="url(#shadowFilter)">
-          <!-- Estrutura metálica -->
-          <rect x="10" y="20" width="280" height="12" rx="4" fill="#718096" />
-          <rect x="30" y="32" width="10" height="28" fill="#4A5568" />
-          <rect x="260" y="32" width="10" height="28" fill="#4A5568" />
-          <circle cx="35" cy="62" r="7" fill="#1A202C" />
-          <circle cx="265" cy="62" r="7" fill="#1A202C" />
-          <!-- Colchão azul-claro -->
-          <rect x="5" y="6" width="290" height="16" rx="6" fill="#63B3ED" />
+        <!-- 2. Maca Hospitalar Moderna com Rodas -->
+        <g transform="translate(130, 150)" filter="url(#softGlow)">
+          <rect x="8" y="20" width="285" height="12" rx="5" fill="#64748B"/>
+          <rect x="28" y="32" width="10" height="28" rx="2" fill="#475569"/>
+          <rect x="265" y="32" width="10" height="28" rx="2" fill="#475569"/>
+          <!-- Rodas com trava -->
+          <circle cx="33" cy="62" r="8" fill="#1E293B"/>
+          <circle cx="33" cy="62" r="3" fill="#94A3B8"/>
+          <circle cx="270" cy="62" r="8" fill="#1E293B"/>
+          <circle cx="270" cy="62" r="3" fill="#94A3B8"/>
+          <!-- Colchão hospitalar confortável -->
+          <rect x="4" y="6" width="292" height="16" rx="7" fill="#38BDF8"/>
+          <rect x="4" y="6" width="292" height="6" rx="3" fill="#7DD3FC"/>
         </g>
 
-        <!-- 3. Paciente Lucas em Maca -->
+        <!-- 3. Paciente Lucas (Estilo Duolingo / Cartoon Moderno) -->
         <g id="patientBodyGroup" class="${isShivering}">
-          <!-- Travesseiro -->
-          <ellipse cx="185" cy="148" rx="26" ry="12" fill="#E2E8F0"/>
+          <!-- Travesseiro anatômico fofo -->
+          <ellipse cx="185" cy="148" rx="28" ry="13" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
 
-          <!-- Cabeça -->
-          <circle cx="186" cy="120" r="22" fill="${skin}" stroke="#D69E2E" stroke-width="1" />
-          <!-- Cabelo castanho cartoon -->
-          <path d="M 166 118 C 166 98, 206 98, 206 118 C 200 104, 172 104, 166 118 Z" fill="#4A3525"/>
-          <!-- Olhos e Sobrancelhas -->
+          <!-- Cabeça carismática -->
+          <ellipse cx="186" cy="120" rx="22" ry="21" fill="url(#skinDuoGrad)" stroke="#B45309" stroke-width="0.8" style="transition: fill 1s ease;"/>
+          
+          <!-- Bochechas com blush suave estilo Duolingo -->
+          <circle cx="174" cy="125" r="4.5" fill="#FB7185" opacity="${skin.blush}"/>
+          <circle cx="200" cy="125" r="4.5" fill="#FB7185" opacity="${skin.blush}"/>
+
+          <!-- Cabelo volumoso cartoon -->
+          <path d="M 165 116 C 163 94, 208 94, 208 116 C 201 103, 172 103, 165 116 Z" fill="url(#hairDuoGrad)"/>
+          <!-- Mecha estilizada na testa -->
+          <path d="M 178 103 Q 186 98 190 106 Q 184 105 178 103 Z" fill="url(#hairDuoGrad)"/>
+
+          <!-- Olhos e Sobrancelhas dinâmicos -->
           ${eyesSvg}
-          <!-- Nariz e Boca de dor/ansiedade -->
-          <path d="M 186 120 L 184 125 L 187 125" stroke="#A0AEC0" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          <path d="M 181 130 Q 186 127 191 130" stroke="#742A2A" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <!-- Gotas de suor se houver -->
+
+          <!-- Narizinho fofo e boquinha expressiva -->
+          <ellipse cx="187" cy="122" rx="1.5" ry="1.2" fill="#D97706" opacity="0.6"/>
+          <path d="M 182 129 Q 187 126 192 129" stroke="${skin.lip}" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+          <!-- Gotas de suor cartoon -->
           ${sweatSvg}
 
-          <!-- Tronco / Camisa hospitalar -->
-          <path d="M 198 134 L 268 136 L 268 170 L 198 168 Z" fill="#EBF8FF" stroke="#BEE3F8" stroke-width="1.5"/>
-          <line x1="200" y1="150" x2="265" y2="152" stroke="#BEE3F8" stroke-width="2"/>
+          <!-- Tórax e Camisa Hospitalar (com animação de respiração suave) -->
+          <g class="duo-chest" style="transform-origin: 230px 150px; animation: duolingoBreathing 3s infinite ease-in-out;">
+            <path d="M 198 134 L 268 135 L 268 172 L 198 170 Z" fill="url(#gownDuoGrad)" stroke="#5EEAD4" stroke-width="1.8"/>
+            <!-- Gola redonda estilizada -->
+            <path d="M 198 138 Q 206 146 216 139" stroke="#14B8A6" stroke-width="2" fill="none"/>
+            <line x1="202" y1="154" x2="265" y2="155" stroke="#5EEAD4" stroke-width="1.5"/>
+          </g>
 
           <!-- Braço com acesso venoso -->
-          <path d="M 205 142 L 250 155" stroke="${skin}" stroke-width="9" stroke-linecap="round"/>
-          <!-- Curativo do acesso no antebraço -->
-          <rect x="236" y="148" width="8" height="8" rx="2" fill="#FFFFFF" stroke="#3182CE" stroke-width="1"/>
+          <path d="M 205 142 L 250 156" stroke="url(#skinDuoGrad)" stroke-width="10" stroke-linecap="round"/>
+          <!-- Curativo transparente do cateter e conexão do equipo -->
+          <rect x="235" y="149" width="9" height="9" rx="2.5" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2"/>
+          <circle cx="239.5" cy="153.5" r="2" fill="#0284C7"/>
 
           <!-- Pelve e Quadril -->
-          <path d="M 264 136 L 315 138 L 315 174 L 264 170 Z" fill="${skin}"/>
+          <path d="M 264 136 L 315 138 L 315 174 L 264 170 Z" fill="url(#skinDuoGrad)"/>
           
-          <!-- Hematoma pélvico estilizado -->
+          <!-- Hematoma pélvico difuso -->
           <ellipse cx="290" cy="154" rx="${hematomaRadiusX}" ry="${hematomaRadiusY}" 
-                   fill="#553C9A" opacity="${hematomaOpacity}" />
+                   fill="url(#hematomaGrad)" opacity="${hematomaOpacity}"/>
 
-          <!-- Membros Inferiores: Perna direita encurtada e rotação externa -->
-          <!-- Perna esquerda normal -->
-          <path d="M 312 144 L 400 148" stroke="${skin}" stroke-width="11" stroke-linecap="round"/>
-          <path d="M 398 144 L 408 144" stroke="#4A5568" stroke-width="6" stroke-linecap="round"/> <!-- Pé esquerdo -->
+          <!-- Membros Inferiores: Perna direita encurtada com meias cirúrgicas brancas -->
+          <!-- Perna esquerda -->
+          <path d="M 312 144 L 400 148" stroke="url(#skinDuoGrad)" stroke-width="11" stroke-linecap="round"/>
+          <path d="M 396 148 L 408 148" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/> <!-- Meia -->
 
-          <!-- Perna direita (encurtada e rodada para fora) -->
-          <path d="M 310 160 L 388 168" stroke="${skin}" stroke-width="11" stroke-linecap="round"/>
-          <path d="M 384 168 L 396 178" stroke="#4A5568" stroke-width="6" stroke-linecap="round"/> <!-- Pé rodado -->
+          <!-- Perna direita (rodada externamente e encurtada) -->
+          <path d="M 310 160 L 388 168" stroke="url(#skinDuoGrad)" stroke-width="11" stroke-linecap="round"/>
+          <path d="M 382 168 L 396 177" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/> <!-- Pé rodado com meia -->
 
-          <!-- Cinta Pélvica (se aplicada) -->
+          <!-- Cinta Pélvica SAM Sling -->
           ${cintaSvg}
 
-          <!-- Manta Térmica (se aplicada) -->
+          <!-- Manta Térmica Aluminizada -->
           ${mantaSvg}
         </g>
 
-        <!-- 4. Suporte e Bolsas de Infusão -->
+        <!-- 4. Suporte e Infusão -->
         ${infusionBagSvg}
       </svg>
     `;

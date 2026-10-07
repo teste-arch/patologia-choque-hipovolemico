@@ -252,3 +252,20 @@ body.modo-apresentacao .plantao-shell { grid-template-columns:76px minmax(0,1fr)
 @media(max-width:1100px) { .plantao-main { padding:28px 30px 0; }.plantao-shell { grid-template-columns:230px minmax(0,1fr); }.home-title { font-size:32px; }.home-actions { grid-template-columns:repeat(2,minmax(0,1fr)); }.action-button { height:92px; }.game-interface-layout { grid-template-columns:1fr; } }
 @media(max-width:700px) { .plantao-shell,.plantao-shell.is-collapsed { display:block; }.plantao-sidebar { position:relative; height:auto; padding:20px; }.brand { margin-bottom:20px; }.brand-name br { display:none; }.sidebar-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; }.sidebar-button { padding:6px; height:52px; flex-direction:column; gap:3px; font-size:9px; text-align:center; }.sidebar-label,.sidebar-institution { display:none; }.plantao-main { padding:24px 20px 0; }.plantao-topbar { gap:10px; padding-bottom:20px; }.progress-heading { font-size:9px; }.progress-heading span:first-child { display:none; }.home-intro { padding-top:24px; }.home-title { font-size:28px; }.home-meta { font-size:11px; gap:6px; }.welcome-note { padding:18px 14px; gap:12px; align-items:flex-start; }.welcome-note h2 { font-size:13px; }.welcome-note p { font-size:11px; }.gota-avatar { width:40px; height:50px; }.home-actions { gap:9px; }.action-button { padding:14px; font-size:11px; }.home-bottom { gap:12px; flex-wrap:wrap; }.trilha-nav-buttons { flex-wrap:wrap; }.flip-cards-container { grid-template-columns:1fr; }.modal-window { max-height:90vh; }.is-collapsed .plantao-sidebar { display:none; }.faculdade-banner h4 { font-size:13px; }.hotspot-info-box { width:100%; }.patient-meters-row { flex-wrap:wrap; }.meter-wrapper { min-width:120px; }.modal-tabs { padding:0; }.tab-btn { font-size:11px; padding:12px 8px; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+
+/* Animações e Refinamentos Estilo Duolingo */
+@keyframes duolingoBreathing {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.035) translateY(-1px); }
+}
+
+.duo-chest {
+  transform-origin: 230px 150px;
+  animation: duolingoBreathing 3s infinite ease-in-out;
+}
+
+.patient-svg-root {
+  filter: drop-shadow(0 4px 14px rgba(15, 23, 42, 0.08));
+  border-radius: 12px;
+}
+
