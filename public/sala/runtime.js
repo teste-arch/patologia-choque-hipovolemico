@@ -110,12 +110,12 @@ const CLINICAL_DATA = {
         titulo: "Classifique a causa",
         instrucao: "Toque em cada situação clínica para classificar o tipo de perda:",
         cartas: [
-          { id: "c1", texto: "Fratura fechada de pelve instável", tipo: "hemorragica", feedback: "Correto! A bacia pode ocultar mais de 2 litros de sangue no retroperitônio." },
-          { id: "c2", texto: "Diarreia e vômitos intensos por 3 dias", tipo: "nao_hemorragica", feedback: "Exato! Perda gastrointestinal de água e eletrólitos." },
-          { id: "c3", texto: "Grande queimadura de 2º e 3º grau", tipo: "nao_hemorragica", feedback: "Certo! Extravasamento de plasma por lesão endotelial." },
-          { id: "c4", texto: "Hemorragia digestiva por varizes", tipo: "hemorragica", feedback: "Correto! Perda ativa de sangue intravascular." },
-          { id: "c5", texto: "Pancreatite aguda grave", tipo: "nao_hemorragica", feedback: "Muito bem! Sequestro inflamatório no 3º espaço retroperitoneal." },
-          { id: "c6", texto: "Fratura exposta de fêmur", tipo: "hemorragica", feedback: "Exato! Perda considerável de sangue e hemostasia urgente." }
+          { id: "c1", texto: "Fratura pélvica instável em livro aberto", tipo: "hemorragica", feedback: "Correto! Lesão dos plexos venosos pré-sacrais e artérias ilíacas pode reter mais de 2.000 mL de sangue no retroperitônio." },
+          { id: "c2", texto: "Pancreatite aguda necrosante com sequestro retroperitoneal", tipo: "nao_hemorragica", feedback: "Exato! Inflamação química grave provoca sequestro maciço de fluidos e plasma no 3º espaço, sem sangramento ativo." },
+          { id: "c3", texto: "Grande queimado (> 40% SCQ) com aumento de permeabilidade", tipo: "nao_hemorragica", feedback: "Certo! Lesão endotelial sistêmica acarreta extravasamento plasmático microvascular com hemoconcentração." },
+          { id: "c4", texto: "Gravidez ectópica rota com hemoperitônio oculto", tipo: "hemorragica", feedback: "Correto! Emergência obstétrica com perda ativa de sangue total intravascular para a cavidade peritoneal." },
+          { id: "c5", texto: "Cetoacidose diabética com diurese osmótica extrema", tipo: "nao_hemorragica", feedback: "Muito bem! Glicosúria maciça induz perda profunda de água livre e eletrólitos pelo leito renal." },
+          { id: "c6", texto: "Laceração esplênica traumática grau IV (baço roto)", tipo: "hemorragica", feedback: "Exato! Descontinuidade do parênquima e vasos hilares esplênicos leva a choque hemorrágico hipovolêmico rápido." }
         ]
       },
       paraFixar: "Perda de sangue ou de fluidos: no fim, falta volume circulante no leito vascular."
@@ -372,14 +372,14 @@ const CLINICAL_DATA = {
         id: 1,
         numero: 1,
         fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR",
-        titulo: "Na Cena do Acidente",
+        titulo: "Na Cena do Acidente (Politrauma e Pelve Instável)",
         cenario: "rua",
-        situacao: "Lucas está caído no asfalto, pálido e com dor intensa na pelve deformada. FC 128 bpm, PA 88/53 mmHg, FR 26 irpm, SpO₂ 94%.",
-        contexto: "A pelve fraturada pode reter litros de sangue de forma oculta no retroperitônio. O corpo tenta compensar com taquicardia e palidez. A prioridade imediata é conter o sangramento e aquecer.",
+        situacao: "Lucas, 28 anos, foi ejetado em colisão moto × automóvel. Está no asfalto com deformidade pélvica em 'livro aberto' (rotação externa acentuada do membro inferior direito), hematoma em flanco/períneo e palidez profusa. Sinais vitais: FC 128 bpm, PA 88/53 mmHg, FR 26 irpm, SpO₂ 94% em ar ambiente.",
+        contexto: "Fraturas do anel pélvico de alta energia provocam hemorragia exsanguinante oculta no retroperitônio (> 2.000 mL de sangue). A conduta deve obedecer ao XABCDE, priorizando a hemostasia mecânica imediata da bacia, prevenindo a hipotermia e restringindo o tempo de cena a menos de 10 minutos (Golden Period).",
         sinais: [
-          "FC 128 bpm | PA 88/53 mmHg",
-          "Pele fria, pálida e sudorese (enchimento 4s)",
-          "Deformidade pélvica em rotação externa e hematomas"
+          "FC 128 bpm | PA 88/53 mmHg (Choque Classe III compensado)",
+          "Pele fria, sudorese pegajosa e enchimento capilar lento (4s)",
+          "Deformidade pélvica em rotação externa com hematomas perineais"
         ],
         miniAnimacao: "cinta-pelvica",
         miniAnimacaoTitulo: "Estabilização Pélvica Precoce",
@@ -387,53 +387,53 @@ const CLINICAL_DATA = {
         opcoes: [
           {
             id: "1A",
-            texto: "Seguir o XABCDE: estabilizar a pelve com cinta nos trocânteres maiores, aquecer com manta térmica, monitorizar e preparar saída rápida da cena.",
+            texto: "Priorizar o controle da hemorragia exsanguinante (X): aplicar cinta pélvica comercial centrada estritamente sobre os trocânteres maiores para fechar o anel ósseo, cobrir com manta térmica aluminizada contra hipotermia, manter tempo de cena inferior a 10 min e iniciar transporte imediato para Centro de Trauma.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta perfeita! Conter o foco de sangramento na bacia e aquecer com manta previne o colapso precoce.",
+            feedback: "Conduta perfeita e alinhada ao XABCDE (PHTLS/ATLS 10ª ed.)! A fixação sobre os trocânteres maiores gera o vetor de força ideal para fechar a sínfise púbica e promover o tamponamento mecânico do plexo venoso pré-sacral. O controle térmico precoce preserva os fatores de coagulação.",
             efeitos: { fc: -6, pas: 6, fr: -2, spo2: 3, perfusao: 5, consciencia: 0, volume: 0, temperatura: 5, sangramento: -25 },
-            dicaGota: "Prioridade do XABCDE: contenha o sangramento pélvico e aqueça logo o paciente!"
+            dicaGota: "Prioridade do X: feche o anel pélvico na altura dos trocânteres maiores e aqueça o paciente!"
           },
           {
             id: "1B",
-            texto: "Fazer imobilização completa e demorada com prancha longa e colar cervical antes de cuidar da pelve.",
+            texto: "Posicionar a cinta pélvica alta sobre as cristas ilíacas superiores para comprimir o abdome inferior, tracionar firmemente o membro inferior rodado externamente para realinhar a fratura antes do transporte e ofertar oxigênio sob máscara a 15 L/min.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Atenção ao tempo de cena: imobilizar é importante, mas demorar sem tratar a hemorragia pélvica agrava o choque.",
+            feedback: "Atenção anatômica! A cinta posicionada nas cristas ilíacas NÃO reduz o volume da pelve menor e pode esmagar as asas ilíacas (o ponto de ancoragem correto é nos trocânteres maiores). Além disso, a tração forçada do membro em pelve instável pode romper vasos ilíacos internos e plexos venosos já lesados.",
             efeitos: { fc: 4, pas: -2, fr: 1, spo2: 0, perfusao: -3, consciencia: -3, volume: -5, temperatura: -5, sangramento: 0 },
-            dicaGota: "Não gaste tempo precioso na via pública para procedimentos secundários."
+            dicaGota: "A cinta pélvica deve ser centrada estritamente nos trocânteres maiores, nunca nas cristas ilíacas!"
           },
           {
             id: "1C",
-            texto: "Examinar repetidamente a estabilidade comprimindo e balançando a pelve para testar mobilidade.",
+            texto: "Postergar a saída da cena para realizar ressuscitação volêmica agressiva com infusão em bólus pressurizado de 2.000 mL de Ringer Lactato aquecido até restaurar a PA para níveis estritamente normais (PAS ≥ 120 mmHg) antes de embarcar.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Perigoso! Balançar pelve suspeita desfaz coágulos e pode romper vasos ilíacos. Pelve suspeita não se balança: se estabiliza!",
+            feedback: "Erro conceitual clássico no trauma! A hiper-ressuscitação com cristaloide na cena ('pop the clot') rompe os coágulos hemostáticos recém-formados, provoca hemodiluição de plaquetas e fatores de coagulação e consome tempo vital fora do hospital definitivo (viola a Hipotensão Permissiva).",
             efeitos: { fc: 10, pas: -8, fr: 2, spo2: -2, perfusao: -8, consciencia: -5, volume: -10, temperatura: -5, sangramento: 15 },
-            dicaGota: "Nunca comprima ou balance uma bacia com suspeita de fratura!"
+            dicaGota: "Grandes volumes de soro na via pública estouram coágulos e diluem o sangue! Evite hiper-ressuscitação."
           }
         ],
         cuidadosEnfermagem: [
-          "Avaliação rápida sistemática XABCDE e alinhamento cervical.",
-          "Instalação da cinta pélvica posicionada sobre os trocânteres maiores.",
-          "Manta térmica para prevenir hipotermia e monitorização contínua."
+          "Avaliação rápida sistemática XABCDE e alinhamento da coluna sem perda de tempo.",
+          "Instalação da cinta pélvica posicionada com precisão sobre os trocânteres maiores femorais.",
+          "Instalação precoce da manta térmica para bloquear o pilar da hipotermia da Tríade Letal."
         ],
-        paraFixar: "Choque no trauma = procurar e conter o sangramento. Pelve suspeita se estabiliza, nunca se balança.",
-        vocesabia: "A bacia fraturada pode reter mais de 2 litros de sangue sem nenhuma ferida externa aberta!"
+        paraFixar: "Choque no trauma = procurar e conter o sangramento. Cinta pélvica se fixa nos trocânteres maiores, nunca nas cristas ilíacas.",
+        vocesabia: "A bacia fraturada em livro aberto aumenta o volume retroperitoneal em até 50%, retendo mais de 2 litros de sangue oculto!"
       },
 
       {
         id: 2,
         numero: 2,
         fase: "FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR",
-        titulo: "No Transporte da Ambulância",
+        titulo: "No Transporte da Ambulância (Hipotensão Permissiva e Regulação)",
         cenario: "ambulancia",
-        situacao: "Lucas está na ambulância com cinta aplicada, pulso fino (122 bpm) e PA 92/55 mmHg. O hospital básico local não tem cirurgião; o Centro de Trauma está a 14 minutos.",
-        contexto: "Choque hemorrágico requer centro de trauma com cirurgia e banco de sangue. Atrasar o trajeto ou infundir litros de soro frio dilui fatores de coagulação e resfria o paciente.",
+        situacao: "Em trânsito na ambulância de Suporte Avançado com cinta posicionada. Lucas apresenta pulso filiforme (122 bpm), PA 92/55 mmHg e consciência flutuante (ansiedade e torpor). Há um Hospital Municipal a 4 minutos (sem cirurgião nem tomógrafo) e um Centro de Trauma Nível 1 a 14 minutos.",
+        contexto: "Choque hemorrágico por trauma pélvico exige Centro de Trauma estruturado com cirurgia de emergência e banco de sangue. A fluidoterapia em deslocamento deve seguir Hipotensão Permissiva (PAS 80-90 mmHg com pulso radial palpável) para não agravar a coagulopatia dilucional nem a hipotermia.",
         sinais: [
-          "PA 92/55 mmHg | FC 122 bpm",
-          "Pele fria e pulsos radiais débeis",
-          "Consciência oscilando entre ansiedade e torpor"
+          "PA 92/55 mmHg | FC 122 bpm | Enchimento 4 segundos",
+          "Pele fria e pulsos radiais débeis filiformes",
+          "Consciência oscilando entre ansiedade e torpor (hipoperfusão cerebral)"
         ],
         miniAnimacao: "triade-letal",
         miniAnimacaoTitulo: "Prevenção da Tríade Letal",
@@ -441,53 +441,53 @@ const CLINICAL_DATA = {
         opcoes: [
           {
             id: "2A",
-            texto: "Transporte rápido ao Centro de Trauma, acesso venoso calibroso durante o trajeto com fluidos aquecidos criteriosos e pré-notificar a Sala Vermelha via regulação.",
+            texto: "Conduzir rapidamente ao Centro de Trauma Nível 1 com pré-notificação via regulação (MIST/SBAR), puncionar 2 acessos periféricos calibrosos (14G ou 16G) durante o deslocamento e adotar Hipotensão Permissiva (alvo PAS 80–90 mmHg com pulso radial presente) com alíquotas restritas de fluidos aquecidos.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Excelente decisão! O paciente certo deve ir para o hospital certo, rápido e com a equipe avisada.",
+            feedback: "Excelente decisão baseada em evidências! A Hipotensão Permissiva preserva a perfusão de órgãos nobres sem estourar trombos retroperitoneais e sem causar acidose hiperclorêmica. A pré-notificação permite que a Sala Vermelha mobilize a equipe cirúrgica e o banco de sangue previamente.",
             efeitos: { fc: -4, pas: 6, fr: -1, spo2: 1, perfusao: 5, consciencia: 3, volume: 5, temperatura: 5, sangramento: -10 },
-            dicaGota: "Leve direto ao hospital com cirurgia e pré-notifique a equipe!"
+            dicaGota: "Leve direto ao hospital capacitado com cirurgia e pré-notifique a equipe receptora!"
           },
           {
             id: "2B",
-            texto: "Parar a ambulância na cena tentando punções repetidas e procedimentos secundários antes de deslocar.",
+            texto: "Manter o deslocamento ao Centro de Trauma, mas realizar infusão rápida e contínua de Solução Fisiológica 0,9% em temperatura ambiente até elevar a pressão arterial média (PAM) acima de 75 mmHg e normalizar a frequência cardíaca.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Acesso venoso no trauma grave deve ser feito em deslocamento. Permanecer parado consome tempo vital.",
+            feedback: "Conduta arriscada: Solução Fisiológica 0,9% fria em infusão contínua desencadeia acidose metabólica hiperclorêmica e agrava a hipotermia celular, duas pontas da Tríade Letal. O fluido deve ser aquecido e administrado em alíquotas criteriosas.",
             efeitos: { fc: 4, pas: -3, fr: 0, spo2: 0, perfusao: -4, consciencia: -3, volume: -6, temperatura: -6, sangramento: 5 },
-            dicaGota: "A hora de ouro não permite ficar parado na via pública."
+            dicaGota: "Grandes infusões de soro fisiológico frio causam acidose hiperclorêmica e resfriamento corporal."
           },
           {
             id: "2C",
-            texto: "Desviar o trajeto para o hospital básico local, que não tem suporte cirúrgico nem hemoterapia.",
+            texto: "Desviar o trajeto para o Hospital Municipal básico a 4 minutos para 'estabilizar hemodinamicamente o paciente' antes de qualquer transferência de maior distância.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Decisão inadequada: parar onde não há cirurgia nem sangue atrasa o tratamento definitivo e exige transferência de alto risco.",
+            feedback: "Erro crítico de encaminhamento no trauma! Parar em unidade desprovida de centro cirúrgico de emergência, angioembolização ou banco de sangue atrasa a hemostasia definitiva, consome tempo irreversível e multiplica a mortalidade do choque exsanguinante.",
             efeitos: { fc: 8, pas: -8, fr: 1, spo2: -1, perfusao: -8, consciencia: -6, volume: -10, temperatura: -8, sangramento: 10 },
-            dicaGota: "O hospital mais próximo nem sempre é o hospital capacitado para trauma pélvico."
+            dicaGota: "O hospital mais próximo sem suporte cirúrgico só gera tempo perdido fatal no trauma pélvico."
           }
         ],
         cuidadosEnfermagem: [
-          "Punção de acesso calibroso em deslocamento sem atrasar a saída.",
-          "Fluidos aquecidos e criteriosos conforme prescrição/protocolo.",
-          "Pré-notificação imediata do Centro de Trauma pela regulação."
+          "Punção venosa periférica curta e calibrosa (14G ou 16G em fossas antecubitais) realizada em trânsito.",
+          "Manutenção de alvos de Hipotensão Permissiva (PAS 80–90 mmHg com pulso radial palpável).",
+          "Passagem de plantão prévia estruturada via rádio/regulação (MIST: Mecanismo, Lesões, Sinais, Tratamento)."
         ],
-        paraFixar: "No trauma grave, o paciente vai para o hospital certo, rápido e com a equipe avisada.",
-        vocesabia: "Cristaloide em excesso dilui os fatores de coagulação e aumenta o sangramento."
+        paraFixar: "No choque do trauma, o paciente certo vai para o hospital com cirurgia e sangue, rápido e com aviso prévio.",
+        vocesabia: "Estudos demonstram que cada 10 minutos de atraso até o controle cirúrgico da hemorragia aumentam a mortalidade em até 10%!"
       },
 
       {
         id: 3,
         numero: 3,
         fase: "FASE 2 — SALA VERMELHA (PS)",
-        titulo: "Chegada à Sala Vermelha",
+        titulo: "Chegada à Sala Vermelha (FAST e Diagnóstico no Trauma Instável)",
         cenario: "sala-vermelha",
-        situacao: "Lucas dá entrada na Sala Vermelha. A PA sobe brevemente e cai para 84/50 mmHg (resposta transitória). Ultrassom FAST é negativo no abdome, mas o lactato é 4,8 mmol/L.",
-        contexto: "FAST negativo NÃO descarta sangramento pélvico (o sangue se esconde no retroperitônio). O lactato alto confirma hipoperfusão tecidual severa.",
+        situacao: "Lucas dá entrada na Sala Vermelha. A PA sobe brevemente após prova volêmica mas cai para 84/50 mmHg (resposta transitória). O ultrassom e-FAST abdominal na fossa hepatorrenal e esplenorrenal é NEGATIVO para líquido peritoneal livre, mas a gasometria revela Lactato de 4,8 mmol/L e Déficit de Base (BE) de -8,5 mEq/L.",
+        contexto: "O exame FAST detecta líquido intraperitoneal, mas NÃO avalia o retroperitônio, onde se acumula o sangue de fraturas pélvicas. Um paciente em choque classe III/IV com resposta transitória precisa de transfusão e hemostasia urgente, e JAMAIS deve ser transportado para a tomografia.",
         sinais: [
-          "Resposta transitória à reposição",
-          "Lactato 4,8 mmol/L e acidose metabólica",
-          "FAST negativo com pelve instável"
+          "Resposta hemodinâmica transitória à prova volêmica",
+          "Lactato 4,8 mmol/L e Acidose Metabólica grave (BE -8,5)",
+          "FAST negativo para líquido livre peritoneal com pelve instável"
         ],
         miniAnimacao: "fast-negativo",
         miniAnimacaoTitulo: "Atenção ao Retroperitônio",
@@ -495,53 +495,53 @@ const CLINICAL_DATA = {
         opcoes: [
           {
             id: "3A",
-            texto: "Passagem de caso (SBAR), manter cinta pélvica, 2 acessos calibrosos, coletar exames com identificação rigorosa, aquecer ativamente, acionar transfusão maciça e acionar cirurgia/ortopedia.",
+            texto: "Reconhecer choque hemorrágico grave classe III/IV por sangramento retroperitoneal (não descartado pelo FAST negativo), manter a cinta pélvica posicionada, acionar o Protocolo de Transfusão Maciça (PTM 1:1:1 balanceado), solicitar Ácido Tranexâmico (TXA) na primeira hora e convocar cirurgia geral e ortopedia com urgência.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Conduta exemplar! Choque grave exige hemostasia e sangue. A enfermagem garante os acessos, a segurança nas amostras e o calor.",
+            feedback: "Raciocínio clínico exemplar! O FAST negativo afasta hemoperitônio maciço, mas a pelve sangra para o retroperitônio. Reconhecer a resposta transitória e o lactato elevado como choque classe III/IV e deflagrar imediatamente o PTM 1:1:1 e o TXA precoce é a chave para a sobrevida.",
             efeitos: { fc: -8, pas: 8, fr: -1, spo2: 2, perfusao: 10, consciencia: 5, volume: 15, temperatura: 5, sangramento: -25 },
-            dicaGota: "FAST negativo na pelve não descarta choque! Foque em amostras corretas e sangue."
+            dicaGota: "FAST negativo exclui líquido peritoneal, mas o sangue da pelve fica no retroperitônio! Acione sangue e cirurgia."
           },
           {
             id: "3B",
-            texto: "Interpretar o FAST negativo como ausência de sangramento, infundir apenas soro e aguardar tomografia.",
+            texto: "Como o FAST abdominal foi negativo e o lactato está elevado, encaminhar o paciente imediatamente para a sala de Tomografia Computadorizada (Angio-TC de corpo inteiro) para identificar com precisão a origem do sangramento oculto.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Equívoco perigoso: FAST negativo exclui hemoperitônio, não hematoma retroperitoneal. Continuar apenas com soro esfria o paciente.",
+            feedback: "Erro clássico de alta mortalidade! Princípio áureo da emergência: 'Paciente hemodinamicamente instável NÃO vai para a Tomografia Computadorizada (o túnel da morte)'. A instabilidade exige reanimação hemostática na Sala Vermelha ou centro cirúrgico/angioembolização imediata.",
             efeitos: { fc: 2, pas: -4, fr: 0, spo2: 0, perfusao: -5, consciencia: -3, volume: -3, temperatura: -8, sangramento: 5 },
-            dicaGota: "Cristaloide puro não transporta oxigênio e piora a hipotermia."
+            dicaGota: "Nunca transporte um paciente instável para a Tomografia Computadorizada!"
           },
           {
             id: "3C",
-            texto: "Afrouxar a cinta para palpar a pelve e levar o paciente instável imediatamente para a tomografia.",
+            texto: "Interpretar o FAST negativo como evidência de estabilidade abdominal, afrouxar temporariamente a cinta pélvica para palpar a mobilidade óssea e infundir Bicarbonato de Sódio 8,4% para neutralizar o lactato elevado.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Conduta fatal: soltar a cinta desfaz o tamponamento e reabre o sangramento. Paciente instável nunca vai para a TC!",
+            feedback: "Erro catastrófico! Soltar a cinta pélvica desfaz o tamponamento retroperitoneal e reabre sangramentos venosos maciços. O bicarbonato não trata a causa do choque (hipoperfusão celular) e desvia a curva de dissociação da hemoglobina, piorando a anóxia tecidual.",
             efeitos: { fc: 10, pas: -12, fr: 1, spo2: -3, perfusao: -10, consciencia: -8, volume: -12, temperatura: -4, sangramento: 20 },
-            dicaGota: "Nunca remova a cinta e jamais leve paciente instável para a tomografia!"
+            dicaGota: "Nunca remova a cinta pélvica e não use bicarbonato empírico no choque hemorrágico!"
           }
         ],
         cuidadosEnfermagem: [
-          "Passagem estruturada de caso com SBAR e monitorização contínua.",
-          "Manutenção e checagem da cinta pélvica sem afrouxamento indevido.",
-          "Aquecimento ativo precoce e coleta de amostras com checagem rigorosa."
+          "Passagem estruturada de caso com SBAR e conferência visual da integridade da cinta pélvica.",
+          "Instalação precoce de aquecimento ativo de infusão e manta de ar aquecido (Bair Hugger).",
+          "Envio imediato de amostras identificadas para prova cruzada, tipagem e tromboelastometria/coagulograma."
         ],
-        paraFixar: "FAST negativo não descarta sangramento pélvico. Instável precisa de sangue e hemostasia, não tomografia.",
-        vocesabia: "Em estudo publicado (Saleh et al., Cureus, 2024), paciente com fratura em livro aberto apresentou FC de 76 bpm: ausência de taquicardia não exclui choque!"
+        paraFixar: "FAST negativo NÃO descarta sangramento pélvico. Paciente instável recebe sangue e hemostasia, nunca vai para a tomografia.",
+        vocesabia: "O Ácido Tranexâmico (TXA) reduz a mortalidade por sangramento em até 30% quando administrado nas primeiras 3 horas do trauma (ensaio CRASH-2)!"
       },
 
       {
         id: 4,
         numero: 4,
         fase: "FASE 2 — SALA VERMELHA (PS)",
-        titulo: "Transfusão com Segurança",
+        titulo: "Transfusão Segura e Ressuscitação Hemostática",
         cenario: "sala-vermelha",
-        situacao: "Chegou o primeiro concentrado de hemácias do Banco de Sangue. A equipe está com pressa. Cabe à enfermagem instalar e vigiar a infusão.",
-        contexto: "Na urgência, a transfusão salva vidas, mas falhas de identificação provocam reações hemolíticas agudas fatais. Vigilância nos primeiros 15 minutos é obrigatória.",
+        situacao: "O Banco de Sangue libera a primeira remessa de Concentrado de Hemácias e Plasma Fresco Congelado pelo Protocolo de Transfusão Maciça. A equipe atua sob pressão de tempo da emergência, e a enfermagem é responsável pela conferência e instalação dos hemocomponentes.",
+        contexto: "A ressuscitação hemostática no choque hemorrágico preconiza a reposição balanceada 1:1:1 (Hemácias, Plasma e Plaquetas). No entanto, a agilidade não pode atropelar os protocolos de segurança do paciente: reações hemolíticas agudas por incompatibilidade ABO são de altíssima letalidade.",
         sinais: [
-          "Instalação de hemocomponente sob pressão de tempo",
-          "Risco de reação por erro de identificação",
-          "Sinais de alerta: calafrios, febre, dor lombar ou queda de PA"
+          "Instalação de hemocomponentes sob pressão de tempo de choque classe IV",
+          "Necessidade de infusão rápida sem induzir hipotermia transfusional",
+          "Risco de reação transfusional: vigilância obrigatória nos primeiros 10 a 15 minutos"
         ],
         miniAnimacao: "transfusao-segura",
         miniAnimacaoTitulo: "Cultura de Segurança Transfusional",
@@ -549,53 +549,53 @@ const CLINICAL_DATA = {
         opcoes: [
           {
             id: "4A",
-            texto: "Conferir prescrição, realizar dupla checagem à beira do leito (paciente e bolsa), aferir sinais vitais antes de abrir, usar equipo com filtro e observar diretamente nos primeiros 15 minutos.",
+            texto: "Realizar dupla checagem independente à beira do leito (conferindo nome completo, registro hospitalar, número da bolsa e tipagem), utilizar equipo próprio com filtro de partículas, infundir através de aquecedor rápido de fluidos e monitorar rigorosamente os sinais vitais nos primeiros 10 a 15 minutos.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Brilhante! A pressa da emergência nunca pode suprimir a dupla checagem. A vigilância precoce detecta incompatibilidades a tempo.",
+            feedback: "Perfeito e exemplar! A dupla checagem à beira do leito é a principal barreira contra erros fatais de incompatibilidade. A infusão em aquecedor rápido previne a hipotermia induzida pelo sangue estocado a 4°C, combatendo a coagulopatia precoce.",
             efeitos: { fc: -4, pas: 6, fr: -1, spo2: 2, perfusao: 5, consciencia: 3, volume: 8, temperatura: 3, sangramento: 0 },
-            dicaGota: "Segurança em primeiro lugar: dupla checagem e vigilância no leito salvam vidas."
+            dicaGota: "Segurança transfusional inegociável: dupla checagem, filtro de equipo e aquecimento do sangue!"
           },
           {
             id: "4B",
-            texto: "Fazer a checagem correta antes de conectar a bolsa, mas sair do leito logo em seguida sem reavaliar os primeiros minutos.",
+            texto: "Efetuar a dupla checagem e instalar o concentrado de hemácias conectando em Y com solução de Ringer Lactato no mesmo acesso venoso para diluir o sangue e acelerar o fluxo por gravidade.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "A checagem inicial foi certa, mas abandonar a vigilância impede de reconhecer uma reação hemolítica no início.",
+            feedback: "Contraindicação farmacológica grave de enfermagem! NUNCA misturar concentrado de hemácias no mesmo equipo com Ringer Lactato: o cálcio iônico do Ringer anula o anticoagulante da bolsa e provoca a formação de coágulos e trombos maciços no interior do equipo.",
             efeitos: { fc: 2, pas: 0, fr: 0, spo2: 0, perfusao: -2, consciencia: -1, volume: 2, temperatura: 0, sangramento: 0 },
-            dicaGota: "A maioria das reações transfusionais graves ocorre nos primeiros 15 minutos!"
+            dicaGota: "Nunca infunda Ringer Lactato no mesmo equipo de sangue: o cálcio reativa a coagulação e obstrui a via!"
           },
           {
             id: "4C",
-            texto: "Conectar a bolsa rapidamente conferindo apenas a etiqueta sozinho(a), pulando a pulseira para 'ganhar tempo'.",
+            texto: "Presumir que bolsas de emergência O negativo não requerem conferência minuciosa de pulseira e infundir por gravidade sem filtro de partículas nem aquecedor para 'ganhar tempo' na reanimação.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Erro gravíssimo! Incompatibilidade ABO por falha de identificação causa choque hemolítico e coagulação intravascular disseminada.",
+            feedback: "Erro gravíssimo! Mesmo na liberação de sangue de emergência, a checagem à beira do leito é mandatória por lei. Infundir sangue frio e sem filtro sobrecarrega a circulação pulmonar com microagregados e agrava a hipotermia da Tríade Letal.",
             efeitos: { fc: 8, pas: -10, fr: 3, spo2: -3, perfusao: -10, consciencia: -6, volume: -5, temperatura: 0, sangramento: 0 },
-            dicaGota: "Nunca pule a dupla checagem à beira do leito!"
+            dicaGota: "A pressa nunca justifica pular a checagem nem infundir sangue gelado sem filtro!"
           }
         ],
         cuidadosEnfermagem: [
-          "Dupla checagem obrigatória à beira do leito com conferência da pulseira.",
-          "Aferição de sinais vitais antes, aos 10–15 minutos e ao término da infusão.",
-          "Suspensão IMEDIATA da infusão caso surjam calafrios, febre ou dor."
+          "Dupla checagem independente de identificação à beira do leito com conferência da pulseira e rótulo hemoterápico.",
+          "Aferição de sinais vitais basais antes, aos 10–15 minutos e na conclusão de cada unidade.",
+          "Utilização mandante de aquecedores de infusão rápida (Rapid Infuser/Belmont/Level 1) para manter a normotermia."
         ],
-        paraFixar: "Pressa não dispensa a dupla checagem. Na transfusão, quem vigia detecta a reação a tempo.",
-        vocesabia: "Mais de 90% dos erros transfusionais graves decorrem de falhas humanas na checagem da identificação do paciente!"
+        paraFixar: "Pressa não elimina a dupla checagem. Sangue nunca corre com Ringer Lactato e deve ser aquecido para frear a Tríade Letal.",
+        vocesabia: "Infundir 4 bolsas de sangue refrigerado sem aquecimento pode derrubar a temperatura corporal do paciente em mais de 1,5°C!"
       },
 
       {
         id: 5,
         numero: 5,
         fase: "FASE 2 — SALA VERMELHA (PS)",
-        titulo: "Suspeita de Lesão Uretral",
+        titulo: "Suspeita de Lesão Uretral e Sistematização da Assistência",
         cenario: "sala-vermelha",
-        situacao: "Lucas melhora a PA. Ao preparar o cateterismo vesical para medir a diurese, você nota sangue vivo no meato uretral e hematoma em bolsa escrotal.",
-        contexto: "Fraturas de bacia podem romper a uretra. Passar sonda às cegas pode transformar uma laceração parcial em ruptura completa e infectar a pelve.",
+        situacao: "Lucas melhora os níveis pressóricos após a transfusão balanceada. Para monitorar o débito urinário horário (padrão-ouro de perfusão renal no choque), a equipe planeja cateterismo vesical. Ao despir a região perineal, o enfermeiro constata presença de sangue no meato uretral (uretrorragia) e volumoso hematoma escrotal/perineal ('asa de borboleta').",
+        contexto: "Em fraturas pélvicas de alto impacto (livro aberto e cisalhamento vertical), até 15% dos homens sofrem lesão traumática da uretra posterior/membranosa. O cateterismo vesical uretral às cegas é TERMINANTEMENTE CONTRAINDICADO, pois pode transformar uma laceração parcial em ruptura completa e contaminar o hematoma retroperitoneal com urina.",
         sinais: [
-          "Sangue no meato uretral (uretrorragia)",
-          "Hematoma perineal e escrotal proeminente",
-          "Dor suprapúbica ou bexigoma palpável"
+          "Sangue vivo no meato acústico/uretral (uretrorragia franca)",
+          "Hematoma perineal e escrotal em 'asa de borboleta'",
+          "Dor suprapúbica ou bexigoma palpável por retenção urinária aguda"
         ],
         miniAnimacao: "uretra",
         miniAnimacaoTitulo: "Alerta: Não Sonde às Cegas!",
@@ -603,39 +603,39 @@ const CLINICAL_DATA = {
         opcoes: [
           {
             id: "5A",
-            texto: "Suspender qualquer tentativa de sondagem, comunicar imediatamente à equipe médica e urologia, registrar os achados e vigiar distensão vesical.",
+            texto: "Contraindicar categoricamente o cateterismo vesical por via uretral, comunicar de imediato à equipe médica e urologia para avaliação de cistostomia suprapúbica percutânea ou uretrocistografia retrógrada, e monitorar a perfusão renal por parâmetros hemodinâmicos e clareamento do lactato.",
             tipo: "correta",
             pontos: 2,
-            feedback: "Perfeito! Reconhecer os sinais de lesão uretral protege o paciente contra sequelas definitivas. A investigação vem antes da sonda.",
+            feedback: "Conduta cirúrgica e de enfermagem irrepreensível! A tríade de uretrorragia, hematoma perineal e fratura de bacia constitui contraindicação formal ao cateterismo uretral às cegas (ATLS 10ª ed.). A intervenção correta previne a transecção da uretra e osteomielite pélvica.",
             efeitos: { fc: 0, pas: 0, fr: 0, spo2: 0, perfusao: 2, consciencia: 2, volume: 0, temperatura: 0, sangramento: 0 },
-            dicaGota: "Sangue no meato é sinal de pare! Jamais introduza sonda vesical às cegas."
+            dicaGota: "Sangue no meato é sinal de pare absoluto! Nunca passe sonda uretral com suspeita de lesão."
           },
           {
             id: "5B",
-            texto: "Tentar passar a sonda vesical 'com delicadeza', prometendo parar se houver resistência mecânica.",
+            texto: "Utilizar uma sonda de Foley de menor calibre (12 Fr) abundantemente lubrificada com lidocaína gel e realizar uma tentativa cuidadosa, interrompendo o procedimento apenas se for sentida qualquer resistência mecânica na uretra posterior.",
             tipo: "parcial",
             pontos: 1,
-            feedback: "Conduta arriscada: mesmo com delicadeza, o cateter pode romper a mucosa lesada e invadir o hematoma pélvico.",
+            feedback: "Conduta altamente arriscada! Mesmo sondas finas e lubrificadas criam falsas vias com facilidade extrema na uretra lacerada, convertendo lesões parciais em secções completas e infectando a pelve com urina. A contraindicação é absoluta.",
             efeitos: { fc: 2, pas: -1, fr: 0, spo2: 0, perfusao: -2, consciencia: 0, volume: -3, temperatura: 0, sangramento: 3 },
-            dicaGota: "A presença de sangue no meato contraindica qualquer tentativa às cegas."
+            dicaGota: "Mesmo com sonda fina e lubrificada, a tentativa uretral é contraindicada na presença de uretrorragia."
           },
           {
             id: "5C",
-            texto: "Passar sonda de alívio rápido para drenar a bexiga antes de avisar a equipe médica.",
+            texto: "Substituir a sonda de demora por um cateter de alívio Nelaton sem balão para esvaziar a bexiga rapidamente e evitar ruptura vesical antes da chegada da urologia.",
             tipo: "errada",
             pontos: 0,
-            feedback: "Conduta incorreta: passar sonda às cegas pode dilacerar a uretra e provocar extravasamento de urina para a pelve fraturada.",
+            feedback: "Equívoco grave de enfermagem! O risco do procedimento decorre da introdução do cateter através de uma uretra traumatizada, independentemente de haver ou não balão insuflável. O cateter de alívio rasga a mucosa e abre via para extravasamento de urina.",
             efeitos: { fc: 4, pas: -3, fr: 1, spo2: 0, perfusao: -4, consciencia: -2, volume: -5, temperatura: 0, sangramento: 5 },
-            dicaGota: "Nunca passe sonda com sangue no meato. Comunique à equipe imediatamente!"
+            dicaGota: "Nem sonda de demora nem sonda de alívio! Qualquer passagem uretral às cegas é proibida com sangue no meato."
           }
         ],
         cuidadosEnfermagem: [
-          "Inspeção visual do meato uretral e períneo antes de qualquer sondagem.",
-          "Interrupção imediata do procedimento se houver uretrorragia ou hematoma perineal.",
-          "Comunicação urgente com a urologia para avaliação e conduta adequada."
+          "Inspeção visual minuciosa do meato uretral e bolsa escrotal/períneo antes de qualquer procedimento urológico.",
+          "Interrupção imediata da sondagem vesical e registro em prontuário na presença de uretrorragia.",
+          "Preparo de material asséptico para punção suprapúbica percutânea (cistostomia) pela equipe médica."
         ],
-        paraFixar: "Sangue no meato + hematoma perineal = suspeita de lesão uretral. Não sonde às cegas: comunique.",
-        vocesabia: "Lesões uretrais acometem até 15% das fraturas pélvicas graves em livro aberto (Saleh et al., Cureus, 2024)."
+        paraFixar: "Sangue no meato + hematoma perineal = lesão uretral provável. Não sonde às cegas por via uretral: acione a urologia para cistostomia.",
+        vocesabia: "A lesão traumática de uretra não reconhecida pode resultar em estenose uretral complexa, incontinência e disfunção erétil permanente!"
       }
     ]
   },
@@ -1441,41 +1441,52 @@ class PatientRenderer {
     if (p.consciencia >= 75) {
       olhosSobrancelhasSvg = `
         <g id="rosto-olhos-consciente">
-          <g transform="translate(176, 96)">
-            <ellipse cx="0" cy="0" rx="4.5" ry="5.5" fill="#FBF9F5" stroke="#102A43" stroke-width="2"/>
-            <circle cx="0.5" cy="-0.8" r="3.2" fill="#102A43"/>
-            <circle cx="1.6" cy="-2.0" r="1.3" fill="#FFFFFF"/>
-          </g>
-          <path d="M 166 84 C 172 78 180 80 186 86" stroke="#102A43" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-          <path d="M 172 87 Q 174 84 176 87" stroke="#102A43" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <!-- Esclera do olho amendoado estilizado -->
+          <path d="M 183 89.5 C 185 86 191.5 86 193.5 89.5 C 191.5 93 185 93 183 89.5 Z" fill="#FBF9F5" stroke="#102A43" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- Íris navy voltada para cima e para a frente -->
+          <circle cx="189" cy="89" r="2.8" fill="#102A43"/>
+          <!-- Catchlights / Brilho branco de vida no olhar -->
+          <circle cx="190.1" cy="87.9" r="1.1" fill="#FFFFFF"/>
+          <circle cx="187.8" cy="90.1" r="0.6" fill="#FFFFFF"/>
+          <!-- Linha da pálpebra superior sutil -->
+          <path d="M 182.5 86.5 Q 188.5 84.5 194.5 86.8" stroke="#102A43" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <!-- Sobrancelha expressiva de dor e alerta lúcido -->
+          <path d="M 179 81 C 184.5 76.5 192.5 77.5 197 83.5" stroke="#102A43" stroke-width="3.2" stroke-linecap="round" fill="none"/>
         </g>
       `;
     } else if (p.consciencia >= 45) {
       olhosSobrancelhasSvg = `
         <g id="rosto-olhos-sonolento">
-          <g transform="translate(176, 98)">
-            <ellipse cx="0" cy="0" rx="4.5" ry="4.5" fill="#FBF9F5" stroke="#102A43" stroke-width="1.8"/>
-            <circle cx="0.5" cy="0.5" r="2.8" fill="#102A43"/>
-            <circle cx="1.4" cy="-0.5" r="1" fill="#FFFFFF"/>
-            <path d="M -4.5 -1 Q 0 3 4.5 -1" fill="var(--skin-shadow)" stroke="#102A43" stroke-width="2"/>
-          </g>
-          <path d="M 168 89 C 174 88 180 89 184 91" stroke="#102A43" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <!-- Esclera com abertura menor -->
+          <path d="M 183 90.5 C 185 87.5 191.5 87.5 193.5 90.5 C 191.5 93.5 185 93.5 183 90.5 Z" fill="#FBF9F5" stroke="#102A43" stroke-width="1.8"/>
+          <circle cx="188.5" cy="90.5" r="2.4" fill="#102A43"/>
+          <circle cx="189.4" cy="89.8" r="0.8" fill="#FFFFFF"/>
+          <!-- Pálpebra pesada descendo sobre a íris (torpor) -->
+          <path d="M 182.5 89 Q 188.5 89 194.5 90" stroke="#102A43" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M 183 89 Q 188.5 89 194 90 L 194 87.5 Q 188.5 86.5 183 87.5 Z" fill="var(--skin-shadow)"/>
+          <!-- Sobrancelha rebaixada/pesada -->
+          <path d="M 180 83 C 186 82 192 83 196 85" stroke="#102A43" stroke-width="2.6" stroke-linecap="round" fill="none"/>
         </g>
       `;
     } else {
       olhosSobrancelhasSvg = `
         <g id="rosto-olhos-coma">
-          <path d="M 170 100 C 173 104 179 104 183 100" stroke="#102A43" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <line x1="168" y1="92" x2="182" y2="93" stroke="#627D98" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- Olho fechado em arco relaxado com cílios sutis -->
+          <path d="M 182 91 C 186 94 191 94 194 91" stroke="#102A43" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+          <line x1="184" y1="92.5" x2="183.5" y2="94" stroke="#102A43" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="188" y1="93" x2="188" y2="95" stroke="#102A43" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="192" y1="92.5" x2="192.5" y2="94" stroke="#102A43" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Sobrancelha inerte e plana -->
+          <line x1="180" y1="84" x2="194" y2="84.5" stroke="#627D98" stroke-width="2.2" stroke-linecap="round"/>
         </g>
       `;
     }
 
-    // Suor cel-shading simplificado
+    // Suor cel-shading em gotas estilizadas na fronte quando há hipoperfusão
     const sweatSvg = p.perfusao < 55 ? `
       <g id="layer-suor" class="sweat-drop">
-        <path d="M 160 88 C 158 84 163 82 163 82 C 163 82 167 84 166 88 A 3 3 0 0 1 160 88 Z" fill="#64B5F6" stroke="#102A43" stroke-width="1.4"/>
-        <path d="M 194 92 C 193 88 197 86 197 86 C 197 86 201 88 200 92 A 3 3 0 0 1 194 92 Z" fill="#64B5F6" stroke="#102A43" stroke-width="1.4"/>
+        <path d="M 182 78 C 180 75 184 73 184 73 C 184 73 187 75 186 78 A 2.2 2.2 0 0 1 182 78 Z" fill="#64B5F6" stroke="#102A43" stroke-width="1.2"/>
+        <path d="M 194 82 C 192 79 196 77 196 77 C 196 77 199 79 198 82 A 2.2 2.2 0 0 1 194 82 Z" fill="#64B5F6" stroke="#102A43" stroke-width="1.2"/>
       </g>
     ` : "";
 
@@ -1483,24 +1494,61 @@ class PatientRenderer {
     const corpoSvg = `
       <g id="layer-corpo">
         <g id="corpo-cabeca">
-          <path d="M 162 118 C 162 134 184 136 198 136 L 198 126 C 182 126 166 122 162 118 Z" fill="var(--skin-shadow)"/>
-          <path d="M 148 100 C 146 76 168 70 186 72 C 198 74 206 82 208 94 C 210 102 208 108 204 112 C 206 116 204 122 198 126 C 188 132 176 130 168 124 C 158 122 150 114 148 100 Z" 
-                fill="var(--skin-base)" stroke="#102A43" stroke-width="3"/>
-          <path d="M 152 112 C 158 122 170 126 182 126 C 172 126 160 120 152 112 Z" fill="var(--skin-shadow)"/>
+          <!-- 4.1 Cabelo Posterior / Nuca (apoiado no travesseiro) -->
+          <g id="cabelo-posterior">
+            <path d="M 148 116 C 138 114 128 106 126 94 C 124 84 128 74 136 66 L 144 76 L 148 88 Z" fill="#102A43"/>
+            <path d="M 126 94 L 118 88 L 126 82 Z" fill="#102A43"/>
+            <path d="M 132 72 L 124 66 L 134 62 Z" fill="#102A43"/>
+          </g>
 
-          <path d="M 148 104 C 142 100 142 114 148 116 Z" fill="var(--skin-base)" stroke="#102A43" stroke-width="2.5"/>
-          <path d="M 147 106 Q 145 110 147 112" stroke="#102A43" stroke-width="1.8" fill="none"/>
+          <!-- 4.2 Pescoço e Sombra Cel-shading da Mandíbula -->
+          <g id="corpo-pescoco">
+            <path d="M 166 116 L 184 128 L 210 134 L 202 122 C 196 122 188 120 176 116 Z" fill="var(--skin-shadow)"/>
+            <path d="M 176 116 L 200 120 L 208 134 L 184 132 Z" fill="var(--skin-base)" stroke="#102A43" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 176 116 L 194 120 L 198 126 L 182 128 Z" fill="var(--skin-shadow)"/>
+          </g>
 
-          <path d="M 142 98 C 136 78 152 64 174 60 C 186 58 196 62 200 68 C 196 66 186 66 180 70 C 192 68 198 72 202 78 C 194 76 186 78 184 82 C 190 82 194 86 194 90 C 184 86 172 88 166 94 C 158 98 150 104 142 98 Z" 
-                fill="#102A43" stroke="#102A43" stroke-width="3"/>
-          <path d="M 136 102 C 132 94 140 88 144 94 Z" fill="#102A43"/>
-          <path d="M 134 110 C 130 104 138 100 142 106 Z" fill="#102A43"/>
+          <!-- 4.3 Silhueta Facial Anatômica do Lucas (Perfil/3-quartos estilo referência) -->
+          <path d="M 156 114 C 142 108 138 92 140 78 C 142 66 156 56 172 58 C 182 60 188 68 192 76 L 196 84 L 205 91.5 C 207 92.5 207 94.5 204.5 95.5 L 200.5 97 C 203 98.2 203.5 99.8 202.5 101.2 L 199 103 C 202 104.2 202.5 106 201 107.5 L 198 109.5 C 203 112 203.5 116 199.5 119 C 193 122 184 120 176 116 Z" 
+                fill="var(--skin-base)" stroke="#102A43" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 
-          <ellipse cx="180" cy="110" rx="6" ry="4" fill="var(--skin-blush)" opacity="${skin.blush}"/>
-          <path d="M 188 98 C 192 102 190 106 186 106" stroke="#102A43" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <path d="M 184 116 Q 190 114 194 116" stroke="var(--skin-lip)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <!-- Sombra cel-shading sob o queixo e mandíbula -->
+          <path d="M 176 116 C 184 120 193 122 199.5 119 L 204 132 L 182 130 Z" fill="var(--skin-shadow)"/>
+          
+          <!-- Sombra cel-shading suave sob a franja na fronte -->
+          <path d="M 174 68 C 182 66 188 72 192 76 L 190 80 C 184 76 178 74 174 76 Z" fill="var(--skin-shadow)"/>
 
+          <!-- 4.4 Orelha Anatômica Estilizada -->
+          <g id="rosto-orelha" transform="translate(158, 98)">
+            <path d="M 0 0 C 6 -3 14 0 14 7 C 14 13 8 16 0 14 Z" fill="var(--skin-base)" stroke="#102A43" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M 2.5 2 C 6 1 10 3 10 7 C 10 11 5 13 1.5 12 Z" fill="var(--skin-shadow)"/>
+            <path d="M 3.5 3.5 C 7 3.5 8 6 7 8.5 C 6 10.5 4 10.5 2.5 9" stroke="#102A43" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </g>
+
+          <!-- 4.5 Cabelo Frontal, Topo e Costeleta Navy com Cel-Shading 2-Tone -->
+          <g id="cabelo-frontal">
+            <!-- Mechas e massa principal -->
+            <path d="M 136 72 C 130 64 140 54 148 54 L 144 58 C 152 50 162 48 170 52 L 166 56 C 176 52 184 56 188 64 C 184 62 178 62 174 66 C 182 64 188 68 190 74 C 184 72 176 74 174 78 C 178 78 184 82 184 86 C 176 84 168 86 164 92 C 158 92 152 84 148 86 C 144 80 138 78 136 72 Z" 
+                  fill="#102A43" stroke="#102A43" stroke-width="3" stroke-linejoin="round"/>
+            <!-- Costeleta na frente da orelha -->
+            <path d="M 160 90 L 164 92 L 162 100 L 158 98 Z" fill="#102A43"/>
+            <!-- Destaque cel-shading 2-tone navy no topo -->
+            <path d="M 150 56 C 158 52 168 52 176 56 C 168 56 160 58 152 62 Z" fill="#243B53"/>
+            <path d="M 174 66 C 180 64 185 66 187 70 C 183 69 178 70 175 72 Z" fill="#243B53"/>
+          </g>
+
+          <!-- 4.6 Detalhes Faciais: Blush reativo, Narina e Lábios com respiração/dor -->
+          <ellipse cx="185" cy="99" rx="6" ry="3.5" fill="var(--skin-blush)" opacity="${skin.blush}"/>
+          <!-- Narina sutil anatômica -->
+          <path d="M 203.5 94.5 Q 202 95.5 204.5 95.5" stroke="#102A43" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- Abertura e contorno dos lábios -->
+          <path d="M 199.5 102.8 L 202.8 102.8" stroke="#102A43" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M 199 105.5 Q 202.5 107.5 204 105.5" stroke="var(--skin-lip)" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+
+          <!-- Olhos e Sobrancelhas Dinâmicos Conforme Consciência -->
           ${olhosSobrancelhasSvg}
+
+          <!-- Gotas de Suor Conforme Perfusão -->
           ${sweatSvg}
         </g>
 
