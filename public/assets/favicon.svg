@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B" />
+      <stop offset="100%" stop-color="#E63946" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1D2B53" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Gotinha mascote amigável -->
+  <path d="M 32 4 C 32 4, 12 30, 12 44 A 20 20 0 0 0 52 44 C 52 30, 32 4, 32 4 Z" fill="url(#dropGrad)" filter="url(#shadow)" />
+  <!-- Brilho reflexo -->
+  <path d="M 24 22 C 20 28, 18 36, 18 42 C 18 43, 20 43, 20 42 C 20 36, 22 28, 26 23 C 27 22, 25 21, 24 22 Z" fill="#FFFFFF" opacity="0.6"/>
+  <!-- Olhos simpáticos -->
+  <circle cx="26" cy="40" r="3" fill="#1D2B53" />
+  <circle cx="38" cy="40" r="3" fill="#1D2B53" />
+  <circle cx="27" cy="39" r="1" fill="#FFFFFF" />
+  <circle cx="39" cy="39" r="1" fill="#FFFFFF" />
+  <!-- Sorriso amigável -->
+  <path d="M 28 45 Q 32 49 36 45" stroke="#1D2B53" stroke-width="2" stroke-linecap="round" fill="none" />
+  <!-- Bochechas rosadas -->
+  <ellipse cx="22" cy="43" rx="2.5" ry="1.5" fill="#FF85A1" opacity="0.7"/>
+  <ellipse cx="42" cy="43" rx="2.5" ry="1.5" fill="#FF85A1" opacity="0.7"/>
+  <!-- Cruzinha médica amigável na testa -->
+  <rect x="30" y="24" width="4" height="10" rx="2" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="27" y="27" width="10" height="4" rx="2" fill="#FFFFFF" opacity="0.9"/>
+</svg>

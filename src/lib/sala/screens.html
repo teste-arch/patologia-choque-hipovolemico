@@ -1,0 +1,113 @@
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g id="svgGotaMascoteBase">
+<path d="M 32 4 C 32 4, 12 30, 12 44 A 20 20 0 0 0 52 44 C 52 30, 32 4, 32 4 Z" fill="var(--coral-red)"></path>
+<path d="M 24 22 C 20 28, 18 36, 18 42 C 18 43, 20 43, 20 42 C 20 36, 22 28, 26 23 C 27 22, 25 21, 24 22 Z" fill="var(--card)" opacity="0.6"></path>
+<circle cx="26" cy="40" fill="var(--foreground)" r="3"></circle>
+<circle cx="38" cy="40" fill="var(--foreground)" r="3"></circle>
+<circle cx="27" cy="39" fill="var(--card)" r="1"></circle>
+<circle cx="39" cy="39" fill="var(--card)" r="1"></circle>
+<path d="M 28 45 Q 32 49 36 45" fill="none" stroke="var(--foreground)" stroke-linecap="round" stroke-width="2"></path>
+<ellipse cx="22" cy="43" fill="var(--coral-red-light)" opacity="0.8" rx="2.5" ry="1.5"></ellipse>
+<ellipse cx="42" cy="43" fill="var(--coral-red-light)" opacity="0.8" rx="2.5" ry="1.5"></ellipse>
+</g>
+</defs>
+</svg>
+<section aria-labelledby="mapaTrilhaTitle" class="screen" hidden="" id="telaMapaTrilha">
+<div style="margin: 1rem 0;">
+<span class="hero-header-badge">Trilha de Aprendizado Completa</span>
+<h2 id="mapaTrilhaTitle" style="color: var(--navy-blue); font-size: 1.8rem; margin: 0.3rem 0;">
+          Mapa das 7 Paradas da Sala Vermelha
+        </h2>
+<p style="color: var(--text-muted); font-size: 1rem;">
+          Navegue livremente pelas estações de conhecimento e coloque suas habilidades à prova no caso clínico:
+        </p>
+<!-- Grade Dinâmica dos Cards da Trilha -->
+<div class="mapa-trilha-grid" id="mapaTrilhaCardsGrid"></div>
+<div style="text-align: center; margin-top: 1.5rem;">
+<button class="btn btn-outline" onclick="window.uiManager.mostrarTela('telaHome')">
+            ← Voltar para a Tela Inicial
+          </button>
+</div>
+</div>
+</section>
+<section aria-labelledby="paradaContentArea" class="screen" hidden="" id="telaParadaTeorica">
+<div class="parada-view-container" id="paradaContentArea">
+<!-- Renderizado dinamicamente por trilha.js -->
+</div>
+</section>
+<section aria-labelledby="casoTituloEtapa" class="screen" hidden="" id="telaCasoClinico">
+<div class="game-play-area">
+<!-- Cabeçalho da Etapa Atual -->
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+<div>
+<span class="caso-etapa-badge" id="casoFaseBadge">FASE 1 — ATENDIMENTO PRÉ-HOSPITALAR</span>
+<h2 class="caso-etapa-titulo" id="casoTituloEtapa">Na Cena do Acidente</h2>
+</div>
+<div style="display: flex; gap: 0.5rem; align-items: center;">
+<button class="btn btn-outline btn-mini" id="btnEntendaSituacao" title="Explicação didática da situação">
+              💡 Entenda a Situação
+            </button>
+<button class="btn btn-aqua btn-mini" id="btnUsarDicaGota" title="Usa uma dica da Gota">
+              💧 Dica da Gota (<span id="dicasRestantesNum">2</span>)
+            </button>
+</div>
+</div>
+<!-- Layout Central: Monitor Multiparamétrico + Paciente SVG -->
+<div class="game-interface-layout">
+<!-- Monitor de Beira de Leito -->
+<div class="vital-monitor-panel" id="vitalMonitorPanel">
+<!-- Renderizado em tempo real por monitor.js -->
+</div>
+<!-- Paciente Lucas deitado em Maca -->
+<div class="patient-scene-container" id="patientSceneBox">
+<!-- Renderizado dinamicamente por patient.js -->
+</div>
+</div>
+<!-- Descrição da Situação Clínica e Sinais Observados -->
+<div class="caso-situacao-card">
+<p id="casoSituacaoTexto" style="margin-bottom: 0.6rem; font-weight: 600; color: var(--navy-blue);"></p>
+<div style="background: var(--bg-card-alt); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; border-left: 3px solid var(--coral-red);">
+<strong style="color: var(--coral-red); font-size: 0.85rem;">Sinais Clínicos em Destaque:</strong>
+<ul id="casoSinaisLista" style="padding-left: 1.25rem; font-size: 0.85rem; margin-top: 0.25rem;"></ul>
+</div>
+</div>
+<!-- 3 Opções de Conduta de Enfermagem (Embaralhadas) -->
+<div style="margin-top: 0.5rem;">
+<h3 style="font-size: 1.1rem; color: var(--navy-blue); margin-bottom: 0.6rem;">
+            Qual é a sua conduta imediata de enfermagem?
+          </h3>
+<div class="opcoes-conduta-list" id="casoOpcoesList">
+<!-- Botões gerados dinamicamente por ui.js -->
+</div>
+</div>
+<!-- Card de Feedback Pedagógico Pós-Escolha -->
+<div class="feedback-escolha-container" id="casoFeedbackCard">
+<!-- Conteúdo gerado após a seleção -->
+</div>
+</div>
+</section>
+<section aria-labelledby="finalCasoContentArea" class="screen" hidden="" id="telaFinalCaso">
+<div id="finalCasoContentArea">
+<!-- Renderizado dinamicamente por ui.js -->
+</div>
+</section>
+<section id="secaoEquipeReferencias">
+<!-- Renderizado por ui.js com fotos, orientadora, referências ABNT e aviso -->
+</section>
+<div aria-labelledby="modalHeaderTitle" aria-modal="true" class="modal-backdrop" hidden="" id="modalBackdrop" role="dialog">
+<div class="modal-window">
+<div class="modal-header">
+<h3 id="modalHeaderTitle">Título do Modal</h3>
+<button aria-label="Fechar janela" class="btn-icon" id="modalBtnClose" style="min-width: 38px; min-height: 38px; font-size: 1.1rem;">
+          ✕
+        </button>
+</div>
+<div class="modal-body" id="modalBodyContent">
+<!-- Conteúdo injetado via JavaScript -->
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary btn-mini" id="modalBtnOk">Entendi / Fechar</button>
+</div>
+</div>
+</div>
