@@ -269,3 +269,47 @@ body.modo-apresentacao .plantao-shell { grid-template-columns:76px minmax(0,1fr)
   border-radius: 12px;
 }
 
+@keyframes sirenPulse {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.9)); }
+}
+
+.siren-active {
+  animation: sirenPulse 1.2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes shivering {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+.patient-shivering {
+  animation: shivering 0.16s infinite ease-in-out;
+}
+
+@keyframes sweatDrop {
+  0% { opacity: 0; transform: translateY(-3px); }
+  40% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+.sweat-drop {
+  animation: sweatDrop 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes dripFall {
+  0% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+.iv-drip {
+  animation: dripFall 1.2s infinite linear;
+}
+
+.iv-drip.fast {
+  animation: dripFall 0.5s infinite linear;
+}
+

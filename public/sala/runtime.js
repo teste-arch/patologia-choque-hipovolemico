@@ -1152,51 +1152,61 @@ class PatientRenderer {
 
   getSkinColors(perfusao) {
     if (perfusao >= 70) {
-      return { start: "#FED0BB", end: "#F7A382", blush: 0.75, lip: "#E63946" };
+      return {
+        highlight: "#FFF2EC",
+        base: "#FED0BB",
+        shadow: "#ECA184",
+        blush: 0.65,
+        lip: "#E63946"
+      };
     }
-    if (perfusao >= 50) {
-      return { start: "#F5DFCE", end: "#E2BAA3", blush: 0.4, lip: "#C96D6D" };
+    if (perfusao >= 45) {
+      return {
+        highlight: "#FCF7F2",
+        base: "#F3E2D5",
+        shadow: "#D8C2B0",
+        blush: 0.25,
+        lip: "#B78A8A"
+      };
     }
-    if (perfusao >= 30) {
-      return { start: "#EFE8DC", end: "#D8C7B5", blush: 0.15, lip: "#A68080" };
-    }
-    return { start: "#E2E7EF", end: "#BAC8D8", blush: 0.05, lip: "#7E8C9D" }; // cianose suave
+    // Choque descompensado / cianose periférica
+    return {
+      highlight: "#F0F4F8",
+      base: "#D9E2EC",
+      shadow: "#BCCCDC",
+      blush: 0.05,
+      lip: "#7B8794"
+    };
   }
 
   renderScenarioBackground(cenarioTipo) {
     if (cenarioTipo === "rua") {
       return `
-        <defs>
-          <linearGradient id="skyRua" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#E2E8F0"/>
-            <stop offset="100%" stop-color="#CBD5E1"/>
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="520" height="240" fill="url(#skyRua)"/>
-        <!-- Pista e asfalto com guia -->
-        <rect x="0" y="165" width="520" height="75" fill="#334155"/>
-        <line x1="0" y1="202" x2="520" y2="202" stroke="#FBBF24" stroke-width="3" stroke-dasharray="24 16"/>
-        <!-- Moto caída estilizada cartoon Duolingo -->
-        <g transform="translate(42, 160) scale(0.68)">
-          <circle cx="20" cy="28" r="14" fill="#1E293B" stroke="#0F172A" stroke-width="3"/>
-          <circle cx="20" cy="28" r="6" fill="#94A3B8"/>
-          <circle cx="72" cy="28" r="14" fill="#1E293B" stroke="#0F172A" stroke-width="3"/>
-          <circle cx="72" cy="28" r="6" fill="#94A3B8"/>
-          <path d="M 20 28 L 44 8 L 62 22 L 72 28" stroke="#E63946" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="44" cy="8" r="5" fill="#FFD166"/>
-          <line x1="44" y1="8" x2="38" y2="-2" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+        <rect x="0" y="0" width="520" height="240" fill="#E2E8F0"/>
+        <path d="M 0 165 L 520 165 L 520 240 L 0 240 Z" fill="#334155"/>
+        <line x1="0" y1="165" x2="520" y2="165" stroke="#94A3B8" stroke-width="3"/>
+        <line x1="0" y1="208" x2="520" y2="208" stroke="#FBBF24" stroke-width="3" stroke-dasharray="26 18"/>
+        <!-- Moto caída do acidente com curvas orgânicas -->
+        <g transform="translate(30, 162) scale(0.68)">
+          <ellipse cx="22" cy="30" rx="15" ry="14" fill="#0F172A" stroke="#334155" stroke-width="3"/>
+          <circle cx="22" cy="30" r="7" fill="#64748B"/>
+          <ellipse cx="80" cy="30" rx="15" ry="14" fill="#0F172A" stroke="#334155" stroke-width="3"/>
+          <circle cx="80" cy="30" r="7" fill="#64748B"/>
+          <path d="M 22 30 Q 42 12 55 12 Q 70 12 80 30" stroke="#E63946" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M 46 10 Q 55 4 65 10 Q 58 16 46 10 Z" fill="#B91C1C"/>
+          <path d="M 50 10 L 46 -2 M 46 -2 L 38 -2" stroke="#64748B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
         </g>
-        <!-- Ambulância fofa ao fundo com giroflex pulsante -->
-        <g transform="translate(390, 105) scale(0.8)">
-          <rect x="10" y="24" width="105" height="56" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
-          <path d="M 78 32 L 105 32 L 115 54 L 78 54 Z" fill="#93C5FD" rx="2"/>
-          <rect x="10" y="52" width="105" height="10" fill="#E63946"/>
-          <rect x="42" y="32" width="6" height="16" rx="2" fill="#E63946"/>
-          <rect x="37" y="37" width="16" height="6" rx="2" fill="#E63946"/>
-          <circle cx="34" cy="80" r="10" fill="#1E293B"/>
-          <circle cx="94" cy="80" r="10" fill="#1E293B"/>
-          <!-- Sirene pulsando -->
-          <ellipse cx="62" cy="20" rx="8" ry="6" fill="#EF4444" class="siren-active"/>
+        <!-- Viatura SAMU 192 com giroflex pulsante -->
+        <g transform="translate(385, 104) scale(0.8)">
+          <path d="M 10 24 C 10 16 20 16 25 16 L 95 16 C 105 16 114 24 116 34 L 122 55 C 123 60 120 66 114 66 L 10 66 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+          <path d="M 85 24 L 108 24 L 115 48 L 85 48 Z" fill="#93C5FD" opacity="0.85"/>
+          <rect x="10" y="48" width="112" height="10" fill="#E63946"/>
+          <path d="M 44 26 H 50 V 42 H 44 Z M 36 31 H 58 V 37 H 36 Z" fill="#E63946"/>
+          <circle cx="34" cy="68" r="9" fill="#1E293B"/>
+          <circle cx="34" cy="68" r="4" fill="#94A3B8"/>
+          <circle cx="98" cy="68" r="9" fill="#1E293B"/>
+          <circle cx="98" cy="68" r="4" fill="#94A3B8"/>
+          <ellipse cx="68" cy="12" rx="9" ry="6" fill="#EF4444" class="siren-active"/>
         </g>
       `;
     }
@@ -1204,33 +1214,29 @@ class PatientRenderer {
     if (cenarioTipo === "ambulancia") {
       return `
         <rect x="0" y="0" width="520" height="240" fill="#1E293B"/>
-        <rect x="12" y="12" width="496" height="216" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
-        <!-- Janela da ambulância -->
-        <rect x="36" y="28" width="150" height="64" rx="8" fill="#BAE6FD" stroke="#93C5FD" stroke-width="2"/>
-        <line x1="45" y1="70" x2="175" y2="70" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="14 10"/>
-        <!-- Painel de oxigênio / suporte -->
-        <rect x="390" y="28" width="85" height="95" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
-        <rect x="400" y="38" width="65" height="38" rx="4" fill="#0F172A"/>
-        <line x1="405" y1="58" x2="460" y2="58" stroke="#10B981" stroke-width="2"/>
-        <circle cx="412" cy="94" r="5" fill="#10B981"/>
-        <circle cx="430" cy="94" r="5" fill="#EF4444"/>
+        <rect x="10" y="10" width="500" height="220" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+        <path d="M 32 26 C 32 20 38 18 48 18 L 180 18 C 190 18 196 20 196 26 L 196 82 C 196 88 190 92 180 92 L 48 92 C 38 92 32 88 32 82 Z" fill="#BAE6FD" stroke="#60A5FA" stroke-width="2"/>
+        <line x1="40" y1="72" x2="188" y2="72" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="16 12"/>
+        <rect x="390" y="24" width="95" height="105" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+        <rect x="402" y="34" width="72" height="40" rx="6" fill="#0F172A"/>
+        <path d="M 406 54 L 418 54 L 422 43 L 426 63 L 430 54 L 470 54" stroke="#10B981" stroke-width="2" fill="none"/>
+        <circle cx="415" cy="94" r="5" fill="#10B981"/>
+        <circle cx="435" cy="94" r="5" fill="#F59E0B"/>
+        <circle cx="455" cy="94" r="5" fill="#EF4444"/>
       `;
     }
 
     // Cenário Sala Vermelha
     return `
       <rect x="0" y="0" width="520" height="240" fill="#F8FAFC"/>
-      <!-- Faixa institucional Sala Vermelha com luz suave -->
-      <rect x="0" y="65" width="520" height="18" fill="#E63946" opacity="0.9"/>
-      <text x="24" y="78" font-family="'Fredoka', sans-serif" font-weight="700" font-size="10.5" fill="#FFFFFF" letter-spacing="2">EMERGÊNCIA • SALA VERMELHA • PLANTÃO DE TRAUMA</text>
-      <!-- Sirene no teto -->
-      <g transform="translate(250, 10)" class="siren-active">
-        <rect x="0" y="0" width="20" height="5" fill="#64748B" rx="2"/>
-        <path d="M 3 5 C 3 17, 17 17, 17 5 Z" fill="#EF4444"/>
+      <rect x="0" y="58" width="520" height="20" fill="#E63946"/>
+      <text x="20" y="72" font-family="'Fredoka', sans-serif" font-weight="700" font-size="10.5" fill="#FFFFFF" letter-spacing="2">EMERGÊNCIA • SALA VERMELHA • POLITRAUMA</text>
+      <g transform="translate(260, 10)" class="siren-active">
+        <rect x="-12" y="0" width="24" height="6" rx="2" fill="#64748B"/>
+        <path d="M -9 6 C -9 18 9 18 9 6 Z" fill="#EF4444"/>
       </g>
-      <!-- Suporte de soro elegante -->
-      <line x1="72" y1="26" x2="72" y2="225" stroke="#94A3B8" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 58 36 Q 72 26 86 36" stroke="#94A3B8" stroke-width="2.5" fill="none"/>
+      <path d="M 66 18 L 66 228" stroke="#94A3B8" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M 48 30 C 48 20 66 16 66 30 C 66 16 84 20 84 30" stroke="#94A3B8" stroke-width="2.8" fill="none" stroke-linecap="round"/>
     `;
   }
 
@@ -1241,121 +1247,124 @@ class PatientRenderer {
     const skin = this.getSkinColors(p.perfusao);
     const cenarioTipo = state.etapaAtualIndex === 0 ? "rua" : state.etapaAtualIndex === 1 ? "ambulancia" : "sala-vermelha";
 
-    // Expressão dos olhos estilo Duolingo
+    // Expressão dos olhos cartoon Duolingo de alta fidelidade
     let eyesSvg = "";
     if (p.consciencia >= 75) {
-      // Olhos grandes, pupilas brilhantes, sobrancelhas de dor arqueadas
       eyesSvg = `
-        <g transform="translate(178, 114)">
-          <ellipse cx="0" cy="0" rx="5.5" ry="6.5" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.8"/>
-          <ellipse cx="0.5" cy="0" rx="3.6" ry="4.5" fill="#1D2B53"/>
-          <circle cx="1.8" cy="-1.5" r="1.5" fill="#FFFFFF"/>
-          <circle cx="-0.8" cy="1.8" r="0.8" fill="#FFFFFF"/>
+        <g transform="translate(168, 110)">
+          <path d="M -7 -1 C -5 -6 4 -6 7 -1 C 5 5 -4 5 -7 -1 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.6"/>
+          <ellipse cx="0.5" cy="-0.5" rx="4" ry="4.8" fill="#1E293B"/>
+          <circle cx="2" cy="-2.2" r="1.6" fill="#FFFFFF"/>
+          <circle cx="-1.2" cy="1.6" r="0.9" fill="#FFFFFF"/>
         </g>
-        <g transform="translate(196, 114)">
-          <ellipse cx="0" cy="0" rx="5.5" ry="6.5" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.8"/>
-          <ellipse cx="0.5" cy="0" rx="3.6" ry="4.5" fill="#1D2B53"/>
-          <circle cx="1.8" cy="-1.5" r="1.5" fill="#FFFFFF"/>
-          <circle cx="-0.8" cy="1.8" r="0.8" fill="#FFFFFF"/>
+        <g transform="translate(188, 110)">
+          <path d="M -7 -1 C -5 -6 4 -6 7 -1 C 5 5 -4 5 -7 -1 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.6"/>
+          <ellipse cx="0.5" cy="-0.5" rx="4" ry="4.8" fill="#1E293B"/>
+          <circle cx="2" cy="-2.2" r="1.6" fill="#FFFFFF"/>
+          <circle cx="-1.2" cy="1.6" r="0.9" fill="#FFFFFF"/>
         </g>
-        <!-- Sobrancelhas de dor inclinadas -->
-        <path d="M 172 105 Q 178 102 184 107" stroke="#3D261A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-        <path d="M 202 105 Q 196 102 190 107" stroke="#3D261A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <!-- Sobrancelhas orgânicas com arco de dor e vinco -->
+        <path d="M 160 100 C 164 95 170 95 176 101" stroke="#3E2723" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M 196 100 C 192 95 186 95 180 101" stroke="#3E2723" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M 177 99 Q 178 96 179 99" stroke="#D7A287" stroke-width="1.4" stroke-linecap="round" fill="none"/>
       `;
     } else if (p.consciencia >= 45) {
-      // Sonolento / pálpebras caídas
       eyesSvg = `
-        <g transform="translate(178, 115)">
-          <ellipse cx="0" cy="0" rx="5.5" ry="6" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.5"/>
-          <ellipse cx="0" cy="1" rx="3.2" ry="3.5" fill="#1D2B53"/>
-          <circle cx="1.2" cy="0" r="1.1" fill="#FFFFFF"/>
-          <path d="M -5.5 -1 Q 0 4 5.5 -1" fill="${skin.end}" stroke="#1D2B53" stroke-width="1.6"/>
+        <g transform="translate(168, 111)">
+          <path d="M -7 0 C -4 -4 4 -4 7 0 C 4 4 -4 4 -7 0 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
+          <ellipse cx="0.5" cy="0.5" rx="3.5" ry="3.5" fill="#1E293B"/>
+          <circle cx="1.5" cy="-0.5" r="1.1" fill="#FFFFFF"/>
+          <path d="M -7 -2 Q 0 3 7 -2" fill="${skin.shadow}" stroke="#0F172A" stroke-width="1.6"/>
         </g>
-        <g transform="translate(196, 115)">
-          <ellipse cx="0" cy="0" rx="5.5" ry="6" fill="#FFFFFF" stroke="#1D2B53" stroke-width="1.5"/>
-          <ellipse cx="0" cy="1" rx="3.2" ry="3.5" fill="#1D2B53"/>
-          <circle cx="1.2" cy="0" r="1.1" fill="#FFFFFF"/>
-          <path d="M -5.5 -1 Q 0 4 5.5 -1" fill="${skin.end}" stroke="#1D2B53" stroke-width="1.6"/>
+        <g transform="translate(188, 111)">
+          <path d="M -7 0 C -4 -4 4 -4 7 0 C 4 4 -4 4 -7 0 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
+          <ellipse cx="0.5" cy="0.5" rx="3.5" ry="3.5" fill="#1E293B"/>
+          <circle cx="1.5" cy="-0.5" r="1.1" fill="#FFFFFF"/>
+          <path d="M -7 -2 Q 0 3 7 -2" fill="${skin.shadow}" stroke="#0F172A" stroke-width="1.6"/>
         </g>
-        <path d="M 173 107 Q 178 108 183 109" stroke="#5D3A24" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-        <path d="M 201 107 Q 196 108 191 109" stroke="#5D3A24" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M 161 103 C 166 104 172 105 176 106" stroke="#4E342E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M 195 103 C 190 104 184 105 180 106" stroke="#4E342E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
       `;
     } else {
-      // Olhos fechados / torpor
       eyesSvg = `
-        <path d="M 173 116 Q 178 119 183 116" stroke="#1D2B53" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M 191 116 Q 196 119 201 116" stroke="#1D2B53" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <line x1="174" y1="110" x2="182" y2="111" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-        <line x1="200" y1="110" x2="192" y2="111" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+        <path d="M 161 112 C 165 116 171 116 175 112" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M 181 112 C 185 116 191 116 195 112" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <line x1="162" y1="105" x2="173" y2="106" stroke="#718096" stroke-width="2" stroke-linecap="round"/>
+        <line x1="194" y1="105" x2="183" y2="106" stroke="#718096" stroke-width="2" stroke-linecap="round"/>
       `;
     }
 
-    // Suor dinâmico estilo cartoon
-    const showSweat = p.perfusao < 55;
-    const sweatSvg = showSweat ? `
-      <g class="sweat-drop" fill="#60A5FA" stroke="#3B82F6" stroke-width="0.8">
-        <path d="M 169 107 C 169 104 172 102 172 102 C 172 102 175 104 175 107 A 3 3 0 0 1 169 107 Z"/>
-        <path d="M 202 109 C 202 106 205 104 205 104 C 205 104 208 106 208 109 A 3 3 0 0 1 202 109 Z"/>
+    // Suor dinâmico em 3D
+    const sweatSvg = p.perfusao < 55 ? `
+      <g class="sweat-drop" filter="url(#dropGlow)">
+        <path d="M 158 103 C 157 99 161 97 161 97 C 161 97 165 99 164 103 A 3 3 0 0 1 158 103 Z" fill="#60A5FA" opacity="0.85"/>
+        <circle cx="160" cy="102" r="0.8" fill="#FFFFFF"/>
+        <path d="M 195 105 C 194 101 198 99 198 99 C 198 99 202 101 201 105 A 3 3 0 0 1 195 105 Z" fill="#60A5FA" opacity="0.85"/>
+        <circle cx="197" cy="104" r="0.8" fill="#FFFFFF"/>
       </g>
     ` : "";
 
-    const isShivering = p.temperatura < 65 ? "patient-shivering" : "";
+    const shiverClass = p.temperatura < 65 ? "patient-shivering" : "";
 
-    // Hematoma pélvico difuso moderno
-    const hematomaRadiusX = Math.max(10, (p.sangramento / 100) * 34);
-    const hematomaRadiusY = Math.max(6, (p.sangramento / 100) * 20);
-    const hematomaOpacity = Math.min(0.85, Math.max(0.2, p.sangramento / 100));
+    // Hematoma pélvico difuso
+    const hematomaOpacity = Math.min(0.92, Math.max(0.18, p.sangramento / 100));
+    const hemaScale = 0.55 + (p.sangramento / 100) * 0.65;
 
-    // Cinta Pélvica moderna (estilo SAM Pelvic Sling profissional)
+    // Cinta Pélvica SAM Sling
     const cintaSvg = state.cintaPelvicaAplicada ? `
-      <g transform="translate(260, 140)">
-        <!-- Faixa azul de neoprene -->
-        <rect x="0" y="0" width="64" height="26" rx="6" fill="#1D2B53" stroke="#0F172A" stroke-width="2"/>
-        <!-- Faixa central laranja de alta visibilidade -->
-        <rect x="12" y="5" width="40" height="16" rx="3" fill="#FF6B35"/>
-        <!-- Fivela / engate mecânico de tração -->
-        <rect x="25" y="3" width="14" height="20" rx="3" fill="#FFD166" stroke="#D97706" stroke-width="1.5"/>
-        <circle cx="32" cy="13" r="3" fill="#EF4444"/>
-        <!-- Costura tracejada profissional -->
-        <line x1="4" y1="3" x2="60" y2="3" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="4" y1="23" x2="60" y2="23" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <text x="32" y="34" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#1D2B53" text-anchor="middle">SAM SLING FIXADA</text>
+      <g transform="translate(244, 134)">
+        <path d="M 0 6 C 18 -2 52 -2 70 6 L 68 28 C 50 32 16 32 2 28 Z" fill="#0F172A" stroke="#1E293B" stroke-width="2"/>
+        <path d="M 8 9 C 24 4 48 4 62 9 L 60 25 C 46 28 22 28 10 25 Z" fill="#FF5722"/>
+        <g transform="translate(35, 17)">
+          <circle cx="0" cy="0" r="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+          <circle cx="0" cy="0" r="4.5" fill="#FFC107"/>
+          <circle cx="0" cy="0" r="2" fill="#D32F2F"/>
+          <line x1="-7" y1="0" x2="-5" y2="0" stroke="#0F172A" stroke-width="1.5"/>
+          <line x1="5" y1="0" x2="7" y2="0" stroke="#0F172A" stroke-width="1.5"/>
+        </g>
+        <path d="M 3 5 C 20 -1 50 -1 67 5" stroke="#38BDF8" stroke-width="1.4" stroke-dasharray="3 2" fill="none"/>
+        <path d="M 5 29 C 22 33 48 33 65 29" stroke="#38BDF8" stroke-width="1.4" stroke-dasharray="3 2" fill="none"/>
+        <text x="35" y="38" font-family="'Nunito', sans-serif" font-weight="900" font-size="7.2" fill="#0F172A" text-anchor="middle" letter-spacing="0.5">SAM PELVIC SLING</text>
       </g>
     ` : "";
 
-    // Manta térmica aluminizada reflexiva
+    // Manta térmica aluminizada
     const mantaSvg = state.mantaTermicaAplicada ? `
-      <g>
-        <path d="M 194 130 Q 300 116 415 134 L 410 188 Q 295 194 194 176 Z" 
-              fill="url(#mantaGrad)" opacity="0.94" stroke="#D97706" stroke-width="1.8"/>
-        <!-- Vincos poligonais reflexivos de manta de trauma -->
-        <line x1="220" y1="130" x2="310" y2="190" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
-        <line x1="280" y1="125" x2="370" y2="185" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
-        <line x1="330" y1="124" x2="405" y2="175" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
-        <text x="305" y="156" font-family="'Fredoka', sans-serif" font-weight="700" font-size="10.5" fill="#78350F" text-anchor="middle" letter-spacing="1">MANTA TÉRMICA ATIVA</text>
+      <g filter="url(#goldSheen)">
+        <path d="M 184 126 C 230 110 330 112 412 132 L 408 192 C 320 200 225 194 184 176 Z" 
+              fill="url(#goldFoilGrad)" stroke="#B45309" stroke-width="2" opacity="0.96"/>
+        <path d="M 200 128 L 260 192 M 245 121 L 310 194 M 300 118 L 365 193 M 350 120 L 405 182" 
+              stroke="#FFFFFF" stroke-width="2" opacity="0.65" stroke-linecap="round"/>
+        <path d="M 220 186 L 300 122 M 275 192 L 355 120 M 330 194 L 400 141" 
+              stroke="#FFFBEB" stroke-width="1.4" opacity="0.5" stroke-linecap="round"/>
+        <rect x="240" y="146" width="112" height="18" rx="4" fill="#78350F" opacity="0.85"/>
+        <text x="296" y="159" font-family="'Fredoka', sans-serif" font-weight="700" font-size="9.5" fill="#FEF08A" text-anchor="middle" letter-spacing="1">AQUECIMENTO ATIVO</text>
       </g>
     ` : "";
 
-    // Bolsas de infusão
-    let infusionBagSvg = "";
+    // Bolsas e infusão
+    let infusionSvg = "";
     if (state.transfusaoIniciada) {
-      infusionBagSvg = `
-        <g transform="translate(62, 46)">
-          <rect x="0" y="0" width="24" height="36" rx="6" fill="#881337" stroke="#FFFFFF" stroke-width="1.8"/>
-          <rect x="4" y="6" width="16" height="13" rx="2" fill="#FFFFFF" opacity="0.95"/>
-          <text x="12" y="16" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#881337" text-anchor="middle">CH O+</text>
-          <!-- Linha do equipo em curva suave -->
-          <path d="M 12 36 Q 14 70 45 105" stroke="#881337" stroke-width="2" fill="none"/>
-          <circle cx="12" cy="48" r="2.5" fill="#881337" class="iv-drip fast"/>
+      infusionSvg = `
+        <g transform="translate(54, 38)">
+          <path d="M 3 4 C 3 1 23 1 23 4 L 25 38 C 25 42 20 44 13 44 C 6 44 1 42 1 38 Z" fill="#881337" stroke="#4C0519" stroke-width="1.8"/>
+          <rect x="5" y="10" width="16" height="15" rx="2" fill="#FFFFFF"/>
+          <text x="13" y="19" font-family="'Nunito', sans-serif" font-weight="900" font-size="7" fill="#881337" text-anchor="middle">CH O+</text>
+          <rect x="7" y="21" width="12" height="2" fill="#E11D48"/>
+          <rect x="10" y="44" width="6" height="12" rx="2" fill="#CBD5E1" opacity="0.8"/>
+          <circle cx="13" cy="49" r="1.8" fill="#881337" class="iv-drip fast"/>
+          <path d="M 13 56 C 15 95 30 125 45 138" stroke="#881337" stroke-width="2.2" fill="none" stroke-linecap="round"/>
         </g>
       `;
     } else {
-      infusionBagSvg = `
-        <g transform="translate(62, 46)">
-          <rect x="0" y="0" width="24" height="36" rx="6" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.8"/>
-          <text x="12" y="20" font-family="'Nunito', sans-serif" font-weight="800" font-size="7.5" fill="#0369A1" text-anchor="middle">SF 0.9%</text>
-          <path d="M 12 36 Q 14 70 45 105" stroke="#38BDF8" stroke-width="1.8" fill="none"/>
-          <circle cx="12" cy="48" r="2.2" fill="#38BDF8" class="iv-drip"/>
+      infusionSvg = `
+        <g transform="translate(54, 38)">
+          <path d="M 3 4 C 3 1 23 1 23 4 L 25 38 C 25 42 20 44 13 44 C 6 44 1 42 1 38 Z" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.8"/>
+          <rect x="5" y="12" width="16" height="14" rx="2" fill="#FFFFFF" opacity="0.9"/>
+          <text x="13" y="21" font-family="'Nunito', sans-serif" font-weight="900" font-size="7" fill="#0369A1" text-anchor="middle">SF 0.9%</text>
+          <rect x="10" y="44" width="6" height="12" rx="2" fill="#BAE6FD" opacity="0.8"/>
+          <circle cx="13" cy="49" r="1.6" fill="#38BDF8" class="iv-drip"/>
+          <path d="M 13 56 C 15 95 30 125 45 138" stroke="#38BDF8" stroke-width="2" fill="none" stroke-linecap="round"/>
         </g>
       `;
     }
@@ -1364,121 +1373,172 @@ class PatientRenderer {
       <svg viewBox="0 0 520 240" class="patient-svg-root" style="width: 100%; height: auto; display: block;">
         <defs>
           <linearGradient id="skinDuoGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="${skin.start}"/>
-            <stop offset="100%" stop-color="${skin.end}"/>
+            <stop offset="0%" stop-color="${skin.highlight}"/>
+            <stop offset="35%" stop-color="${skin.base}"/>
+            <stop offset="100%" stop-color="${skin.shadow}"/>
           </linearGradient>
 
           <linearGradient id="hairDuoGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#4A3022"/>
-            <stop offset="100%" stop-color="#2D1C13"/>
+            <stop offset="0%" stop-color="#5C3826"/>
+            <stop offset="40%" stop-color="#3E2415"/>
+            <stop offset="100%" stop-color="#24140B"/>
           </linearGradient>
 
           <linearGradient id="gownDuoGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#CCFBF1"/>
-            <stop offset="100%" stop-color="#99F6E4"/>
+            <stop offset="0%" stop-color="#D1FAE5"/>
+            <stop offset="60%" stop-color="#A7F3D0"/>
+            <stop offset="100%" stop-color="#6EE7B7"/>
           </linearGradient>
 
-          <linearGradient id="mantaGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#FDE047"/>
-            <stop offset="50%" stop-color="#F59E0B"/>
-            <stop offset="100%" stop-color="#FBBF24"/>
+          <linearGradient id="mattressGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#38BDF8"/>
+            <stop offset="100%" stop-color="#0284C7"/>
           </linearGradient>
 
-          <radialGradient id="hematomaGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#6B21A8" stop-opacity="0.9"/>
-            <stop offset="70%" stop-color="#7E22CE" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+          <linearGradient id="goldFoilGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FEF08A"/>
+            <stop offset="30%" stop-color="#F59E0B"/>
+            <stop offset="70%" stop-color="#FDE047"/>
+            <stop offset="100%" stop-color="#D97706"/>
+          </linearGradient>
+
+          <radialGradient id="hematomaDuoGrad" cx="45%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#581C87" stop-opacity="0.95"/>
+            <stop offset="50%" stop-color="#7E22CE" stop-opacity="0.55"/>
+            <stop offset="80%" stop-color="#C084FC" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
           </radialGradient>
 
-          <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0F172A" flood-opacity="0.12"/>
+          <filter id="softShadow" x="-15%" y="-15%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4.5" flood-color="#0F172A" flood-opacity="0.14"/>
+          </filter>
+          <filter id="goldSheen" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#D97706" flood-opacity="0.22"/>
+          </filter>
+          <filter id="dropGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#3B82F6" flood-opacity="0.4"/>
           </filter>
         </defs>
 
         <!-- 1. Cenário de Fundo -->
         ${this.renderScenarioBackground(cenarioTipo)}
 
-        <!-- 2. Maca Hospitalar Moderna com Rodas -->
-        <g transform="translate(130, 150)" filter="url(#softGlow)">
-          <rect x="8" y="20" width="285" height="12" rx="5" fill="#64748B"/>
-          <rect x="28" y="32" width="10" height="28" rx="2" fill="#475569"/>
-          <rect x="265" y="32" width="10" height="28" rx="2" fill="#475569"/>
-          <!-- Rodas com trava -->
-          <circle cx="33" cy="62" r="8" fill="#1E293B"/>
-          <circle cx="33" cy="62" r="3" fill="#94A3B8"/>
-          <circle cx="270" cy="62" r="8" fill="#1E293B"/>
-          <circle cx="270" cy="62" r="3" fill="#94A3B8"/>
-          <!-- Colchão hospitalar confortável -->
-          <rect x="4" y="6" width="292" height="16" rx="7" fill="#38BDF8"/>
-          <rect x="4" y="6" width="292" height="6" rx="3" fill="#7DD3FC"/>
+        <!-- 2. Sombra de Assentamento no Chão -->
+        <ellipse cx="260" cy="220" rx="150" ry="11" fill="#0F172A" opacity="0.16"/>
+
+        <!-- 3. Maca Hospitalar Ergonômica com Linhas Curvas -->
+        <g transform="translate(100, 138)" filter="url(#softShadow)">
+          <path d="M 12 28 C 12 18 24 16 35 16 L 305 16 C 316 16 328 18 328 28 L 324 38 L 16 38 Z" fill="#64748B"/>
+          <rect x="38" y="38" width="12" height="32" rx="4" fill="#475569"/>
+          <rect x="286" y="38" width="12" height="32" rx="4" fill="#475569"/>
+          <rect x="160" y="38" width="16" height="34" rx="4" fill="#334155"/>
+          <g transform="translate(44, 70)">
+            <circle cx="0" cy="0" r="9.5" fill="#1E293B"/>
+            <circle cx="0" cy="0" r="4" fill="#94A3B8"/>
+            <path d="M -7 4 L -11 8" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(292, 70)">
+            <circle cx="0" cy="0" r="9.5" fill="#1E293B"/>
+            <circle cx="0" cy="0" r="4" fill="#94A3B8"/>
+            <path d="M -7 4 L -11 8" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+          <!-- Colchão arredondado ergonômico -->
+          <path d="M 6 12 C 6 2 20 0 34 0 L 312 0 C 326 0 336 2 336 12 C 336 20 326 22 312 22 L 34 22 C 20 22 6 20 6 12 Z" fill="url(#mattressGrad)"/>
+          <path d="M 12 4 C 12 2 22 1 32 1 L 312 1 C 324 1 330 2 330 4 C 330 6 324 7 312 7 L 32 7 C 22 7 12 6 12 4 Z" fill="#7DD3FC" opacity="0.6"/>
+          <!-- Grade lateral de proteção -->
+          <path d="M 85 2 C 85 -12 105 -12 105 2 M 125 2 C 125 -12 145 -12 145 2 M 165 2 C 165 -12 185 -12 185 2" stroke="#CBD5E1" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <line x1="81" y1="-8" x2="189" y2="-8" stroke="#CBD5E1" stroke-width="3.2" stroke-linecap="round"/>
         </g>
 
-        <!-- 3. Paciente Lucas (Estilo Duolingo / Cartoon Moderno) -->
-        <g id="patientBodyGroup" class="${isShivering}">
-          <!-- Travesseiro anatômico fofo -->
-          <ellipse cx="185" cy="148" rx="28" ry="13" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+        <!-- 4. Paciente Lucas em Anatomia Humana Orgânica -->
+        <g id="patientBodyGroup" class="${shiverClass}">
+          <!-- Travesseiro anatômico moldado com curvatura -->
+          <path d="M 150 144 C 148 128 160 124 180 124 C 200 124 214 128 212 144 C 210 152 198 156 180 156 C 162 156 152 152 150 144 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+          <ellipse cx="180" cy="140" rx="19" ry="6.5" fill="#F1F5F9" opacity="0.8"/>
 
-          <!-- Cabeça carismática -->
-          <ellipse cx="186" cy="120" rx="22" ry="21" fill="url(#skinDuoGrad)" stroke="#B45309" stroke-width="0.8" style="transition: fill 1s ease;"/>
+          <!-- Cabeça com contorno de queixo anatômico e bochechas carismáticas -->
+          <path d="M 158 110 C 155 88 172 82 188 84 C 204 86 210 98 208 114 C 206 126 198 136 184 138 C 170 140 160 128 158 110 Z" 
+                fill="url(#skinDuoGrad)" stroke="#B45309" stroke-width="0.8" style="transition: fill 1.2s ease;"/>
           
-          <!-- Bochechas com blush suave estilo Duolingo -->
-          <circle cx="174" cy="125" r="4.5" fill="#FB7185" opacity="${skin.blush}"/>
-          <circle cx="200" cy="125" r="4.5" fill="#FB7185" opacity="${skin.blush}"/>
+          <!-- Orelha estilizada -->
+          <path d="M 157 110 C 153 107 153 118 158 120 Z" fill="url(#skinDuoGrad)" stroke="#B45309" stroke-width="0.6"/>
+          <path d="M 156 112 Q 155 115 157 117" stroke="#D7A287" stroke-width="1" fill="none"/>
 
-          <!-- Cabelo volumoso cartoon -->
-          <path d="M 165 116 C 163 94, 208 94, 208 116 C 201 103, 172 103, 165 116 Z" fill="url(#hairDuoGrad)"/>
-          <!-- Mecha estilizada na testa -->
-          <path d="M 178 103 Q 186 98 190 106 Q 184 105 178 103 Z" fill="url(#hairDuoGrad)"/>
+          <!-- Blush carismático nas bochechas -->
+          <ellipse cx="164" cy="119" rx="4.8" ry="3.2" fill="#FB7185" opacity="${skin.blush}"/>
+          <ellipse cx="194" cy="119" rx="4.8" ry="3.2" fill="#FB7185" opacity="${skin.blush}"/>
 
-          <!-- Olhos e Sobrancelhas dinâmicos -->
+          <!-- Cabelo castanho volumoso com curvas orgânicas -->
+          <path d="M 154 108 C 152 82 176 76 198 80 C 206 84 212 92 210 104 C 206 94 196 90 186 90 C 172 90 162 94 158 106 Z" fill="url(#hairDuoGrad)"/>
+          <path d="M 166 92 C 176 84 188 85 192 95 C 186 91 176 92 166 92 Z" fill="url(#hairDuoGrad)"/>
+          <path d="M 176 94 C 182 88 188 90 190 98 C 185 95 180 95 176 94 Z" fill="#6D432D"/>
+
+          <!-- Olhos e Sobrancelhas de Alta Expressão -->
           ${eyesSvg}
 
-          <!-- Narizinho fofo e boquinha expressiva -->
-          <ellipse cx="187" cy="122" rx="1.5" ry="1.2" fill="#D97706" opacity="0.6"/>
-          <path d="M 182 129 Q 187 126 192 129" stroke="${skin.lip}" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <!-- Nariz e Boca expressiva -->
+          <path d="M 178 112 C 180 116 178 118 176 118" stroke="#D7A287" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M 172 124 Q 178 120 184 124" stroke="${skin.lip}" stroke-width="2.4" stroke-linecap="round" fill="none"/>
 
-          <!-- Gotas de suor cartoon -->
+          <!-- Gotas de Suor -->
           ${sweatSvg}
 
-          <!-- Tórax e Camisa Hospitalar (com animação de respiração suave) -->
-          <g class="duo-chest" style="transform-origin: 230px 150px; animation: duolingoBreathing 3s infinite ease-in-out;">
-            <path d="M 198 134 L 268 135 L 268 172 L 198 170 Z" fill="url(#gownDuoGrad)" stroke="#5EEAD4" stroke-width="1.8"/>
-            <!-- Gola redonda estilizada -->
-            <path d="M 198 138 Q 206 146 216 139" stroke="#14B8A6" stroke-width="2" fill="none"/>
-            <line x1="202" y1="154" x2="265" y2="155" stroke="#5EEAD4" stroke-width="1.5"/>
+          <!-- Pescoço e Clavícula anatômicos -->
+          <path d="M 170 134 C 170 142 176 146 186 146 C 194 146 198 142 198 134 Z" fill="url(#skinDuoGrad)"/>
+          <path d="M 178 143 Q 184 146 190 143" stroke="#D7A287" stroke-width="1.2" fill="none"/>
+
+          <!-- Tórax e Bata Hospitalar Orgânica -->
+          <g class="duo-chest">
+            <path d="M 184 134 C 178 140 182 150 184 170 L 274 170 C 276 148 274 138 268 134 C 250 130 202 130 184 134 Z" 
+                  fill="url(#gownDuoGrad)" stroke="#34D399" stroke-width="1.6"/>
+            <path d="M 184 136 C 194 150 206 150 216 136" stroke="#059669" stroke-width="2" fill="none"/>
+            <path d="M 200 150 L 200 170" stroke="#6EE7B7" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <path d="M 218 144 Q 238 152 258 148" stroke="#34D399" stroke-width="1.5" fill="none" opacity="0.6"/>
           </g>
 
-          <!-- Braço com acesso venoso -->
-          <path d="M 205 142 L 250 156" stroke="url(#skinDuoGrad)" stroke-width="10" stroke-linecap="round"/>
-          <!-- Curativo transparente do cateter e conexão do equipo -->
-          <rect x="235" y="149" width="9" height="9" rx="2.5" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2"/>
-          <circle cx="239.5" cy="153.5" r="2" fill="#0284C7"/>
+          <!-- Braço esquerdo estendido em repouso com mão esculpida -->
+          <path d="M 194 142 C 208 148 222 152 246 156 C 254 158 262 161 268 164" 
+                stroke="url(#skinDuoGrad)" stroke-width="10.5" stroke-linecap="round" fill="none"/>
+          <g transform="translate(266, 162)">
+            <path d="M 0 0 C 4 0 8 2 10 5 C 10 8 7 9 3 9 C -1 9 -3 7 0 0 Z" fill="url(#skinDuoGrad)"/>
+            <path d="M 2 8 C 5 11 8 10 10 8" stroke="#D7A287" stroke-width="1" fill="none"/>
+          </g>
 
-          <!-- Pelve e Quadril -->
-          <path d="M 264 136 L 315 138 L 315 174 L 264 170 Z" fill="url(#skinDuoGrad)"/>
-          
-          <!-- Hematoma pélvico difuso -->
-          <ellipse cx="290" cy="154" rx="${hematomaRadiusX}" ry="${hematomaRadiusY}" 
-                   fill="url(#hematomaGrad)" opacity="${hematomaOpacity}"/>
+          <!-- Cateter venoso no antebraço com curativo transparente -->
+          <g transform="translate(234, 150)">
+            <rect x="0" y="0" width="12" height="10" rx="3" fill="#FFFFFF" opacity="0.75" stroke="#0284C7" stroke-width="1"/>
+            <rect x="3" y="3" width="6" height="4" rx="1.5" fill="#0284C7"/>
+            <circle cx="6" cy="5" r="1.5" fill="#38BDF8"/>
+          </g>
 
-          <!-- Membros Inferiores: Perna direita encurtada com meias cirúrgicas brancas -->
-          <!-- Perna esquerda -->
-          <path d="M 312 144 L 400 148" stroke="url(#skinDuoGrad)" stroke-width="11" stroke-linecap="round"/>
-          <path d="M 396 148 L 408 148" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/> <!-- Meia -->
+          <!-- Quadril e Pelve Anatômica -->
+          <path d="M 266 138 C 278 140 298 140 314 144 L 314 172 L 266 170 Z" fill="url(#skinDuoGrad)"/>
 
-          <!-- Perna direita (rodada externamente e encurtada) -->
-          <path d="M 310 160 L 388 168" stroke="url(#skinDuoGrad)" stroke-width="11" stroke-linecap="round"/>
-          <path d="M 382 168 L 396 177" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/> <!-- Pé rodado com meia -->
+          <!-- Hematoma pélvico orgânico difuso -->
+          <g transform="translate(285, 154) scale(${hemaScale})">
+            <path d="M -22 -6 C -12 -16 14 -14 26 -4 C 36 6 28 20 14 22 C -4 24 -18 18 -24 6 Z" 
+                  fill="url(#hematomaDuoGrad)" opacity="${hematomaOpacity}"/>
+            <ellipse cx="-16" cy="14" rx="4" ry="2.5" fill="#581C87" opacity="${hematomaOpacity * 0.7}"/>
+            <ellipse cx="20" cy="12" rx="5" ry="3" fill="#6B21A8" opacity="${hematomaOpacity * 0.6}"/>
+          </g>
 
-          <!-- Cinta Pélvica SAM Sling -->
+          <!-- Membros Inferiores: Perna esquerda normal e Perna direita encurtada com rotação externa -->
+          <path d="M 310 144 C 335 146 370 148 412 150" stroke="url(#skinDuoGrad)" stroke-width="12.5" stroke-linecap="round" fill="none"/>
+          <path d="M 406 150 L 420 150" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+
+          <!-- Perna direita rodada externamente e encurtada -->
+          <path d="M 308 160 C 332 166 366 170 396 171" stroke="url(#skinDuoGrad)" stroke-width="12.5" stroke-linecap="round" fill="none"/>
+          <path d="M 390 171 L 406 182" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+
+          <!-- Cinta Pélvica SAM Sling (se ativa) -->
           ${cintaSvg}
 
-          <!-- Manta Térmica Aluminizada -->
+          <!-- Manta Térmica Aluminizada Ouro (se ativa) -->
           ${mantaSvg}
         </g>
 
-        <!-- 4. Suporte e Infusão -->
-        ${infusionBagSvg}
+        <!-- 5. Suporte de Infusão e Bolsas Realistas -->
+        ${infusionSvg}
       </svg>
     `;
 
