@@ -1,0 +1,238 @@
+/* ==========================================================================
+   ANIMATIONS.CSS — Animações SVG, micro-interações e efeitos lúdicos
+   Sala Vermelha: Choque Hipovolêmico
+   ========================================================================== */
+
+/* Sirene de Emergência */
+@keyframes sirenPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(230, 57, 70, 0.4));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 12px rgba(230, 57, 70, 0.85));
+  }
+}
+
+.siren-active {
+  animation: sirenPulse 1.8s infinite ease-in-out;
+  transform-origin: center;
+}
+
+/* Flutuação suave da Mascote Gota */
+@keyframes floatGota {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+.mascote-gota-avatar svg {
+  animation: floatGota 3.2s infinite ease-in-out;
+}
+
+/* Tremor ao Errar (Shake) */
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.shake-error {
+  animation: shakeError 0.45s ease-in-out;
+}
+
+/* Brilho Verde ao Acertar (Success Glow) */
+@keyframes pulseSuccess {
+  0% {
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(46, 196, 182, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0);
+    transform: scale(1);
+  }
+}
+
+.pulse-success {
+  animation: pulseSuccess 0.6s ease-out;
+}
+
+/* Alerta Crítico no Monitor */
+@keyframes pulseCritico {
+  0%, 100% {
+    background: rgba(255, 51, 102, 0.1);
+  }
+  50% {
+    background: rgba(255, 51, 102, 0.28);
+  }
+}
+
+/* Transições Suaves de Entrada */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Tremor de frio no paciente */
+@keyframes shivering {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+.patient-shivering {
+  animation: shivering 0.18s infinite ease-in-out;
+}
+
+/* Gotas de suor caindo */
+@keyframes sweatDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.sweat-drop {
+  animation: sweatDrop 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Gotejamento de Soro / Sangue */
+@keyframes dripFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+.iv-drip {
+  animation: dripFall 1.2s infinite linear;
+}
+
+.iv-drip.fast {
+  animation: dripFall 0.5s infinite linear;
+}
+
+/* Engrenagens da Tríade Letal */
+@keyframes gearSpinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gearSpinCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.gear-cw {
+  animation: gearSpinClockwise 8s infinite linear;
+  transform-origin: center;
+}
+
+.gear-ccw {
+  animation: gearSpinCounterClockwise 8s infinite linear;
+  transform-origin: center;
+}
+
+/* Mini Animação: Fechamento da Cinta Pélvica */
+@keyframes pelvicClamp {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pelvic-belt-path {
+  stroke-dasharray: 60;
+  animation: pelvicClamp 1.8s ease-in-out infinite alternate;
+}
+
+/* Confetes da Vitória */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: var(--coral-red);
+  opacity: 0.85;
+  top: -20px;
+  animation: confettiFall 3.5s linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+  }
+}
+
+/* Respeito estrito a Acessibilidade: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .siren-active,
+  .mascote-gota-avatar svg,
+  .shake-error,
+  .pulse-success,
+  .patient-shivering,
+  .sweat-drop,
+  .iv-drip,
+  .gear-cw,
+  .gear-ccw {
+    animation: none !important;
+  }
+}
