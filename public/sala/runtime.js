@@ -2378,26 +2378,50 @@ class TrilhaManager {
     const embaralhados = [...passos].sort(() => Math.random() - 0.5);
 
     return `
-      <div class="playground-title">🎯 Minijogo: ${data.minijogoXabcde.titulo}</div>
-      <p style="font-size: 0.95rem;">${data.minijogoXabcde.instrucao}</p>
+      <div class="playground-title">🎯 Minijogo: Ordene os Passos do Atendimento no Trauma</div>
+      <p style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+        Toque nas caixas na sequência em que as condutas devem ser executadas (do 1º ao 6º passo). 
+        Depois de ordenar todas, clique em <strong>Concluir</strong> para validar seu raciocínio!
+      </p>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; max-width: 680px; margin: 0 auto 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
+        <span>Etapas selecionadas: <strong id="xabcdeSelectedCounter" style="color: var(--primary);">0 de 6</strong></span>
+        <button id="btnLimparXabcde" class="btn btn-outline btn-mini" style="font-size: 0.78rem; padding: 4px 10px;">
+          Limpar Seleção 🔄
+        </button>
+      </div>
 
       <div class="xabcde-sort-container" id="xabcdeCardsList">
         ${embaralhados.map(p => `
-          <button class="xabcde-card-btn" data-ordem="${p.ordem}" data-letra="${p.letra}">
-            <div class="parada-numero" style="width: 38px; height: 38px; font-size: 1.1rem; background: var(--coral-red);">${p.letra}</div>
-            <div style="flex: 1;">
-              <strong style="font-size: 0.95rem; color: var(--navy-blue);">${p.titulo}</strong>
-              <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.15rem 0 0;">${p.descricao}</p>
+          <div class="xabcde-card-btn" data-id="${p.ordem}" data-ordem-correta="${p.ordem}" tabindex="0" role="button">
+            <div class="xabcde-badge-slot" id="slot-badge-${p.ordem}">
+              <span class="xabcde-slot-text">—</span>
             </div>
-          </button>
+            <div style="flex: 1;">
+              <strong style="font-size: 0.95rem; color: var(--navy-blue); display: block;">${p.titulo}</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.2rem 0 0; line-height: 1.4;">${p.descricao}</p>
+              <div class="xabcde-status-tag" style="display: none; margin-top: 0.35rem;"></div>
+            </div>
+          </div>
         `).join("")}
       </div>
 
-      <div id="xabcdeFeedbackMsg" style="margin-top: 1rem; text-align: center; font-weight: 700; font-size: 0.95rem; color: var(--aqua-green); display: none;">
-        🎉 Parabéns! Você ordenou perfeitamente toda a cadeia do XABCDE no trauma!
+      <div style="text-align: center; margin-top: 1.25rem;">
+        <button id="btnConcluirXabcde" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem; border-radius: 12px; font-weight: 700; box-shadow: var(--shadow-sm);">
+          Concluir Sequência ➔
+        </button>
+      </div>
+
+      <div id="xabcdeResultContainer" style="display: none; max-width: 680px; margin: 1.5rem auto 0; text-align: center; padding: 1.25rem; border-radius: 16px; border: 2px solid var(--border-color); background: var(--bg-card); box-shadow: var(--shadow-md);">
+        <div id="xabcdeScoreBadge" style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.4rem;"></div>
+        <p id="xabcdeScoreDesc" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5;"></p>
+        <button id="btnTentarNovamenteXabcde" class="btn btn-outline" style="border-radius: 10px; font-weight: 700;">
+          Tentar Novamente 🔄
+        </button>
       </div>
     `;
   }
+
 
   // ==========================================================================
   // BIND DE EVENTOS DAS PARADAS
@@ -2593,29 +2617,150 @@ class TrilhaManager {
   }
 
   bindEventsP6() {
-    let proximaOrdemEsperada = 1;
-    const cards = document.querySelectorAll(".xabcde-card-btn");
-    const feedback = document.getElementById("xabcdeFeedbackMsg");
+    let ordemSelecionada = [];
+    let jogoFinalizado = false;
+
+    const container = document.getElementById("xabcdeCardsList");
+    const cards = Array.from(document.querySelectorAll(".xabcde-card-btn"));
+    const counter = document.getElementById("xabcdeSelectedCounter");
+    const btnLimpar = document.getElementById("btnLimparXabcde");
+    const btnConcluir = document.getElementById("btnConcluirXabcde");
+    const resultBox = document.getElementById("xabcdeResultContainer");
+    const scoreBadge = document.getElementById("xabcdeScoreBadge");
+    const scoreDesc = document.getElementById("xabcdeScoreDesc");
+    const btnTentar = document.getElementById("btnTentarNovamenteXabcde");
+
+    function atualizarSlots() {
+      if (counter) counter.textContent = `${ordemSelecionada.length} de ${cards.length}`;
+
+      cards.forEach(card => {
+        const idx = ordemSelecionada.indexOf(card);
+        const slotText = card.querySelector(".xabcde-slot-text");
+        if (idx !== -1) {
+          card.classList.add("is-selected");
+          if (slotText) slotText.textContent = `${idx + 1}º`;
+        } else {
+          card.classList.remove("is-selected");
+          if (slotText) slotText.textContent = "—";
+        }
+      });
+    }
 
     cards.forEach(card => {
       card.addEventListener("click", () => {
-        const ordem = parseInt(card.getAttribute("data-ordem"), 10);
+        if (jogoFinalizado) return;
 
-        if (ordem === proximaOrdemEsperada) {
-          card.classList.add("acertou", "pulse-success");
-          card.disabled = true;
-          proximaOrdemEsperada++;
-
-          if (proximaOrdemEsperada > cards.length && feedback) {
-            feedback.style.display = "block";
-          }
+        const idx = ordemSelecionada.indexOf(card);
+        if (idx !== -1) {
+          // Desmarca
+          ordemSelecionada.splice(idx, 1);
         } else {
-          card.classList.add("shake-error");
-          setTimeout(() => card.classList.remove("shake-error"), 500);
+          // Adiciona se ainda houver vagas
+          if (ordemSelecionada.length < cards.length) {
+            ordemSelecionada.push(card);
+          }
+        }
+        atualizarSlots();
+      });
+
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
         }
       });
     });
+
+    if (btnLimpar) {
+      btnLimpar.addEventListener("click", () => {
+        if (jogoFinalizado) return;
+        ordemSelecionada = [];
+        atualizarSlots();
+      });
+    }
+
+    if (btnConcluir) {
+      btnConcluir.addEventListener("click", () => {
+        if (ordemSelecionada.length < cards.length) {
+          alert(`Por favor, toque nas ${cards.length} caixas para definir a ordem completa (1º ao 6º) antes de concluir!`);
+          return;
+        }
+
+        jogoFinalizado = true;
+        let totalAcertos = 0;
+
+        ordemSelecionada.forEach((card, index) => {
+          const posicaoEscolhida = index + 1;
+          const ordemCorreta = parseInt(card.getAttribute("data-ordem-correta"), 10);
+          const slotText = card.querySelector(".xabcde-slot-text");
+          const statusTag = card.querySelector(".xabcde-status-tag");
+
+          if (posicaoEscolhida === ordemCorreta) {
+            card.classList.add("card-acertou");
+            if (slotText) slotText.textContent = `✔ ${posicaoEscolhida}º`;
+            if (statusTag) {
+              statusTag.innerHTML = `<span style="color: #10b981; font-weight: 700; font-size: 0.78rem;">✔ Posição correta</span>`;
+              statusTag.style.display = "block";
+            }
+            totalAcertos++;
+          } else {
+            card.classList.add("card-errou");
+            if (slotText) slotText.textContent = `✖ ${posicaoEscolhida}º`;
+            if (statusTag) {
+              statusTag.innerHTML = `<span style="color: #ef4444; font-weight: 700; font-size: 0.78rem;">✖ Posição incorreta</span>`;
+              statusTag.style.display = "block";
+            }
+          }
+        });
+
+        // Exibe resultado sem revelar gabarito / sem colinha
+        if (resultBox && scoreBadge && scoreDesc) {
+          if (totalAcertos === cards.length) {
+            scoreBadge.innerHTML = `<span style="color: #10b981;">🎉 Perfeito! Você acertou todas as ${cards.length} etapas!</span>`;
+            scoreDesc.textContent = "Excelente raciocínio clínico! A prioridade imediata do trauma foi aplicada com maestria absoluta.";
+            window.gameState?.concluirParadaTrilha(6);
+            window.uiManager?.atualizarBarraProgresso();
+          } else if (totalAcertos > 0) {
+            scoreBadge.innerHTML = `<span style="color: var(--primary);">Você acertou ${totalAcertos} de ${cards.length} etapas!</span>`;
+            scoreDesc.textContent = "Veja em verde as caixas que você colocou na posição correta e em vermelho as que estão fora de ordem. Tente novamente para encontrar a sequência ideal!";
+          } else {
+            scoreBadge.innerHTML = `<span style="color: #ef4444;">Você acertou 0 de ${cards.length} etapas!</span>`;
+            scoreDesc.textContent = "Nenhuma das caixas coincidiu com a prioridade recomendada. Revise mentalmente o que mata mais rápido no trauma e tente outra vez!";
+          }
+
+          resultBox.style.display = "block";
+          btnConcluir.style.display = "none";
+        }
+      });
+    }
+
+    if (btnTentar) {
+      btnTentar.addEventListener("click", () => {
+        jogoFinalizado = false;
+        ordemSelecionada = [];
+
+        cards.forEach(card => {
+          card.classList.remove("card-acertou", "card-errou", "is-selected");
+          const statusTag = card.querySelector(".xabcde-status-tag");
+          if (statusTag) statusTag.style.display = "none";
+        });
+
+        // Reembaralha as caixas no DOM para novo desafio lúdico
+        if (container) {
+          const shuffled = [...cards].sort(() => Math.random() - 0.5);
+          shuffled.forEach(c => container.appendChild(c));
+        }
+
+        if (resultBox) resultBox.style.display = "none";
+        if (btnConcluir) btnConcluir.style.display = "inline-flex";
+
+        atualizarSlots();
+      });
+    }
+
+    atualizarSlots();
   }
+
 }
 
 // Exportação global
@@ -3365,7 +3510,7 @@ class UIManager {
 
         <!-- Banner Institucional da Faculdade -->
         <div class="faculdade-banner">
-          <img src="/__l5e/assets-v1/75266d4a-3f22-4e3d-a0f0-e4518827bf29/fac-curvelo.png" alt="FAC — Faculdade Arquidiocesana de Curvelo" class="logo-fac-img" onerror="this.onerror=null; this.src='/__l5e/assets-v1/75266d4a-3f22-4e3d-a0f0-e4518827bf29/fac-curvelo.png';">
+          <img src="https://raw.githubusercontent.com/teste-arch/conte-do/main/FAC%20logo.png" alt="FAC — Faculdade Arquidiocesana de Curvelo" class="logo-fac-img" onerror="this.onerror=null; this.src='/assets/fac-logo.png';">
           <div style="text-align: left;">
             <h4 style="color: var(--navy-blue); margin-bottom: 0.1rem;">FAC — Faculdade Arquidiocesana de Curvelo</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Curso de Bacharelado em Enfermagem • Curvelo, MG</p>

@@ -352,38 +352,96 @@
   transform: translateY(-2px);
 }
 
-/* P6: XABCDE Ordenação */
+/* P6: XABCDE Ordenação sem Letras */
 .xabcde-sort-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: 600px;
-  margin: 0 auto;
+  gap: 0.65rem;
+  max-width: 680px;
+  margin: 1rem auto;
 }
 
 .xabcde-card-btn {
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.15rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
+  user-select: none;
 }
 
 .xabcde-card-btn:hover {
-  border-color: var(--navy-blue);
-  background: var(--navy-blue-light);
+  border-color: var(--primary);
+  background: var(--muted);
+  transform: translateY(-1px);
 }
 
-.xabcde-card-btn.acertou {
-  border-color: var(--aqua-green);
-  background: var(--aqua-green-light);
-  cursor: default;
+.xabcde-card-btn.is-selected {
+  border-color: var(--primary);
+  background: var(--muted);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
+
+.xabcde-badge-slot {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.xabcde-card-btn.is-selected .xabcde-badge-slot {
+  border-style: solid;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.xabcde-card-btn.card-acertou {
+  border-color: #10b981 !important;
+  background: #ecfdf5 !important;
+}
+
+.dark .xabcde-card-btn.card-acertou {
+  background: rgba(16, 185, 129, 0.12) !important;
+}
+
+.xabcde-card-btn.card-acertou .xabcde-badge-slot {
+  border-style: solid;
+  border-color: #10b981 !important;
+  background: #10b981 !important;
+  color: #ffffff !important;
+}
+
+.xabcde-card-btn.card-errou {
+  border-color: #ef4444 !important;
+  background: #fef2f2 !important;
+}
+
+.dark .xabcde-card-btn.card-errou {
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+
+.xabcde-card-btn.card-errou .xabcde-badge-slot {
+  border-style: solid;
+  border-color: #ef4444 !important;
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
 
 /* Navegação entre paradas */
 .trilha-nav-buttons {
