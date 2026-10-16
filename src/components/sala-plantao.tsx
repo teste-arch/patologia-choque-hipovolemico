@@ -268,27 +268,40 @@ export function SalaPlantao() {
     }
   }
 
-  // Lista de navegação lateral (Conteúdo 100% Livre + Jogos em Salas)
-  const nav = [
+  // Estrutura Clara e Minimalista de Navegação
+  const mainNav = [
     {
-      label: "Visão Geral",
+      id: "home",
+      label: "Início",
+      part: null,
+      sub: "Visão Geral do Plantão",
       icon: Home,
       active: activeTab === "home",
       action: () => navigateToTab("home"),
     },
     {
-      label: "📚 Conteúdo Interativo",
+      id: "conteudo",
+      label: "Conteúdo",
+      part: "Parte 1",
+      sub: "Simuladores & Estudo",
       icon: BookOpen,
       active: activeTab === "conteudo",
       action: () => navigateToTab("conteudo"),
     },
     {
-      label: "🎮 Jogos em Salas",
-      icon: Stethoscope,
+      id: "gamificacao",
+      label: "Jogos em Salas",
+      part: "Parte 2",
+      sub: activeTab === "caso" ? "Em Partida..." : "Salas Kahoot",
+      icon: Trophy,
       active: activeTab === "gamificacao" || activeTab === "caso",
       action: () => navigateToTab("gamificacao"),
     },
+  ];
+
+  const supportNav = [
     {
+      id: "trilha",
       label: "Trilha das 7 Etapas",
       icon: ListChecks,
       active: activeTab === "legado",
@@ -298,13 +311,15 @@ export function SalaPlantao() {
       },
     },
     {
+      id: "consulta",
       label: "Consulta Rápida",
       icon: Search,
       active: false,
       action: () => runtime().uiManager?.abrirModalConsultaRapida(),
     },
     {
-      label: "Equipe e Referências",
+      id: "equipe",
+      label: "Equipe & Referências",
       icon: Users,
       active: false,
       action: showTeam,
@@ -313,11 +328,11 @@ export function SalaPlantao() {
 
   return (
     <div className={`plantao-shell${collapsed ? " is-collapsed" : ""}`}>
-      {/* Menu Lateral */}
+      {/* Menu Lateral Otimizado */}
       <aside className="plantao-sidebar" aria-label="Menu principal">
         <div className="brand">
           <div className="brand-mark">
-            <Droplets size={26} strokeWidth={2.5} />
+            <Droplets size={24} strokeWidth={2.5} />
           </div>
           <div>
             <div className="brand-name">
@@ -331,37 +346,69 @@ export function SalaPlantao() {
 
         {/* Crachá Informativo se houver sessão de sala ativa */}
         {(name || activeRoomCode) && (
-          <div className="mb-6 p-3 rounded-xl bg-card/10 border border-white/10 flex items-center justify-between text-xs">
+          <div className="sidebar-session-card mb-4 p-2.5 rounded-xl bg-card/10 border border-white/10 flex items-center justify-between text-xs">
             <div className="truncate">
-              <span className="text-[10px] uppercase font-bold text-sidebar-muted block">
+              <span className="text-[9px] uppercase font-bold text-sidebar-muted block">
                 {activeRoomCode ? `Sala: ${activeRoomCode}` : "Plantonista"}
               </span>
-              <span className="font-bold text-white truncate block">
+              <span className="font-bold text-white truncate block text-[11px]">
                 {name ? `Enf. ${name}` : "Sessão Aberta"}
               </span>
             </div>
-            <span className="text-emerald-400 text-xs font-bold">●</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
           </div>
         )}
 
-        <p className="sidebar-label">Navegação do Plantão</p>
-        <nav className="sidebar-nav">
-          {nav.map((item) => (
-            <Button
-              key={item.label}
-              variant="ghost"
-              className="sidebar-button"
-              data-active={item.active}
-              aria-current={item.active ? "page" : undefined}
-              title={item.label}
-              disabled={!ready}
-              onClick={item.action}
-            >
-              <item.icon size={18} />
-              <span>{item.label}</span>
-            </Button>
-          ))}
-        </nav>
+        {/* Grupo 1: Estrutura Principal do Site */}
+        <div className="sidebar-section">
+          <span className="sidebar-section-title">Estrutura do Site</span>
+          <nav className="sidebar-nav-group" aria-label="Navegação principal">
+            {mainNav.map((item) => (
+              <button
+                key={item.id}
+                onClick={item.action}
+                disabled={!ready}
+                data-active={item.active}
+                className="sidebar-nav-card"
+                title={`${item.label} ${item.part ? `(${item.part})` : ""}`}
+                aria-current={item.active ? "page" : undefined}
+              >
+                <div className="sidebar-nav-icon">
+                  <item.icon size={17} />
+                </div>
+                <div className="sidebar-nav-body">
+                  <div className="sidebar-nav-head">
+                    <span className="sidebar-nav-name">{item.label}</span>
+                    {item.part && (
+                      <span className="sidebar-nav-badge">{item.part}</span>
+                    )}
+                  </div>
+                  <span className="sidebar-nav-subtitle">{item.sub}</span>
+                </div>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        {/* Grupo 2: Apoio Didático & Consulta (Compacto & Minimalista) */}
+        <div className="sidebar-section mt-5 pt-4 border-t border-white/10">
+          <span className="sidebar-section-title">Apoio Didático</span>
+          <nav className="sidebar-subnav" aria-label="Ferramentas de apoio">
+            {supportNav.map((item) => (
+              <button
+                key={item.id}
+                onClick={item.action}
+                disabled={!ready}
+                data-active={item.active}
+                className="sidebar-subnav-btn"
+                title={item.label}
+              >
+                <item.icon size={15} className="flex-shrink-0 opacity-80" />
+                <span className="truncate">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
 
         <div className="sidebar-institution">
           <div className="bg-white/95 p-2 rounded-xl mb-3 shadow-xs inline-block">
@@ -401,6 +448,19 @@ export function SalaPlantao() {
             >
               <PanelLeftClose />
             </Button>
+
+            {/* Indicador de Localização Atual (Onde Estou) */}
+            <div className="hidden lg:flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-xl bg-muted/60 border border-border">
+              <span className="text-muted-foreground">Sala Vermelha</span>
+              <span className="text-muted-foreground/40 font-mono">/</span>
+              <span className="font-bold text-foreground">
+                {activeTab === "home" && "Visão Geral do Plantão"}
+                {activeTab === "conteudo" && "Parte 1 · Conteúdo Interativo"}
+                {activeTab === "gamificacao" && "Parte 2 · Jogos em Salas"}
+                {activeTab === "caso" && (activeRoomCode ? `Parte 2 · Caso do Lucas (Sala ${activeRoomCode})` : "Parte 2 · Caso do Lucas")}
+                {activeTab === "legado" && "Apoio · Trilha das 7 Etapas"}
+              </span>
+            </div>
 
             {/* Crachá no Topbar se houver sala ativa */}
             {activeRoomCode && (
