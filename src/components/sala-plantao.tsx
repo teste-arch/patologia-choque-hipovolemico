@@ -431,6 +431,17 @@ export function SalaPlantao() {
             <br />
             Curvelo, MG
           </span>
+          <div className="mt-3 pt-2 border-t border-white/10 text-[10px] text-sidebar-muted">
+            Desenvolvido por{" "}
+            <a
+              href="https://ventoflow.top/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white font-bold hover:underline"
+            >
+              VentoFlow
+            </a>
+          </div>
         </div>
       </aside>
 
@@ -729,6 +740,19 @@ export function SalaPlantao() {
             <span className="text-xs text-muted-foreground">
               © 2026 Sala Vermelha · Enfermagem FAC Curvelo · Orientação: Profa. Paula Silveira
             </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span>Desenvolvido por</span>
+            <a
+              href="https://ventoflow.top/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-card border border-border hover:border-primary/40 shadow-xs"
+            >
+              <span>VentoFlow</span>
+              <span className="text-[10px] text-primary">↗</span>
+            </a>
           </div>
         </footer>
       </main>

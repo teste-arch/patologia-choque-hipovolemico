@@ -3560,6 +3560,17 @@ class UIManager {
           <strong>⚖️ Aviso Acadêmico e Institucional:</strong><br>
           ${aviso}
         </div>
+
+        <!-- Crédito de Desenvolvimento Tecnológico -->
+        <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            Plataforma interativa desenvolvida por <strong style="color: var(--navy-blue);">VentoFlow</strong>
+          </div>
+          <a href="https://ventoflow.top/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.9rem; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 700; font-size: 0.82rem; text-decoration: none; box-shadow: var(--shadow-sm); transition: opacity 0.2s;">
+            <span>Conheça a VentoFlow</span>
+            <span style="font-size: 0.75rem;">↗</span>
+          </a>
+        </div>
       </div>
     `;
 
