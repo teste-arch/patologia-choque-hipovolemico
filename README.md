@@ -97,6 +97,5 @@ Certifique-se de ter o **Node.js** instalado (v18+ ou v20+).
   2. Raphael Rodrigues da Silva
   3. Ianca Marques
   4. Elisama Siqueira
-  5. Isabella Mendes
-  6. Thais Prates
-  7. Luiz Henrique
+  5. Thais Prates
+  6. Luiz Henrique
